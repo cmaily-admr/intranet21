@@ -19,3 +19,7 @@ collections:
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Contenu", name: "contenu", widget: "markdown" }
       - { label: "Image", name: "image", widget: "image", required: false }
+backend:
+  name: github
+  repo: cmaily-admr/intranet21
+  branch: main
