@@ -23,3 +23,5 @@ backend:
   name: github
   repo: cmaily-admr/intranet21
   branch: main
+  auth_endpoint: api/auth
+  client_id: Ov23liE6Gvj39lE3gtYk
