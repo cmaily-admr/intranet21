@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecture du document — ADMR Côte-d'Or</title>
+  <meta name="description" content="Lecture d'un document de l'ADMR de Côte-d'Or.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#5B9B31">
+
+  <!-- =====================================================================
+       VISIONNEUSE PDF (affiche un PDF directement dans la page).
+       Fonctionne même sur les téléphones qui ne lisent pas les PDF, car
+       c'est la page qui "dessine" le document (bibliothèque PDF.js, hébergée
+       sur votre site, dans le dossier pdfjs/).
+
+       ◀ VOUS N'AVEZ NORMALEMENT RIEN À MODIFIER ICI.
+       Pour afficher un PDF, faites un lien vers cette page en indiquant le
+       fichier après "?doc=", par exemple :
+         voir-pdf.html?doc=documents/pv-cse-2026-01-20.pdf
+       ===================================================================== -->
+
+  <style>
+    :root {
+      --vert-admr:#5B9B31; --vert-fonce:#2E5A1C; --vert-clair:#EAF4E0;
+      --orange-admr:#E58A00; --gris-texte:#363636; --gris-clair:#6B6B6B;
+      --fond-page:#F6F8F3; --blanc:#FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 112.5%; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; background:var(--fond-page); color:var(--gris-texte); line-height:1.6; }
+
+    .entete { background:var(--blanc); border-bottom:3px solid var(--vert-admr); }
+    .entete-inner { max-width:1120px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:16px; }
+    .logo { height:58px; width:auto; }
+    .titre-bloc { display:flex; flex-direction:column; }
+    .titre-site { font-size:1.3rem; font-weight:800; color:var(--vert-fonce); line-height:1.15; }
+    .sous-titre-site { font-size:.88rem; color:var(--gris-clair); }
+    .lien-accueil { margin-left:auto; display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--vert-fonce); font-weight:700; font-size:.95rem; padding:8px 14px; border:1px solid #E7EBE1; border-radius:999px; background:var(--fond-page); }
+    .lien-accueil:hover { background:var(--vert-clair); }
+
+    /* Barre d'actions */
+    .barre { background:var(--blanc); border-bottom:1px solid #E7EBE1; position:sticky; top:0; z-index:5; }
+    .barre-inner { max-width:900px; margin:0 auto; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .btn-retour { display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--vert-fonce); font-weight:700; font-size:.95rem; padding:8px 14px; border:1px solid #E7EBE1; border-radius:9px; background:var(--fond-page); }
+    .btn-retour:hover { background:var(--vert-clair); }
+    .btn-dl { display:inline-flex; align-items:center; gap:8px; background:var(--vert-admr); color:#fff; text-decoration:none; padding:9px 15px; border-radius:9px; font-weight:700; font-size:.9rem; }
+    .btn-dl:hover { background:var(--vert-fonce); }
+    .btn-dl svg { width:16px; height:16px; }
+
+    /* Zone du document */
+    .visionneuse { max-width:900px; margin:0 auto; padding:24px; min-height:50vh; }
+    #pages canvas { display:block; margin:0 auto 16px; max-width:100%; height:auto; box-shadow:0 4px 16px rgba(0,0,0,.12); border-radius:4px; background:#fff; }
+    #message { text-align:center; color:var(--gris-clair); padding:48px 20px; }
+    #message.erreur { color:#9B2C2C; }
+    #message a { color:var(--vert-admr); font-weight:700; }
+
+    .pied { background:var(--vert-fonce); color:#DDEAD3; }
+    .pied-inner { max-width:1120px; margin:0 auto; padding:26px 24px; font-size:.9rem; }
+    .pied a { color:#fff; }
+    a:focus-visible, summary:focus-visible { outline:3px solid var(--orange-admr); outline-offset:2px; border-radius:6px; }
+  </style>
+</head>
+
+<body>
+
+  <header class="entete">
+    <div class="entete-inner">
+      <img class="logo" src="logo-admr.png" alt="Logo ADMR de Côte-d'Or" onerror="this.style.display='none'">
+      <div class="titre-bloc">
+        <span class="titre-site">Espace salariés</span>
+        <span class="sous-titre-site">ADMR de Côte-d'Or</span>
+      </div>
+      <a class="lien-accueil" href="index.html">← Accueil</a>
+    </div>
+  </header>
+
+  <div class="barre">
+    <div class="barre-inner">
+      <a class="btn-retour" href="index.html" id="retour">← Retour</a>
+      <a class="btn-dl" id="dl" href="#" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+        Télécharger le PDF
+      </a>
+    </div>
+  </div>
+
+  <main class="visionneuse">
+    <div id="message">Chargement du document…</div>
+    <div id="pages"></div>
+  </main>
+
+  <footer class="pied">
+    <div class="pied-inner">Espace salariés — ADMR de Côte-d'Or · <a href="index.html">Retour à l'accueil</a></div>
+  </footer>
+
+  <!-- Bibliothèque PDF.js hébergée sur votre site (dossier pdfjs/) -->
+  <script src="pdfjs/pdf.min.js"></script>
+  <script>
+    (function () {
+      var msg = document.getElementById('message');
+      var pagesEl = document.getElementById('pages');
+      var dl = document.getElementById('dl');
+      var retour = document.getElementById('retour');
+
+      // "Retour" : revient à la page précédente si elle existe
+      retour.addEventListener('click', function (e) {
+        if (history.length > 1) { e.preventDefault(); history.back(); }
+      });
+
+      function erreur(txt, avecLien) {
+        msg.className = 'erreur';
+        msg.style.display = '';
+        if (avecLien && doc) {
+          msg.innerHTML = txt + ' Vous pouvez <a href="' + encodeURI(doc) + '">télécharger le PDF</a>.';
+        } else {
+          msg.textContent = txt;
+        }
+      }
+
+      // Récupère le fichier demandé dans l'adresse (?doc=...)
+      var params = new URLSearchParams(location.search);
+      var doc = params.get('doc') || '';
+
+      // Sécurité : uniquement un PDF du site (chemin relatif), pas d'adresse externe
+      var valide = doc && doc.indexOf('://') === -1 && doc.charAt(0) !== '/' &&
+                   doc.indexOf('..') === -1 && /\.pdf($|\?)/i.test(doc);
+      if (!valide) { erreur("Document introuvable ou lien incorrect.", false); return; }
+
+      dl.href = doc; dl.style.display = '';
+
+      if (!window.pdfjsLib) { erreur("La visionneuse n'a pas pu se charger.", true); return; }
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/pdf.worker.min.js';
+
+      var maxW = Math.min((window.innerWidth || 900) - 40, 820);
+
+      pdfjsLib.getDocument(doc).promise.then(function (pdf) {
+        msg.style.display = 'none';
+        var chain = Promise.resolve();
+        for (var n = 1; n <= pdf.numPages; n++) {
+          (function (n) { chain = chain.then(function () { return renderPage(pdf, n); }); })(n);
+        }
+        return chain;
+      }).catch(function () {
+        erreur("Impossible d'afficher ce document.", true);
+      });
+
+      function renderPage(pdf, n) {
+        return pdf.getPage(n).then(function (page) {
+          var vp1 = page.getViewport({ scale: 1 });
+          var scale = maxW / vp1.width;
+          var vp = page.getViewport({ scale: scale });
+          var dpr = window.devicePixelRatio || 1;
+          var canvas = document.createElement('canvas');
+          var ctx = canvas.getContext('2d');
+          canvas.width = Math.floor(vp.width * dpr);
+          canvas.height = Math.floor(vp.height * dpr);
+          canvas.style.width = vp.width + 'px';
+          canvas.style.height = vp.height + 'px';
+          ctx.scale(dpr, dpr);
+          pagesEl.appendChild(canvas);
+          return page.render({ canvasContext: ctx, viewport: vp }).promise;
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
