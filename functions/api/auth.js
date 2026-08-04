@@ -1,40 +1,33 @@
+/**
+ * Étape 1 du flux OAuth : redirige vers GitHub.
+ * Appelée par Decap CMS quand l'utilisateur clique « Login with GitHub ».
+ */
 export async function onRequest(context) {
-  const { request } = context;
+  const { env, request } = context;
   const url = new URL(request.url);
 
-  if (url.searchParams.has('code')) {
-    const code = url.searchParams.get('code');
-    const clientId = context.env.GITHUB_CLIENT_ID;
-    const clientSecret = context.env.GITHUB_CLIENT_SECRET;
-
-    const response = await fetch('https://github.com/login/oauth/access_token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        client_id: clientId,
-        client_secret: clientSecret,
-        code: code,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (data.access_token) {
-      return new Response(
-        `<script>
-          window.opener.postMessage({
-            type: 'authorization:github:success:${data.access_token}',
-            payload: { token: '${data.access_token}' }
-          }, '*');
-          window.close();
-        </script>`,
-        { headers: { 'Content-Type': 'text/html' } }
-      );
-    }
+  if (!env.GITHUB_CLIENT_ID) {
+    return new Response(
+      "Configuration manquante : GITHUB_CLIENT_ID n'est pas défini dans les variables d'environnement Cloudflare Pages.",
+      { status: 500, headers: { "Content-Type": "text/plain;charset=UTF-8" } }
+    );
   }
 
-  return new Response('Authorization failed', { status: 401 });
+  // Jeton anti-CSRF, stocké en cookie httpOnly et revérifié au retour
+  const state = crypto.randomUUID();
+
+  const authUrl = new URL("https://github.com/login/oauth/authorize");
+  authUrl.searchParams.set("client_id", env.GITHUB_CLIENT_ID);
+  authUrl.searchParams.set("redirect_uri", `${url.origin}/api/callback`);
+  authUrl.searchParams.set("scope", "repo,user");
+  authUrl.searchParams.set("state", state);
+
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: authUrl.toString(),
+      "Set-Cookie": `oauth_state=${state}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=600`,
+      "Cache-Control": "no-store"
+    }
+  });
 }
