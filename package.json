@@ -1,5 +1,10 @@
 {
   "name": "intranet21",
   "version": "1.0.0",
-  "description": "Intranet ADMR"
+  "description": "Intranet21",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {}
 }
