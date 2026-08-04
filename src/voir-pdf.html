@@ -8,18 +8,6 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#5B9B31">
 
-  <!-- =====================================================================
-       VISIONNEUSE PDF (affiche un PDF directement dans la page).
-       Fonctionne même sur les téléphones qui ne lisent pas les PDF, car
-       c'est la page qui "dessine" le document (bibliothèque PDF.js, hébergée
-       sur votre site, dans le dossier pdfjs/).
-
-       ◀ VOUS N'AVEZ NORMALEMENT RIEN À MODIFIER ICI.
-       Pour afficher un PDF, faites un lien vers cette page en indiquant le
-       fichier après "?doc=", par exemple :
-         voir-pdf.html?doc=documents/pv-cse-2026-01-20.pdf
-       ===================================================================== -->
-
   <style>
     :root {
       --vert-admr:#5B9B31; --vert-fonce:#2E5A1C; --vert-clair:#EAF4E0;
@@ -39,7 +27,6 @@
     .lien-accueil { margin-left:auto; display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--vert-fonce); font-weight:700; font-size:.95rem; padding:8px 14px; border:1px solid #E7EBE1; border-radius:999px; background:var(--fond-page); }
     .lien-accueil:hover { background:var(--vert-clair); }
 
-    /* Barre d'actions */
     .barre { background:var(--blanc); border-bottom:1px solid #E7EBE1; position:sticky; top:0; z-index:5; }
     .barre-inner { max-width:900px; margin:0 auto; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
     .btn-retour { display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--vert-fonce); font-weight:700; font-size:.95rem; padding:8px 14px; border:1px solid #E7EBE1; border-radius:9px; background:var(--fond-page); }
@@ -48,7 +35,6 @@
     .btn-dl:hover { background:var(--vert-fonce); }
     .btn-dl svg { width:16px; height:16px; }
 
-    /* Zone du document */
     .visionneuse { max-width:900px; margin:0 auto; padding:24px; min-height:50vh; }
     #pages canvas { display:block; margin:0 auto 16px; max-width:100%; height:auto; box-shadow:0 4px 16px rgba(0,0,0,.12); border-radius:4px; background:#fff; }
     #message { text-align:center; color:var(--gris-clair); padding:48px 20px; }
@@ -66,11 +52,12 @@
 
   <header class="entete">
     <div class="entete-inner">
-<img class="logo" src="/assets/logo-admr.png" alt="Logo ADMR de Côte-d'Or" onerror="this.style.display='none'">      <div class="titre-bloc">
+      <img class="logo" src="/assets/logo-admr.png" alt="Logo ADMR de Côte-d'Or" onerror="this.style.display='none'">
+      <div class="titre-bloc">
         <span class="titre-site">Espace salariés</span>
         <span class="sous-titre-site">ADMR de Côte-d'Or</span>
       </div>
-      <a class="lien-accueil" href="index.html">← Accueil</a>
+      <a class="lien-accueil" href="/">← Accueil</a>
     </div>
   </header>
 
@@ -90,18 +77,17 @@
   </main>
 
   <footer class="pied">
-    <div class="pied-inner">Espace salariés — ADMR de Côte-d'Or · <a href="index.html">Retour à l'accueil</a></div>
+    <div class="pied-inner">Espace salariés — ADMR de Côte-d'Or · <a href="/">Retour à l'accueil</a></div>
   </footer>
 
-  <!-- Bibliothèque PDF.js hébergée sur votre site (dossier pdfjs/) -->
-<script src="/assets/pdf.min.js"></script>  <script>
+  <script src="/assets/pdf.min.js"></script>
+  <script>
     (function () {
       var msg = document.getElementById('message');
       var pagesEl = document.getElementById('pages');
       var dl = document.getElementById('dl');
       var retour = document.getElementById('retour');
 
-      // "Retour" : revient à la page précédente si elle existe
       retour.addEventListener('click', function (e) {
         if (history.length > 1) { e.preventDefault(); history.back(); }
       });
@@ -116,11 +102,9 @@
         }
       }
 
-      // Récupère le fichier demandé dans l'adresse (?doc=...)
       var params = new URLSearchParams(location.search);
       var doc = params.get('doc') || '';
 
-      // Sécurité : uniquement un PDF du site (chemin relatif), pas d'adresse externe
       var valide = doc && doc.indexOf('://') === -1 && doc.charAt(0) !== '/' &&
                    doc.indexOf('..') === -1 && /\.pdf($|\?)/i.test(doc);
       if (!valide) { erreur("Document introuvable ou lien incorrect.", false); return; }
@@ -128,7 +112,8 @@
       dl.href = doc; dl.style.display = '';
 
       if (!window.pdfjsLib) { erreur("La visionneuse n'a pas pu se charger.", true); return; }
-pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/pdf.worker.min.js';
+      pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/pdf.worker.min.js';
+
       var maxW = Math.min((window.innerWidth || 900) - 40, 820);
 
       pdfjsLib.getDocument(doc).promise.then(function (pdf) {
