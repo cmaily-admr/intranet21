@@ -1,3 +1,22 @@
+# Dépendances
 node_modules/
+
+# Build
 _site/
 .cache/
+
+# Cloudflare
+.wrangler/
+.dev.vars
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Éditeurs
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
