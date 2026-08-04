@@ -1,0 +1,21 @@
+backend:
+  name: github
+  repo: cmaily-admr/intranet21
+  branch: main
+  auth_endpoint: api/auth
+  commit_message: "CMS: {{message}}"
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "actualites"
+    label: "Actualités"
+    folder: "_data/actualites"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titre", name: "titre", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Contenu", name: "contenu", widget: "markdown" }
+      - { label: "Image", name: "image", widget: "image", required: false }
