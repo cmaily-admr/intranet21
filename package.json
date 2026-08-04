@@ -1,3 +1,5 @@
+# À la racine du projet
+cat > package.json << 'EOF'
 {
   "name": "intranet21",
   "version": "1.0.0",
@@ -8,3 +10,8 @@
   },
   "dependencies": {}
 }
+EOF
+
+git add package.json
+git commit -m "Add package.json"
+git push
