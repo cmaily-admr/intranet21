@@ -6,20 +6,20 @@ layout: base.njk
 <section aria-labelledby="titre-rubriques">
   <h2 id="titre-rubriques">Rubriques</h2>
 <pre>{{ rubriques | dump }}</pre>
-  <ul class="liste-rubriques">
-    {% for cle, rubrique in rubriques %}
-      {% if rubrique.titre %}
-        <li class="liste-rubriques__item">
-          <a
-            href="/rubriques/{{ cle }}/"
-            style="border-color: {{ rubrique.couleur | default('#005a9c') }}"
-          >
-            <span>{{ rubrique.titre }}</span>
-          </a>
-        </li>
-      {% endif %}
-    {% else %}
-      <li>Aucune rubrique disponible.</li>
-    {% endfor %}
-  </ul>
+ <ul class="liste-rubriques">
+  {% for cle, rubrique in rubriques %}
+    {% if rubrique.title %}
+      <li class="liste-rubriques__item">
+        <a
+          href="/rubriques/{{ cle }}/"
+          style="border-color: {{ rubrique.couleur | default('#005a9c') }}"
+        >
+          <span>{{ rubrique.title }}</span>
+        </a>
+      </li>
+    {% endif %}
+  {% else %}
+    <li>Aucune rubrique disponible.</li>
+  {% endfor %}
+</ul>
 </section>
