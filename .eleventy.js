@@ -20,3 +20,13 @@ module.exports = function (eleventyConfig) {
     markdownTemplateEngine: "njk"
   };
 };
+```js
+module.exports = function (eleventyConfig) {
+  // ... votre configuration existante ...
+
+  eleventyConfig.addFilter("values", (value) => {
+    if (!value || typeof value !== "object") return [];
+    return Array.isArray(value) ? value : Object.values(value);
+  });
+};
+```
