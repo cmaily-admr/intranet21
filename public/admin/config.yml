@@ -2,8 +2,8 @@ backend:
   name: github
   repo: cmaily-admr/intranet21
   branch: main
-  base_url: https://intranet21.pages.dev
-  auth_endpoint: api/auth
+  base_url: https://oauth.decapcms.org
+  auth_endpoint: auth
 
 # Dossier des médias — cohérent avec les liens /uploads/ de vos pages
 media_folder: "uploads"
