@@ -6,7 +6,7 @@ layout: base.njk
 <section aria-labelledby="titre-rubriques">
   <h2 id="titre-rubriques">Rubriques</h2>
 <pre>{{ rubriques | dump }}</pre>
- <ul class="liste-rubriques">
+<ul class="liste-rubriques">
   {% for cle, rubrique in rubriques %}
     {% if rubrique.title %}
       <li class="liste-rubriques__item">
