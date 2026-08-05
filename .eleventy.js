@@ -9,6 +9,21 @@ module.exports = function (eleventyConfig) {
   // Redéclenche le build quand un document est ajouté
   eleventyConfig.addWatchTarget("./uploads/");
 
+  // Filtre pour convertir objet en array
+  eleventyConfig.addFilter("values", (value) => {
+    if (!value || typeof value !== "object") return [];
+    return Array.isArray(value) ? value : Object.values(value);
+  });
+
+  // Filtre pour trier les actualités : épinglées d'abord, puis par date décroissante
+  eleventyConfig.addFilter("actualitesOrdonnees", (items) => {
+    return [...items].sort((a, b) => {
+      const epingle = Number(Boolean(b.epingle)) - Number(Boolean(a.epingle));
+      if (epingle) return epingle;
+      return new Date(b.date) - new Date(a.date);
+    });
+  });
+
   return {
     dir: {
       input: "src",
@@ -20,23 +35,3 @@ module.exports = function (eleventyConfig) {
     markdownTemplateEngine: "njk"
   };
 };
-```js
-module.exports = function (eleventyConfig) {
-  // ... votre configuration existante ...
-
-  eleventyConfig.addFilter("values", (value) => {
-    if (!value || typeof value !== "object") return [];
-    return Array.isArray(value) ? value : Object.values(value);
-  });
-};
-```
-
-```js
-eleventyConfig.addFilter("actualitesOrdonnees", (items) => {
-  return [...items].sort((a, b) => {
-    const epingle = Number(Boolean(b.epingle)) - Number(Boolean(a.epingle));
-    if (epingle) return epingle;
-    return new Date(b.date) - new Date(a.date);
-  });
-});
-```
