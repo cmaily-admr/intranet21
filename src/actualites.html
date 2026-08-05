@@ -1,0 +1,48 @@
+```njk
+---
+layout: layouts/base.njk
+title: Actualités
+permalink: "/actualites/"
+---
+
+<h1>Actualités</h1>
+
+{# Les dates doivent être au format ISO YYYY-MM-DD (ou une date ISO complète).
+   Ainsi, le tri lexical correspond au tri chronologique. #}
+{% set actualitesTriees = actualites
+  | values
+  | sort(attribute="date")
+  | reverse
+%}
+
+{% if actualitesTriees.length %}
+  <div class="liste-actualites">
+    {% for actualite in actualitesTriees %}
+      <article class="actualite{% if actualite.epingle %} actualite--epinglee{% endif %}">
+        {% if actualite.epingle %}
+          <p class="actualite__badge">À la une</p>
+        {% endif %}
+
+        <p class="actualite__date">
+          <time datetime="{{ actualite.date | date('yyyy-MM-dd') }}">
+            {{ actualite.date | date('dd/MM/yyyy') }}
+          </time>
+        </p>
+        <h2>{{ actualite.title }}</h2>
+
+        {% if actualite.resume %}
+          <p>{{ actualite.resume }}</p>
+        {% endif %}
+
+        {# Si vos actualités n'ont pas de page individuelle, afficher un extrait
+           suffit. Le contenu complet reste dans actualite.body si nécessaire. #}
+        {% if actualite.body %}
+          <div class="actualite__contenu">{{ actualite.body | safe }}</div>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>Aucune actualité publiée.</p>
+{% endif %}
+```
