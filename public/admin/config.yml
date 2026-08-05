@@ -4,7 +4,6 @@ backend:
   branch: main
   base_url: https://intranet21.pages.dev
   auth_endpoint: api/auth
-  client_id: Ov23liqRHgeX2hshI8fF
 
 # Dossier des médias — cohérent avec les liens /uploads/ de vos pages
 media_folder: "uploads"
