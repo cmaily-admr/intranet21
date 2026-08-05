@@ -1,18 +1,20 @@
-```njk
+---
+layout: base.njk
+title: Accueil
+---
+
 <section aria-labelledby="titre-rubriques">
   <h2 id="titre-rubriques">Rubriques</h2>
-
+<pre>{{ rubriques | dump }}</pre>
   <ul class="liste-rubriques">
-    {# Pour des fichiers _data/rubriques/*.md, rubriques est un objet.
-       La première variable est la clé du fichier ; la seconde est son contenu. #}
     {% for cle, rubrique in rubriques %}
-      {% if rubrique.slug and rubrique.title %}
+      {% if rubrique.titre %}
         <li class="liste-rubriques__item">
           <a
-            href="/rubriques/{{ rubrique.slug }}/"
+            href="/rubriques/{{ cle }}/"
             style="border-color: {{ rubrique.couleur | default('#005a9c') }}"
           >
-            <span>{{ rubrique.title }}</span>
+            <span>{{ rubrique.titre }}</span>
           </a>
         </li>
       {% endif %}
@@ -21,12 +23,3 @@
     {% endfor %}
   </ul>
 </section>
-```
-
-Si votre installation expose directement `rubriques` comme un tableau, la même boucle peut être écrite plus simplement :
-
-```njk
-{% for rubrique in rubriques %}
-  <a href="/rubriques/{{ rubrique.slug }}/">{{ rubrique.title }}</a>
-{% endfor %}
-```
