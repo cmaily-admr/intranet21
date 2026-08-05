@@ -1,0 +1,20 @@
+```njk
+---
+layout: layouts/base.njk
+pagination:
+  data: actualites
+  size: 1
+  alias: actualite
+  addAllPagesToCollections: true
+permalink: "/actualites/{{ actualite.slug }}/"
+eleventyComputed:
+  title: "{{ actualite.title }}"
+---
+
+<article>
+  <p><a href="/actualites/">Retour aux actualités</a></p>
+  <h1>{{ actualite.title }}</h1>
+  <time datetime="{{ actualite.date }}">{{ actualite.date }}</time>
+  <div>{{ actualite.body | safe }}</div>
+</article>
+```
