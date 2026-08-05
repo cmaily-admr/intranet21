@@ -30,3 +30,13 @@ module.exports = function (eleventyConfig) {
   });
 };
 ```
+
+```js
+eleventyConfig.addFilter("actualitesOrdonnees", (items) => {
+  return [...items].sort((a, b) => {
+    const epingle = Number(Boolean(b.epingle)) - Number(Boolean(a.epingle));
+    if (epingle) return epingle;
+    return new Date(b.date) - new Date(a.date);
+  });
+});
+```
