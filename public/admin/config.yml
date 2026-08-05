@@ -12,105 +12,37 @@ public_folder: "/uploads"
 locale: "fr"
 
 collections:
-  # ==================== ACTUALITÉS ====================
-  - name: "actualites"
-    label: "Actualités"
-    label_singular: "une actualité"
-    folder: "_data/actualites"
+  - name: rubriques
+    label: Rubriques
+    folder: _data/rubriques
     create: true
-    delete: true
-    extension: "md"
-    format: "yaml-frontmatter"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    summary: "{{date | date('DD/MM/YYYY')}} — {{titre}}"
-    sortable_fields: ["date", "titre"]
-    fields:
-      - label: "Titre"
-        name: "titre"
-        widget: "string"
-      - label: "Date de publication"
-        name: "date"
-        widget: "datetime"
-        date_format: "DD/MM/YYYY"
-        time_format: false
-        format: "YYYY-MM-DD"
-      - label: "Chapô (résumé court)"
-        name: "chapo"
-        widget: "text"
-        required: false
-      - label: "Image d'illustration"
-        name: "image"
-        widget: "image"
-        required: false
-        media_library:
-          config:
-            max_file_size: 5242880
-      - label: "Contenu"
-        name: "body"
-        widget: "markdown"
-      - label: "Épingler en haut de page"
-        name: "epingle"
-        widget: "boolean"
-        default: false
-        required: false
-      - label: "Documents joints"
-        name: "documents"
-        widget: "list"
-        required: false
-        label_singular: "un document"
-        summary: "{{fields.nom_doc}}"
-        fields:
-          - { label: "Nom affiché", name: "nom_doc", widget: "string" }
-          - { label: "Fichier", name: "fichier_doc", widget: "file" }
-
-  # ==================== RUBRIQUES ====================
-  - name: "rubriques"
-    label: "Rubriques"
-    label_singular: "une rubrique"
-    folder: "_data/rubriques"
-    create: true
-    delete: true
-    extension: "md"
-    format: "yaml-frontmatter"
     slug: "{{slug}}"
-    summary: "{{titre}}"
     fields:
-      - label: "Titre de la rubrique"
-        name: "titre"
-        widget: "string"
-      - label: "Couleur d'accent"
-        name: "couleur"
-        widget: "select"
-        default: "#5B9B31"
-        options:
-          - { label: "Vert ADMR", value: "#5B9B31" }
-          - { label: "Bleu CSE", value: "#2E7D9A" }
-          - { label: "Orange Qualité", value: "#E58A00" }
-          - { label: "Terracotta Communication", value: "#B0553A" }
-          - { label: "Ardoise Limites", value: "#4A5A6A" }
-          - { label: "Ocre Associations", value: "#C08A2E" }
-      - label: "Ordre d'affichage"
-        name: "ordre"
-        widget: "number"
-        default: 10
-        value_type: "int"
-        min: 1
-      - label: "Blocs de contenu"
-        name: "blocs"
-        widget: "list"
-        label_singular: "un bloc"
-        summary: "{{fields.titre_bloc}}"
+      - { label: Titre, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: "URL, par exemple demarches" }
+      - { label: Couleur, name: couleur, widget: color }
+      - label: Blocs
+        name: blocs
+        widget: list
         fields:
-          - { label: "Titre du bloc", name: "titre_bloc", widget: "string" }
-          - { label: "Contenu", name: "contenu_bloc", widget: "markdown" }
-          - { label: "Image", name: "image_bloc", widget: "image", required: false }
-          - { label: "Ouvert par défaut", name: "ouvert", widget: "boolean", default: false }
-      - label: "Documents"
-        name: "documents"
-        widget: "list"
-        required: false
-        label_singular: "un document"
-        summary: "{{fields.nom_doc}}"
+          - { label: Titre, name: titre, widget: string }
+          - { label: Contenu, name: contenu, widget: markdown }
+      - label: Documents
+        name: documents
+        widget: list
         fields:
-          - { label: "Nom du document", name: "nom_doc", widget: "string" }
-          - { label: "Fichier", name: "fichier_doc", widget: "file" }
+          - { label: Nom, name: nom, widget: string }
+          - { label: Fichier, name: fichier, widget: file }
+
+  - name: actualites
+    label: Actualités
+    folder: _data/actualites
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Titre, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string }
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD" }
+      - { label: Épingler, name: epingle, widget: boolean, default: false, required: false }
+      - { label: Résumé, name: resume, widget: text, required: false }
+      - { label: Contenu, name: body, widget: markdown }
