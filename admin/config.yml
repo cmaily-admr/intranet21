@@ -6,12 +6,46 @@ backend:
   commit_message: "CMS: {{message}}"
   client_id: Ov23liE6Gvj39lE3gtYk
 
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+media_folder: "uploads"
+public_folder: "/uploads"
 
 collections:
+  # --- L'actualité à la une (bloc unique, en haut de l'accueil) ---
+  - name: "une"
+    label: "Actualité à la une"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "une"
+        label: "Actualité à la une"
+        file: "_data/une.json"
+        fields:
+          - { label: "Titre", name: "titre", widget: "string" }
+          - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+          - label: "Lien vidéo (YouTube sans cookie, facultatif)"
+            name: "video_url"
+            widget: "string"
+            required: false
+            hint: "Format : https://www.youtube-nocookie.com/embed/IDENTIFIANT — laissez vide s'il n'y a pas de vidéo."
+          - label: "Contenu"
+            name: "contenu"
+            widget: "markdown"
+            hint: "Le corps du texte. Gras, listes et liens autorisés."
+          - label: "Document à télécharger (facultatif)"
+            name: "document"
+            widget: "file"
+            required: false
+            hint: "PDF ou fichier joint. Laissez vide s'il n'y en a pas."
+          - label: "Texte du bouton de téléchargement"
+            name: "document_label"
+            widget: "string"
+            required: false
+            default: "Télécharger le document (PDF)"
+
+  # --- Actualités précédentes (liste, branchée au palier 4) ---
   - name: "actualites"
-    label: "Actualités"
+    label: "Actualités précédentes"
     folder: "_data/actualites"
     create: true
     extension: "json"
@@ -19,6 +53,6 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Titre", name: "titre", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
       - { label: "Contenu", name: "contenu", widget: "markdown" }
       - { label: "Image", name: "image", widget: "image", required: false }
