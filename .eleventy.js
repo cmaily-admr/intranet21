@@ -33,6 +33,36 @@ module.exports = function(eleventyConfig) {
     return Object.values(obj);
   });
 
+  // Renvoie l'actualité à mettre à la une : la plus récente parmi celles
+  // cochées « a_la_une ». Renvoie null si aucune n'est cochée.
+  eleventyConfig.addFilter("actuALaUne", (obj) => {
+    const liste = obj ? (Array.isArray(obj) ? obj : Object.values(obj)) : [];
+    const cochees = liste.filter((a) => a && a.a_la_une);
+    if (cochees.length === 0) return null;
+    cochees.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    return cochees[0];
+  });
+
+  // Renvoie toutes les actualités SAUF celle à la une, triées de la plus
+  // récente à la plus ancienne.
+  eleventyConfig.addFilter("actusPrecedentes", (obj) => {
+    const liste = obj ? (Array.isArray(obj) ? obj : Object.values(obj)) : [];
+    const cochees = liste.filter((a) => a && a.a_la_une);
+    let uneDate = null;
+    if (cochees.length > 0) {
+      cochees.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      uneDate = cochees[0].date;
+    }
+    let restantes = liste.slice();
+    if (uneDate !== null) {
+      // On retire UNE seule occurrence : celle qui est à la une.
+      const idx = restantes.findIndex((a) => a.a_la_une && a.date === uneDate);
+      if (idx !== -1) restantes.splice(idx, 1);
+    }
+    restantes.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    return restantes;
+  });
+
   // Renvoie true si la date fournie remonte à moins de 30 jours (badge « Nouveau »).
   eleventyConfig.addFilter("estRecent", (value) => {
     if (!value) return false;
