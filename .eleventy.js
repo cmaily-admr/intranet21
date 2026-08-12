@@ -6,6 +6,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("uploads");
 
+  // CRUCIAL : les fonctions Cloudflare Pages (OAuth GitHub pour Decap).
+  // Elles doivent atterrir dans _site/functions/ sinon /api/auth renvoie 404
+  // et le « Login with GitHub » échoue.
+  eleventyConfig.addPassthroughCopy("functions");
+
   // Pages encore 100 % statiques : recopiées telles quelles, PAS traitées.
   // On les recopie via glob pour conserver l'URL exacte (/cse.html, etc.)
   eleventyConfig.addPassthroughCopy("cse.html");
