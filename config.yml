@@ -1,0 +1,152 @@
+backend:
+  name: github
+  repo: cmaily-admr/intranet21
+  branch: main
+  auth_endpoint: api/auth
+  commit_message: "CMS: {{message}}"
+  client_id: Ov23liE6Gvj39lE3gtYk
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  # ============================================================
+  #  Actualités (une seule liste : la plus récente cochée
+  #  « À la une » s'affiche en grand ; les autres en cartes).
+  # ============================================================
+  - name: "actualites"
+    label: "Actualités"
+    label_singular: "Actualité"
+    folder: "_data/actualites"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{#if a_la_une}}★ À LA UNE · {{/if}}{{date}} — {{titre}}"
+    sortable_fields: ["date", "titre"]
+    editor:
+      preview: false
+    fields:
+      - label: "★ Mettre à la une"
+        name: "a_la_une"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Cochez pour afficher cette actualité en grand, en haut de l'accueil. Si plusieurs sont cochées, la plus récente gagne — l'ancienne redescend toute seule dans les actualités précédentes."
+      - { label: "Titre", name: "titre", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - label: "Rubrique concernée (facultatif)"
+        name: "rubrique"
+        widget: "select"
+        required: false
+        options: ["CSE", "Démarche qualité", "Ressources humaines", "Communication", "Limites professionnelles"]
+        hint: "Sert d'étiquette de couleur sur la carte. Laissez vide pour une actualité générale (aucune étiquette)."
+      - label: "Couleur de l'étiquette (facultatif)"
+        name: "couleur"
+        widget: "select"
+        required: false
+        options:
+          - { label: "CSE (bleu)", value: "#2E7D9A" }
+          - { label: "Démarche qualité (orange)", value: "#E58A00" }
+          - { label: "Ressources humaines (vert)", value: "#5B9B31" }
+          - { label: "Communication (brique)", value: "#B0553A" }
+          - { label: "Limites professionnelles (ardoise)", value: "#4A5A6A" }
+        hint: "Choisissez la couleur assortie à la rubrique. Sans effet si aucune rubrique."
+      - { label: "Résumé", name: "resume", widget: "text", hint: "Court texte affiché sur la carte (et en secours si aucun texte long à la une)." }
+
+      # --- Champs utilisés surtout quand l'actu est à la une ---
+      - { label: "Texte complet (pour la une)", name: "contenu", widget: "markdown", required: false, hint: "Texte long affiché quand l'actu est à la une. Laissez vide pour n'afficher que le résumé." }
+      - { label: "Lien vidéo (pour la une)", name: "video_url", widget: "string", required: false, hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT — affichée en haut de la une." }
+      - { label: "Document à télécharger (pour la une)", name: "document", widget: "file", required: false }
+      - { label: "Texte du bouton document", name: "document_label", widget: "string", required: false, default: "Télécharger le document (PDF)" }
+
+      # --- Champs utilisés surtout sur la carte « précédente » ---
+      - label: "Type de lien (pour la carte)"
+        name: "type_lien"
+        widget: "select"
+        options:
+          - { label: "Vers une page", value: "page" }
+          - { label: "Télécharger un PDF", value: "pdf" }
+          - { label: "Voir une vidéo", value: "video" }
+        default: "page"
+        required: false
+      - { label: "Adresse du lien (pour la carte)", name: "lien", widget: "string", required: false, hint: "URL de la page, du PDF ou de la vidéo. Laissez # si pas de lien." }
+      - { label: "Texte du bouton (pour la carte)", name: "texte_lien", widget: "string", required: false, default: "Lire l'article" }
+      - { label: "Image (facultative)", name: "image", widget: "image", required: false }
+
+  # ============================================================
+  #  Les rubriques (pages à sections déroulantes)
+  # ============================================================
+  - name: "rubriques"
+    label: "Rubriques (pages à sections)"
+    label_singular: "Rubrique"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "cse"
+        label: "CSE"
+        file: "_data/rubriques/cse.json"
+        fields: &champs_rubrique
+          - { label: "Titre de la page", name: "titre", widget: "string" }
+          - { label: "Sous-titre (bandeau)", name: "sous_titre", widget: "text" }
+          - { label: "Couleur d'accent", name: "couleur", widget: "color", required: false, default: "#2E7D9A" }
+          - label: "Sections déroulantes"
+            name: "sections"
+            widget: "list"
+            label_singular: "Section"
+            summary: "{{fields.titre}}"
+            fields:
+              - { label: "Titre de la section", name: "titre", widget: "string" }
+              - { label: "Ouverte par défaut ?", name: "ouvert", widget: "boolean", default: false, required: false }
+              - label: "Contenus de la section"
+                name: "blocs"
+                widget: "list"
+                label_singular: "Contenu"
+                types:
+                  - label: "Texte"
+                    name: "texte"
+                    summary: "Texte"
+                    fields:
+                      - { label: "Texte", name: "texte", widget: "markdown" }
+                  - label: "Document (PDF)"
+                    name: "document"
+                    summary: "{{fields.titre_doc}}"
+                    fields:
+                      - { label: "Titre du document", name: "titre_doc", widget: "string" }
+                      - { label: "Précision (facultatif)", name: "precision", widget: "string", required: false, hint: "Ex. : À retourner avant le 30 novembre." }
+                      - { label: "Fichier", name: "fichier", widget: "file" }
+                      - { label: "Date d'ajout", name: "date_ajout", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", required: false, default: "", hint: "Le badge « Nouveau » s'affiche automatiquement pendant 30 jours après cette date." }
+                      - { label: "Forcer le badge « Nouveau »", name: "nouveau", widget: "boolean", default: false, required: false, hint: "Laissez décoché : le badge est automatique. Cochez seulement pour forcer l'affichage." }
+                  - label: "Image"
+                    name: "image"
+                    summary: "Image"
+                    fields:
+                      - { label: "Image", name: "image", widget: "image" }
+                      - { label: "Légende / texte alternatif", name: "legende", widget: "string", required: false }
+                  - label: "Vidéo (lien)"
+                    name: "video"
+                    summary: "{{fields.titre_video}}"
+                    fields:
+                      - { label: "Titre de la vidéo (facultatif)", name: "titre_video", widget: "string", required: false }
+                      - { label: "Lien de la vidéo", name: "video_url", widget: "string", hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT" }
+
+      - name: "demarche-qualite"
+        label: "Démarche qualité"
+        file: "_data/rubriques/demarche-qualite.json"
+        fields: *champs_rubrique
+
+      - name: "ressources-humaines"
+        label: "Ressources humaines"
+        file: "_data/rubriques/ressources-humaines.json"
+        fields: *champs_rubrique
+
+      - name: "communication"
+        label: "Communication"
+        file: "_data/rubriques/communication.json"
+        fields: *champs_rubrique
+
+      - name: "limites-professionnelles"
+        label: "Limites professionnelles"
+        file: "_data/rubriques/limites-professionnelles.json"
+        fields: *champs_rubrique

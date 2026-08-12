@@ -271,7 +271,7 @@
           <div class="actu-corps">
             <div class="actu-haut">
               {% if actu.date | estRecent %}<span class="badge-nouveau">Nouveau</span>{% endif %}
-              <span class="pastille" style="background: {{ actu.couleur | default: '#5B9B31' }};">{{ actu.rubrique }}</span>
+              {% if actu.rubrique and actu.rubrique != "" %}<span class="pastille" style="background: {{ actu.couleur | default: '#5B9B31' }};">{{ actu.rubrique }}</span>{% endif %}
               <span class="actu-date">{{ actu.date | dateFr }}</span>
             </div>
             <h3>{{ actu.titre }}</h3>
