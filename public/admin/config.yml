@@ -2,47 +2,23 @@ backend:
   name: github
   repo: cmaily-admr/intranet21
   branch: main
-  base_url: https://intranet21.pages.dev
   auth_endpoint: api/auth
+  commit_message: "CMS: {{message}}"
+  client_id: Ov23liE6Gvj39lE3gtYk
 
-# Dossier des médias — cohérent avec les liens /uploads/ de vos pages
-media_folder: "uploads"
-public_folder: "/uploads"
-
-locale: "fr"
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
 collections:
-  - name: rubriques
-    label: Rubriques
-    folder: _data/rubriques
+  - name: "actualites"
+    label: "Actualités"
+    folder: "_data/actualites"
     create: true
-    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: Titre, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string, hint: "URL, par exemple demarches" }
-      - { label: Couleur, name: couleur, widget: color }
-      - label: Blocs
-        name: blocs
-        widget: list
-        fields:
-          - { label: Titre, name: titre, widget: string }
-          - { label: Contenu, name: contenu, widget: markdown }
-      - label: Documents
-        name: documents
-        widget: list
-        fields:
-          - { label: Nom, name: nom, widget: string }
-          - { label: Fichier, name: fichier, widget: file }
-
-  - name: actualites
-    label: Actualités
-    folder: _data/actualites
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: Titre, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string }
-      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD" }
-      - { label: Épingler, name: epingle, widget: boolean, default: false, required: false }
-      - { label: Résumé, name: resume, widget: text, required: false }
-      - { label: Contenu, name: body, widget: markdown }
+      - { label: "Titre", name: "titre", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Contenu", name: "contenu", widget: "markdown" }
+      - { label: "Image", name: "image", widget: "image", required: false }
