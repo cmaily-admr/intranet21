@@ -143,6 +143,8 @@
     </div>
   </section>
 
+  {% assign une = actualites | actuALaUne %}
+  {% if une %}
   <section class="zone une-zone">
     <div class="contenu">
 
@@ -156,7 +158,7 @@
 
       <article class="une-carte">
 
-        {% if une.video_url %}
+        {% if une.video_url and une.video_url != "" %}
         <div class="video-cadre">
           <iframe src="{{ une.video_url }}"
                   title="{{ une.titre }}"
@@ -168,9 +170,13 @@
         <div class="une-texte">
           <h2>{{ une.titre }}</h2>
 
-          {{ une.contenu | markdown }}
+          {% if une.contenu and une.contenu != "" %}
+            {{ une.contenu | markdown }}
+          {% else %}
+            <p>{{ une.resume }}</p>
+          {% endif %}
 
-          {% if une.document %}
+          {% if une.document and une.document != "" %}
           <a class="actu-lien" href="{{ une.document }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
             {{ une.document_label | default: "Télécharger le document (PDF)" }}
@@ -182,6 +188,7 @@
       </article>
     </div>
   </section>
+  {% endif %}
 
   <section class="zone">
     <div class="contenu">
@@ -255,7 +262,7 @@
 
       <div class="liste-actus">
 
-        {% assign liste = actualites | valeurs | sort: "date" | reverse %}
+        {% assign liste = actualites | actusPrecedentes %}
         {% for actu in liste %}
         <article class="actu">
           {% if actu.image and actu.image != "" %}

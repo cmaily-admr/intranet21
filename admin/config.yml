@@ -11,40 +11,81 @@ public_folder: "/uploads"
 
 collections:
   # ============================================================
-  #  L'actualité à la une (bloc unique en haut de l'accueil)
+  #  Actualités (une seule liste : la plus récente cochée
+  #  « À la une » s'affiche en grand ; les autres en cartes).
   # ============================================================
-  - name: "une"
-    label: "Actualité à la une"
-    delete: false
+  - name: "actualites"
+    label: "Actualités"
+    label_singular: "Actualité"
+    folder: "_data/actualites"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{#if a_la_une}}★ À LA UNE · {{/if}}{{date}} — {{titre}}"
+    sortable_fields: ["date", "titre"]
     editor:
       preview: false
-    files:
-      - name: "une"
-        label: "Actualité à la une"
-        file: "_data/une.json"
-        fields:
-          - { label: "Titre", name: "titre", widget: "string" }
-          - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
-          - { label: "Lien vidéo (facultatif)", name: "video_url", widget: "string", required: false, hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT — laissez vide s'il n'y a pas de vidéo." }
-          - { label: "Contenu", name: "contenu", widget: "markdown", hint: "Le corps du texte." }
-          - { label: "Document à télécharger (facultatif)", name: "document", widget: "file", required: false }
-          - { label: "Texte du bouton", name: "document_label", widget: "string", required: false, default: "Télécharger le document (PDF)" }
+    fields:
+      - label: "★ Mettre à la une"
+        name: "a_la_une"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Cochez pour afficher cette actualité en grand, en haut de l'accueil. Si plusieurs sont cochées, la plus récente gagne — l'ancienne redescend toute seule dans les actualités précédentes."
+      - { label: "Titre", name: "titre", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - label: "Rubrique concernée"
+        name: "rubrique"
+        widget: "select"
+        options: ["CSE", "Démarche qualité", "Ressources humaines", "Communication", "Limites professionnelles"]
+        hint: "Sert d'étiquette de couleur sur la carte."
+      - label: "Couleur de l'étiquette"
+        name: "couleur"
+        widget: "select"
+        options:
+          - { label: "CSE (bleu)", value: "#2E7D9A" }
+          - { label: "Démarche qualité (orange)", value: "#E58A00" }
+          - { label: "Ressources humaines (vert)", value: "#5B9B31" }
+          - { label: "Communication (brique)", value: "#B0553A" }
+          - { label: "Limites professionnelles (ardoise)", value: "#4A5A6A" }
+        hint: "Choisissez la couleur assortie à la rubrique."
+      - { label: "Résumé", name: "resume", widget: "text", hint: "Court texte affiché sur la carte (et en secours si aucun texte long à la une)." }
+
+      # --- Champs utilisés surtout quand l'actu est à la une ---
+      - { label: "Texte complet (pour la une)", name: "contenu", widget: "markdown", required: false, hint: "Texte long affiché quand l'actu est à la une. Laissez vide pour n'afficher que le résumé." }
+      - { label: "Lien vidéo (pour la une)", name: "video_url", widget: "string", required: false, hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT — affichée en haut de la une." }
+      - { label: "Document à télécharger (pour la une)", name: "document", widget: "file", required: false }
+      - { label: "Texte du bouton document", name: "document_label", widget: "string", required: false, default: "Télécharger le document (PDF)" }
+
+      # --- Champs utilisés surtout sur la carte « précédente » ---
+      - label: "Type de lien (pour la carte)"
+        name: "type_lien"
+        widget: "select"
+        options:
+          - { label: "Vers une page", value: "page" }
+          - { label: "Télécharger un PDF", value: "pdf" }
+          - { label: "Voir une vidéo", value: "video" }
+        default: "page"
+        required: false
+      - { label: "Adresse du lien (pour la carte)", name: "lien", widget: "string", required: false, hint: "URL de la page, du PDF ou de la vidéo. Laissez # si pas de lien." }
+      - { label: "Texte du bouton (pour la carte)", name: "texte_lien", widget: "string", required: false, default: "Lire l'article" }
+      - { label: "Image (facultative)", name: "image", widget: "image", required: false }
 
   # ============================================================
   #  Les rubriques (pages à sections déroulantes)
-  #  Chaque fichier = une page. On édite ses sections et leurs contenus.
   # ============================================================
   - name: "rubriques"
     label: "Rubriques (pages à sections)"
     label_singular: "Rubrique"
-    delete: false          # on ne supprime pas une rubrique entière depuis le CMS
+    delete: false
     editor:
       preview: false
     files:
       - name: "cse"
         label: "CSE"
         file: "_data/rubriques/cse.json"
-        fields: &champs_rubrique   # ancre : réutilisée pour les autres rubriques
+        fields: &champs_rubrique
           - { label: "Titre de la page", name: "titre", widget: "string" }
           - { label: "Sous-titre (bandeau)", name: "sous_titre", widget: "text" }
           - { label: "Couleur d'accent", name: "couleur", widget: "color", required: false, default: "#2E7D9A" }
@@ -107,49 +148,3 @@ collections:
         label: "Limites professionnelles"
         file: "_data/rubriques/limites-professionnelles.json"
         fields: *champs_rubrique
-
-  # ============================================================
-  #  Actualités précédentes (liste, branchée plus tard)
-  # ============================================================
-  - name: "actualites"
-    label: "Actualités précédentes"
-    label_singular: "Actualité"
-    folder: "_data/actualites"
-    create: true
-    extension: "json"
-    format: "json"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    summary: "{{date}} — {{titre}}"
-    sortable_fields: ["date", "titre"]
-    editor:
-      preview: false
-    fields:
-      - { label: "Titre", name: "titre", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
-      - label: "Rubrique concernée"
-        name: "rubrique"
-        widget: "select"
-        options: ["CSE", "Démarche qualité", "Ressources humaines", "Communication", "Limites professionnelles"]
-        hint: "Sert d'étiquette de couleur sur la carte."
-      - label: "Couleur de l'étiquette"
-        name: "couleur"
-        widget: "select"
-        options:
-          - { label: "CSE (bleu)", value: "#2E7D9A" }
-          - { label: "Démarche qualité (orange)", value: "#E58A00" }
-          - { label: "Ressources humaines (vert)", value: "#5B9B31" }
-          - { label: "Communication (brique)", value: "#B0553A" }
-          - { label: "Limites professionnelles (ardoise)", value: "#4A5A6A" }
-        hint: "Choisissez la couleur assortie à la rubrique."
-      - { label: "Résumé", name: "resume", widget: "text", hint: "Court texte affiché sur la carte." }
-      - label: "Type de lien"
-        name: "type_lien"
-        widget: "select"
-        options:
-          - { label: "Vers une page", value: "page" }
-          - { label: "Télécharger un PDF", value: "pdf" }
-          - { label: "Voir une vidéo", value: "video" }
-        default: "page"
-      - { label: "Adresse du lien", name: "lien", widget: "string", required: false, hint: "URL de la page, du PDF ou de la vidéo. Laissez # si pas encore de lien." }
-      - { label: "Texte du bouton", name: "texte_lien", widget: "string", required: false, default: "Lire l'article" }
-      - { label: "Image (facultative)", name: "image", widget: "image", required: false }
