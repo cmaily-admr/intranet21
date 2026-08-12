@@ -15,6 +15,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.ignores.add("voir-pdf.html");
   eleventyConfig.ignores.add("admin/index.html");
 
+  eleventyConfig.addPassthroughCopy("nos-associations.html");
+  eleventyConfig.ignores.add("nos-associations.html");
+
   // NB : cse.html + les 4 autres rubriques sont désormais des GABARITS
   // (ils lisent _data/rubriques/*.json). On ne les ignore donc plus.
 
