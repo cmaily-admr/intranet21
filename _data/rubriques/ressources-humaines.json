@@ -1,0 +1,8 @@
+{
+  "titre": "Ressources humaines",
+  "sous_titre": "Congés, formations, contrats et démarches administratives.",
+  "couleur": "#5B9B31",
+  "sections": [
+    { "titre": "Section d'exemple", "ouvert": true, "blocs": [ { "type": "texte", "texte": "Cette rubrique est en cours de construction. Vous pourrez bientôt y retrouver les documents et informations. Ce contenu se modifie depuis l'espace d'administration." } ] }
+  ]
+}

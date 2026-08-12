@@ -1,0 +1,8 @@
+{
+  "titre": "Communication",
+  "sous_titre": "Actualités, événements et messages de la fédération.",
+  "couleur": "#B0553A",
+  "sections": [
+    { "titre": "Section d'exemple", "ouvert": true, "blocs": [ { "type": "texte", "texte": "Cette rubrique est en cours de construction. Vous pourrez bientôt y retrouver les documents et informations. Ce contenu se modifie depuis l'espace d'administration." } ] }
+  ]
+}
