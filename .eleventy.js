@@ -7,23 +7,19 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("uploads");
 
   // CRUCIAL : les fonctions Cloudflare Pages (OAuth GitHub pour Decap).
-  // Elles doivent atterrir dans _site/functions/ sinon /api/auth renvoie 404
-  // et le « Login with GitHub » échoue.
+  // Sans cette ligne, /api/auth renvoie 404 et le « Login with GitHub » échoue.
   eleventyConfig.addPassthroughCopy("functions");
 
-  // Pages encore 100 % statiques : recopiées telles quelles, PAS traitées.
-  // On les recopie via glob pour conserver l'URL exacte (/cse.html, etc.)
-  eleventyConfig.addPassthroughCopy("cse.html");
+  // voir-pdf.html reste une page statique (visionneuse PDF.js) : recopiée telle quelle.
   eleventyConfig.addPassthroughCopy("voir-pdf.html");
-
-  // On dit à Eleventy d'ignorer ces fichiers en tant que gabarits,
-  // pour qu'ils ne soient QUE recopiés (et gardent leur nom .html).
-  eleventyConfig.ignores.add("cse.html");
   eleventyConfig.ignores.add("voir-pdf.html");
   eleventyConfig.ignores.add("admin/index.html");
 
-  // Convertit le Markdown (champ "contenu" du CMS) en HTML
-  const md = new markdownIt({ html: true, linkify: true, breaks: false });
+  // NB : cse.html + les 4 autres rubriques sont désormais des GABARITS
+  // (ils lisent _data/rubriques/*.json). On ne les ignore donc plus.
+
+  // Convertit le Markdown (champs "texte"/"contenu" du CMS) en HTML
+  const md = new markdownIt({ html: true, linkify: true, breaks: true });
   eleventyConfig.addFilter("markdown", (str) => {
     if (!str) return "";
     return md.render(str);
