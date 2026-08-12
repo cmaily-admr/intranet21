@@ -25,6 +25,24 @@ module.exports = function(eleventyConfig) {
     return md.render(str);
   });
 
+  // Transforme un objet (dossier de données Eleventy) en tableau de ses valeurs,
+  // pour pouvoir trier/boucler. Ex. : {{ actualites | valeurs | sort: "date" }}
+  eleventyConfig.addFilter("valeurs", (obj) => {
+    if (!obj) return [];
+    if (Array.isArray(obj)) return obj;
+    return Object.values(obj);
+  });
+
+  // Renvoie true si la date fournie remonte à moins de 30 jours (badge « Nouveau »).
+  eleventyConfig.addFilter("estRecent", (value) => {
+    if (!value) return false;
+    const d = new Date(value);
+    if (isNaN(d)) return false;
+    const maintenant = Date.now();
+    const trenteJours = 30 * 24 * 60 * 60 * 1000;
+    return (maintenant - d.getTime()) < trenteJours && d.getTime() <= maintenant;
+  });
+
   // Affiche une date ISO (AAAA-MM-JJ) au format français : « 28 juillet 2026 »
   eleventyConfig.addFilter("dateFr", (value) => {
     if (!value) return "";
