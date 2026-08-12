@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nos associations — ADMR Côte-d'Or</title>
+  <meta name="description" content="Les associations locales ADMR de Côte-d'Or : adresses, téléphones et horaires.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#5B9B31">
+  <style>
+    :root {
+      --vert-admr: #5B9B31; --vert-fonce: #2E5A1C; --vert-clair: #EAF4E0;
+      --orange-admr: #E58A00; --gris-texte: #363636; --gris-clair: #6B6B6B;
+      --fond-page: #F6F8F3; --blanc: #FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 112.5%; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: var(--fond-page); color: var(--gris-texte); line-height: 1.6; }
+    .contenu { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .zone { padding: 40px 0; }
+
+    .entete { background: var(--blanc); border-bottom: 3px solid var(--vert-admr); }
+    .entete-inner { max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 16px; }
+    .logo { height: 58px; width: auto; }
+    .titre-bloc { display: flex; flex-direction: column; }
+    .titre-site { font-size: 1.3rem; font-weight: 800; color: var(--vert-fonce); line-height: 1.15; }
+    .sous-titre-site { font-size: .88rem; color: var(--gris-clair); }
+    .lien-accueil { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--vert-fonce); font-weight: 700; font-size: .95rem; padding: 8px 14px; border: 1px solid #E7EBE1; border-radius: 999px; background: var(--fond-page); }
+    .lien-accueil:hover { background: var(--vert-clair); }
+
+    .hero { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--vert-admr), var(--vert-fonce)); color: #fff; }
+    .hero-inner { position: relative; z-index: 2; max-width: 1120px; margin: 0 auto; padding: 46px 24px; }
+    .hero h1 { margin: 0 0 12px; font-size: clamp(1.8rem, 4.2vw, 2.5rem); font-weight: 800; }
+    .hero p { margin: 0; font-size: 1.12rem; max-width: 680px; opacity: .96; }
+    .hero .cercle { position: absolute; border-radius: 50%; z-index: 1; }
+    .hero .c1 { width: 260px; height: 260px; background: rgba(255,255,255,.10); top: -80px; right: -40px; }
+    .hero .c2 { width: 160px; height: 160px; background: rgba(46,125,154,.30); bottom: -60px; right: 120px; }
+
+    .barre-recherche { margin: 0 0 28px; position: relative; }
+    .barre-recherche input { width: 100%; padding: 14px 16px 14px 46px; font-size: 1rem; border: 1px solid #E7EBE1; border-radius: 12px; background: var(--blanc); color: var(--gris-texte); }
+    .barre-recherche input:focus { outline: 3px solid var(--orange-admr); outline-offset: 1px; border-color: transparent; }
+    .barre-recherche svg { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--gris-clair); }
+    .aucun-resultat { display: none; padding: 20px; text-align: center; color: var(--gris-clair); background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 12px; }
+
+    .grille-assos { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    .asso-carte { background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; }
+    .asso-nom { margin: 0 0 12px; font-size: 1.2rem; color: var(--vert-fonce); font-weight: 800; }
+    .asso-adr, .asso-tel { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 8px; font-size: .95rem; color: var(--gris-texte); }
+    .asso-adr svg, .asso-tel svg { width: 17px; height: 17px; flex: 0 0 auto; color: var(--vert-admr); margin-top: 3px; }
+    .asso-tel a { color: var(--gris-texte); text-decoration: none; font-weight: 700; }
+    .asso-tel a:hover { color: var(--vert-admr); }
+    .asso-horaires { margin: 12px 0 18px; border-top: 1px solid #EEF1EA; padding-top: 12px; }
+    .h-titre { font-size: .82rem; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; color: var(--gris-clair); margin-bottom: 8px; }
+    .h-ligne { display: flex; justify-content: space-between; gap: 12px; font-size: .9rem; padding: 2px 0; }
+    .h-jour { color: var(--gris-texte); font-weight: 600; }
+    .h-val { color: var(--gris-texte); text-align: right; }
+    .h-ligne.ferme .h-jour, .h-ligne.ferme .h-val { color: #B0B0B0; font-weight: 400; }
+    .asso-itineraire { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: var(--vert-admr); color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; font-size: .92rem; transition: background .15s ease; }
+    .asso-itineraire:hover { background: var(--vert-fonce); }
+    .asso-itineraire svg { width: 16px; height: 16px; }
+
+    .pied { background: var(--vert-fonce); color: #DDEAD3; margin-top: 20px; }
+    .pied-inner { max-width: 1120px; margin: 0 auto; padding: 34px 24px; display: flex; flex-wrap: wrap; gap: 26px; justify-content: space-between; }
+    .pied h4 { margin: 0 0 8px; color: #fff; font-size: 1.05rem; }
+    .pied a { color: #fff; }
+    .pied p { margin: 4px 0; }
+    .pied .mention { width: 100%; border-top: 1px solid rgba(255,255,255,.15); padding-top: 16px; font-size: .85rem; color: #BBD3AD; }
+
+    a:focus-visible { outline: 3px solid var(--orange-admr); outline-offset: 2px; border-radius: 6px; }
+    @media (max-width: 640px) { .entete-inner { flex-wrap: wrap; } .lien-accueil { margin-left: 0; } }
+  </style>
+</head>
+<body>
+
+  <header class="entete">
+    <div class="entete-inner">
+      <img class="logo" src="/assets/logo-admr.png" alt="Logo ADMR de Côte-d'Or" onerror="this.style.display='none'">
+      <div class="titre-bloc">
+        <span class="titre-site">Espace salariés</span>
+        <span class="sous-titre-site">ADMR de Côte-d'Or</span>
+      </div>
+      <a class="lien-accueil" href="/">← Accueil</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="cercle c1"></span>
+    <span class="cercle c2"></span>
+    <div class="hero-inner">
+      <h1>Nos associations</h1>
+      <p>Retrouvez les coordonnées et horaires des associations locales ADMR de Côte-d'Or. Utilisez le bouton « Voir l'itinéraire » pour ouvrir l'établissement dans Google Maps.</p>
+    </div>
+  </section>
+
+  <section class="zone">
+    <div class="contenu">
+
+      <div class="barre-recherche">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="recherche" placeholder="Rechercher une association (ville, adresse…)" aria-label="Rechercher une association">
+      </div>
+      <p class="aucun-resultat" id="aucun-resultat">Aucune association ne correspond à votre recherche.</p>
+
+      <div class="grille-assos" id="grille-assos">
+      <article class="asso-carte" data-recherche="admr d'arnay-le-duc 7 rue président carnot, 21230 arnay-le-duc">
+        <h3 class="asso-nom">ADMR d'Arnay-le-Duc</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          7 Rue Président Carnot, 21230 Arnay-le-Duc
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380848739">03 80 84 87 39</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CXEPtCFTbEXzEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr d'auxonne 60 rue antoine masson, 21130 auxonne">
+        <h3 class="asso-nom">ADMR d'Auxonne</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          60 Rue Antoine Masson, 21130 Auxonne
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380655334">03 80 65 53 34</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CUQdTgYT5HFoEBM/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de beaune 2b av. roger duchet, 21200 beaune">
+        <h3 class="asso-nom">ADMR de Beaune</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          2B Av. Roger Duchet, 21200 Beaune
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380263710">03 80 26 37 10</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CdXdV2lmMwAlEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de dijon 60 av. du 14 juillet bât f, 21300 chenôve">
+        <h3 class="asso-nom">ADMR de Dijon</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          60 Av. du 14 Juillet bât F, 21300 Chenôve
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380516990">03 80 51 69 90</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CW8_mLjhV0mSEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr du pays châtillonnais 2 bis rue de la libération, 21400 châtillon-sur-seine">
+        <h3 class="asso-nom">ADMR du Pays Châtillonnais</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          2 Bis Rue de la Libération, 21400 Châtillon-sur-Seine
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380910916">03 80 91 09 16</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CX4AGwUxFAo4EBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de genlis 4 rue de la gare, 21110 genlis">
+        <h3 class="asso-nom">ADMR de Genlis</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          4 Rue de la Gare, 21110 Genlis
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380479536">03 80 47 95 36</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CQJfh7SRFZIREBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de gevrey-chambertin 10 rue mal de lattre de tassigny, 21220 gevrey-chambertin">
+        <h3 class="asso-nom">ADMR de Gevrey-Chambertin</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          10 Rue Mal de Lattre de Tassigny, 21220 Gevrey-Chambertin
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380397582">03 80 39 75 82</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 11h30</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CYSeHBEh1V6aEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr d'is-sur-tille 16 pl. du général leclerc, 21120 is-sur-tille">
+        <h3 class="asso-nom">ADMR d'Is-sur-Tille</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          16 Pl. du Général Leclerc, 21120 Is-sur-Tille
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380855112">03 80 85 51 12</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CT5Up-LU8-ThEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de laignes 3 grande rue porte de la croix, 21330 laignes">
+        <h3 class="asso-nom">ADMR de Laignes</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          3 Grande rue Porte de La Croix, 21330 Laignes
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380814873">03 80 81 48 73</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">13h30 – 17h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mardi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Jeudi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CZNzk7oIOVDEEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de liernais rue de la place martin dosse, 21430 liernais">
+        <h3 class="asso-nom">ADMR de Liernais</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Rue de la Place Martin Dosse, 21430 Liernais
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380844956">03 80 84 49 56</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 13h – 16h30</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 16h30</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 11h45</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 16h30</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 11h45</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CWze-0f1SzHBEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de mirebeau-sur-bèze 8 pl. général viard, 21310 mirebeau-sur-bèze">
+        <h3 class="asso-nom">ADMR de Mirebeau-sur-Bèze</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          8 Pl. Général Viard, 21310 Mirebeau-sur-Bèze
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380365774">03 80 36 57 74</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/Cej_oTkPU3vxEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de montbard 3 rue carnot, 21500 montbard">
+        <h3 class="asso-nom">ADMR de Montbard</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          3 Rue Carnot, 21500 Montbard
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380963370">03 80 96 33 70</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CXC4ZtYx4STdEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de semur-en-auxois 2ter av. de ciney, 21140 semur-en-auxois">
+        <h3 class="asso-nom">ADMR de Semur-en-Auxois</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          2ter Av. de Ciney, 21140 Semur-en-Auxois
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380915822">03 80 91 58 22</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CZvf5xNQdZkEEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de nuits-saint-georges 3 rue jean moulin, 21700 nuits-saint-georges">
+        <h3 class="asso-nom">ADMR de Nuits-Saint-Georges</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          3 Rue Jean Moulin, 21700 Nuits-Saint-Georges
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380613730">03 80 61 37 30</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CVUdz5qb3j4fEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de pontailler-sur-saône 1 rue du 8 mai 1945, 21270 pontailler-sur-saône">
+        <h3 class="asso-nom">ADMR de Pontailler-sur-Saône</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          1 Rue du 8 Mai 1945, 21270 Pontailler-sur-Saône
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380361976">03 80 36 19 76</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/Cfr61kOM2Eg3EBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de pouilly-en-auxois 16 pl. pierre et marie curie, 21320 pouilly-en-auxois">
+        <h3 class="asso-nom">ADMR de Pouilly-en-Auxois</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          16 Pl. Pierre et Marie Curie, 21320 Pouilly-en-Auxois
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380906476">03 80 90 64 76</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne ferme"><span class="h-jour">Lundi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CYK6SktusT-bEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de saint-jean-de-losne 19 all. du bastion des charmilles, 21170 saint-jean-de-losne">
+        <h3 class="asso-nom">ADMR de Saint-Jean-de-Losne</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          19 All. du Bastion des Charmilles, 21170 Saint-Jean-de-Losne
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380290143">03 80 29 01 43</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mardi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CeHNjnEi5-OlEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de saint-seine-l'abbaye 4 av. de la gare, 21440 saint-seine-l'abbaye">
+        <h3 class="asso-nom">ADMR de Saint-Seine-l'Abbaye</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          4 Av. de la Gare, 21440 Saint-Seine-l'Abbaye
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380351219">03 80 35 12 19</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne ferme"><span class="h-jour">Lundi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CbF12PRSBhZiEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de saulieu 3 rue du tour des fossés, 21210 saulieu">
+        <h3 class="asso-nom">ADMR de Saulieu</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          3 Rue du Tour des Fossés, 21210 Saulieu
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380642168">03 80 64 21 68</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CSSS-Ir8uAOPEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de seurre 22 gd rue du faubourg saint-georges, 21250 seurre">
+        <h3 class="asso-nom">ADMR de Seurre</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          22 Gd Rue du Faubourg Saint-Georges, 21250 Seurre
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380204958">03 80 20 49 58</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CSaBarrNDZBXEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de venarey-les-laumes 5 av. jean jaurès, 21150 venarey-les-laumes">
+        <h3 class="asso-nom">ADMR de Venarey-les-Laumes</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          5 Av. Jean Jaurès, 21150 Venarey-les-Laumes
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380891793">03 80 89 17 93</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne ferme"><span class="h-jour">Lundi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CfKl-LgRH8DlEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      <article class="asso-carte" data-recherche="admr de vitteaux 21 rue edmé millot, 21350 vitteaux">
+        <h3 class="asso-nom">ADMR de Vitteaux</h3>
+        <p class="asso-adr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          21 Rue Edmé Millot, 21350 Vitteaux
+        </p>
+        <p class="asso-tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
+          <a href="tel:+33380496980">03 80 49 69 80</a>
+        </p>
+        <div class="asso-horaires">
+          <div class="h-titre">Horaires d'ouverture</div>
+          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 11h30, 14h – 16h30</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mardi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h30 – 11h30</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Jeudi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 11h30, 14h – 16h30</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+        </div>
+        <a class="asso-itineraire" href="https://g.page/r/CRJFQPx9Bw9OEBM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Voir l'itinéraire
+        </a>
+      </article>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="pied">
+    <div class="pied-inner">
+      <div>
+        <h4>ADMR de Côte-d'Or</h4>
+        <p>Espace réservé aux salariés</p>
+      </div>
+      <div>
+        <h4>Un problème avec le site ?</h4>
+        <p>Écrivez à : <a href="mailto:communication@admr-21.com">communication@admr-21.com</a></p>
+      </div>
+      <p class="mention">Ce site est un espace d'information interne. Merci de ne pas communiquer son adresse à l'extérieur.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var champ = document.getElementById("recherche");
+      if (!champ) return;
+      var cartes = document.querySelectorAll(".asso-carte");
+      var msgVide = document.getElementById("aucun-resultat");
+      champ.addEventListener("input", function () {
+        var q = champ.value.trim().toLowerCase();
+        var visibles = 0;
+        cartes.forEach(function (c) {
+          var t = (c.getAttribute("data-recherche") || "").toLowerCase();
+          var ok = q === "" || t.indexOf(q) !== -1;
+          c.style.display = ok ? "" : "none";
+          if (ok) visibles++;
+        });
+        msgVide.style.display = (q !== "" && visibles === 0) ? "block" : "none";
+      });
+    })();
+  </script>
+
+</body>
+</html>
