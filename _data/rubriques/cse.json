@@ -7,36 +7,102 @@
       "titre": "PV CSE",
       "ouvert": true,
       "blocs": [
-        { "type": "texte", "texte": "Les comptes rendus des réunions du CSE, du plus récent au plus ancien." },
-        { "type": "document", "titre_doc": "PV du CSE — 20 janvier 2026", "precision": "", "fichier": "/uploads/PV-1006.pdf" },
-        { "type": "document", "titre_doc": "PV du CSE — 18 novembre 2025", "precision": "", "fichier": "/uploads/pv-cse-2025-11-18.pdf" },
-        { "type": "document", "titre_doc": "PV du CSE — 16 septembre 2025", "precision": "", "fichier": "/uploads/pv-cse-2025-09-16.pdf" }
+        {
+          "type": "texte",
+          "texte": "Les comptes rendus des réunions du CSE, du plus récent au plus ancien."
+        },
+        {
+          "type": "document",
+          "titre_doc": "PV du CSE — 20 janvier 2026",
+          "precision": "",
+          "fichier": "/uploads/PV-1006.pdf"
+        },
+        {
+          "type": "document",
+          "titre_doc": "PV du CSE — 18 novembre 2025",
+          "precision": "",
+          "fichier": "/uploads/pv-cse-2025-11-18.pdf"
+        },
+        {
+          "type": "document",
+          "titre_doc": "PV du CSE — 16 septembre 2025",
+          "precision": "",
+          "fichier": "/uploads/pv-cse-2025-09-16.pdf"
+        }
       ]
     },
     {
       "titre": "Commandes groupées",
       "ouvert": false,
       "blocs": [
-        { "type": "texte", "texte": "Téléchargez le bon de commande, complétez-le et retournez-le selon les indications qu'il contient." },
-        { "type": "document", "titre_doc": "Chocolats de Noël 2025", "precision": "À retourner avant le 30 novembre 2025", "fichier": "/uploads/commande-chocolats-2025.pdf" },
-        { "type": "document", "titre_doc": "Fruits et légumes — printemps 2026", "precision": "À retourner avant le 15 mars 2026", "fichier": "/uploads/commande-fruits-2026.pdf" }
+        {
+          "type": "texte",
+          "texte": "Téléchargez le bon de commande, complétez-le et retournez-le selon les indications qu'il contient."
+        },
+        {
+          "type": "document",
+          "titre_doc": "Chocolats de Noël 2025",
+          "precision": "À retourner avant le 30 novembre 2025",
+          "fichier": "/uploads/commande-chocolats-2025.pdf"
+        },
+        {
+          "type": "document",
+          "titre_doc": "Fruits et légumes — printemps 2026",
+          "precision": "À retourner avant le 15 mars 2026",
+          "fichier": "/uploads/commande-fruits-2026.pdf"
+        }
       ]
     },
     {
       "titre": "Horaires permanences",
       "ouvert": false,
       "blocs": [
-        { "type": "texte", "texte": "Les élus du CSE vous accueillent lors des permanences suivantes :\n\n**Mardi** : 10h–12h (siège de Chenôve)\n**Jeudi** : 14h–16h30 (siège de Chenôve)\n\nEn dehors de ces créneaux, vous pouvez joindre le CSE par e-mail." },
-        { "type": "image", "image": "/uploads/permanences-cse.jpg", "legende": "Affiche des permanences du CSE" }
+        {
+          "type": "texte",
+          "texte": "Les élus du CSE vous accueillent lors des permanences suivantes :\n\n**Mardi** : 10h–12h (siège de Chenôve)\n**Jeudi** : 14h–16h30 (siège de Chenôve)\n\nEn dehors de ces créneaux, vous pouvez joindre le CSE par e-mail."
+        },
+        {
+          "type": "image",
+          "image": "/uploads/permanences-cse.jpg",
+          "legende": "Affiche des permanences du CSE"
+        }
+      ]
+    },
+    {
+      "ouvert": false,
+      "titre": "Test",
+      "blocs": [
+        {
+          "type": "texte",
+          "texte": "Je fais un test de texte + un pdf !"
+        },
+        {
+          "type": "document",
+          "nouveau": true,
+          "fichier": "/uploads/pv-cse-2-juillet-26-signe.pdf",
+          "titre_doc": "PV CSE test"
+        }
       ]
     },
     {
       "titre": "Informations diverses",
       "ouvert": false,
       "blocs": [
-        { "type": "texte", "texte": "Retrouvez ici les diverses informations communiquées par le CSE : activités sociales et culturelles, billetterie, partenariats, etc." },
-        { "type": "document", "titre_doc": "Règlement des activités sociales et culturelles", "precision": "", "fichier": "/uploads/reglement-asc.pdf" },
-        { "type": "image", "image": "/uploads/info-cse.jpg", "legende": "Information du CSE" }
+        {
+          "type": "texte",
+          "texte": "Retrouvez ici les diverses informations communiquées par le CSE : activités sociales et culturelles, billetterie, partenariats, etc."
+        },
+        {
+          "type": "document",
+          "titre_doc": "Règlement des activités sociales et culturelles",
+          "precision": "",
+          "fichier": "/uploads/reglement-asc.pdf"
+        },
+        {
+          "type": "image",
+          "image": "/uploads/info-cse.jpg",
+          "legende": "Information du CSE"
+        }
       ]
     }
   ]
