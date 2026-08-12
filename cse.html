@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE — ADMR Côte-d'Or</title>
+  <meta name="description" content="Espace CSE des salariés de l'ADMR de Côte-d'Or.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#5B9B31">
+
+  <style>
+    :root {
+      --vert-admr:     #5B9B31;
+      --vert-fonce:    #2E5A1C;
+      --vert-clair:    #EAF4E0;
+      --orange-admr:   #E58A00;
+      --gris-texte:    #363636;
+      --gris-clair:    #6B6B6B;
+      --fond-page:     #F6F8F3;
+      --blanc:         #FFFFFF;
+      --coul-page:     #2E7D9A;
+    }
+
+    * { box-sizing: border-box; }
+    html { font-size: 112.5%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--fond-page);
+      color: var(--gris-texte);
+      line-height: 1.6;
+    }
+    .contenu { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .zone { padding: 46px 0; }
+
+    .entete { background: var(--blanc); border-bottom: 3px solid var(--vert-admr); }
+    .entete-inner { max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 16px; }
+    .logo { height: 58px; width: auto; }
+    .titre-bloc { display: flex; flex-direction: column; }
+    .titre-site { font-size: 1.3rem; font-weight: 800; color: var(--vert-fonce); line-height: 1.15; }
+    .sous-titre-site { font-size: .88rem; color: var(--gris-clair); }
+    .lien-accueil { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--vert-fonce); font-weight: 700; font-size: .95rem; padding: 8px 14px; border: 1px solid #E7EBE1; border-radius: 999px; background: var(--fond-page); }
+    .lien-accueil:hover { background: var(--vert-clair); }
+
+    .hero { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--vert-admr), var(--vert-fonce)); color: #fff; }
+    .hero-inner { position: relative; z-index: 2; max-width: 1120px; margin: 0 auto; padding: 52px 24px; }
+    .hero h1 { margin: 0 0 12px; font-size: clamp(1.8rem, 4.2vw, 2.6rem); font-weight: 800; }
+    .hero p { margin: 0; font-size: 1.15rem; max-width: 680px; opacity: .96; }
+    .hero .cercle { position: absolute; border-radius: 50%; z-index: 1; }
+    .hero .c1 { width: 260px; height: 260px; background: rgba(255,255,255,.10); top: -80px; right: -40px; }
+    .hero .c2 { width: 160px; height: 160px; background: rgba(46,125,154,.40); bottom: -60px; right: 120px; }
+    .hero .c3 { width: 120px; height: 120px; background: rgba(255,255,255,.08); bottom: -30px; right: -20px; }
+
+    .faq { display: flex; flex-direction: column; gap: 14px; }
+    .bloc { background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 14px; overflow: hidden; }
+    .bloc > summary { list-style: none; cursor: pointer; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; font-weight: 800; color: var(--vert-fonce); font-size: 1.15rem; }
+    .bloc > summary::-webkit-details-marker { display: none; }
+    .bloc > summary::after { content: ""; width: 11px; height: 11px; border-right: 3px solid var(--coul-page); border-bottom: 3px solid var(--coul-page); transform: rotate(45deg); transition: transform .2s ease; flex: 0 0 auto; margin: 0 4px 4px 0; }
+    .bloc[open] > summary::after { transform: rotate(225deg); margin: 4px 4px 0 0; }
+    .bloc > summary:hover { background: var(--vert-clair); }
+    .bloc > summary:focus-visible { outline: 3px solid var(--orange-admr); outline-offset: -3px; }
+    .bloc-contenu { padding: 2px 22px 20px; }
+    .bloc-contenu p { margin: 6px 0 14px; }
+
+    .ligne-doc { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 14px 0; border-top: 1px solid #EEF1EA; }
+    .ligne-doc:first-of-type { border-top: none; }
+    .titre-doc { flex: 1 1 auto; font-weight: 600; color: var(--gris-texte); }
+    .titre-doc small { display: block; font-size: .85rem; color: var(--gris-clair); font-weight: 400; }
+    .doc-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; flex: 0 1 auto; }
+    .btn-tel { display: inline-flex; align-items: center; gap: 8px; background: var(--vert-admr); color: #fff; text-decoration: none; padding: 9px 15px; border-radius: 9px; font-weight: 700; font-size: .9rem; }
+    .btn-tel:hover { background: var(--vert-fonce); }
+    .btn-tel svg { width: 16px; height: 16px; }
+    .btn-voir { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--vert-admr); border: 2px solid var(--vert-admr); text-decoration: none; padding: 7px 13px; border-radius: 9px; font-weight: 700; font-size: .9rem; }
+    .btn-voir:hover { background: var(--vert-clair); }
+    .btn-voir svg { width: 16px; height: 16px; }
+
+    .image-info { max-width: 100%; height: auto; border-radius: 12px; display: block; margin: 10px 0; border: 1px solid #E7EBE1; }
+    .video-cadre { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; margin: 10px 0; }
+    .video-cadre iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .pdf-cadre { width: 100%; height: 500px; border: 1px solid #E7EBE1; border-radius: 12px; margin: 10px 0; }
+
+    .pied { background: var(--vert-fonce); color: #DDEAD3; }
+    .pied-inner { max-width: 1120px; margin: 0 auto; padding: 34px 24px; display: flex; flex-wrap: wrap; gap: 26px; justify-content: space-between; }
+    .pied h4 { margin: 0 0 8px; color: #fff; font-size: 1.05rem; }
+    .pied a { color: #fff; }
+    .pied p { margin: 4px 0; }
+    .pied .mention { width: 100%; border-top: 1px solid rgba(255,255,255,.15); padding-top: 16px; font-size: .85rem; color: #BBD3AD; }
+
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--orange-admr); outline-offset: 2px; border-radius: 6px; }
+  </style>
+</head>
+
+<body>
+
+  <header class="entete">
+    <div class="entete-inner">
+      <img class="logo" src="/assets/logo-admr.png" alt="Logo ADMR de Côte-d'Or" onerror="this.style.display='none'">
+      <div class="titre-bloc">
+        <span class="titre-site">Espace salariés</span>
+        <span class="sous-titre-site">ADMR de Côte-d'Or</span>
+      </div>
+      <a class="lien-accueil" href="/">← Accueil</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="cercle c1"></span>
+    <span class="cercle c2"></span>
+    <span class="cercle c3"></span>
+    <div class="hero-inner">
+      <h1>CSE</h1>
+      <p>Comité Social et Économique : comptes rendus, commandes groupées, permanences et informations de vos élus. Cliquez sur une rubrique pour la dérouler.</p>
+    </div>
+  </section>
+
+  <section class="zone">
+    <div class="contenu">
+      <div class="faq">
+
+        <details class="bloc" open>
+          <summary>PV CSE</summary>
+          <div class="bloc-contenu">
+            <p>Les comptes rendus des réunions du CSE, du plus récent au plus ancien.</p>
+
+            <div class="ligne-doc">
+              <span class="titre-doc">PV du CSE — 20 janvier 2026</span>
+              <div class="doc-actions">
+                <a class="btn-voir" href="/voir-pdf.html?doc=/uploads/PV-1006.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Visualiser
+                </a>
+                <a class="btn-tel" href="/uploads/pv-cse-2026-01-20.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+                  Télécharger
+                </a>
+              </div>
+            </div>
+
+            <div class="ligne-doc">
+              <span class="titre-doc">PV du CSE — 18 novembre 2025</span>
+              <div class="doc-actions">
+                <a class="btn-voir" href="/voir-pdf.html?doc=/uploads/pv-cse-2025-11-18.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Visualiser
+                </a>
+                <a class="btn-tel" href="/uploads/pv-cse-2025-11-18.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+                  Télécharger
+                </a>
+              </div>
+            </div>
+
+            <div class="ligne-doc">
+              <span class="titre-doc">PV du CSE — 16 septembre 2025</span>
+              <div class="doc-actions">
+                <a class="btn-voir" href="/voir-pdf.html?doc=/uploads/pv-cse-2025-09-16.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Visualiser
+                </a>
+                <a class="btn-tel" href="/uploads/pv-cse-2025-09-16.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+                  Télécharger
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </details>
+
+        <details class="bloc">
+          <summary>Commandes groupées</summary>
+          <div class="bloc-contenu">
+            <p>Téléchargez le bon de commande, complétez-le et retournez-le selon les indications qu'il contient.</p>
+
+            <div class="ligne-doc">
+              <span class="titre-doc">
+                Chocolats de Noël 2025
+                <small>À retourner avant le 30 novembre 2025</small>
+              </span>
+              <div class="doc-actions">
+                <a class="btn-voir" href="/voir-pdf.html?doc=/uploads/commande-chocolats-2025.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Visualiser
+                </a>
+                <a class="btn-tel" href="/uploads/commande-chocolats-2025.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+                  Télécharger
+                </a>
+              </div>
+            </div>
+
+            <div class="ligne-doc">
+              <span class="titre-doc">
+                Fruits et légumes — printemps 2026
+                <small>À retourner avant le 15 mars 2026</small>
+              </span>
+              <div class="doc-actions">
+                <a class="btn-voir" href="/voir-pdf.html?doc=/uploads/commande-fruits-2026.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Visualiser
+                </a>
+                <a class="btn-tel" href="/uploads/commande-fruits-2026.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+                  Télécharger
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </details>
+
+        <details class="bloc">
+          <summary>Horaires permanences</summary>
+          <div class="bloc-contenu">
+            <p>Les élus du CSE vous accueillent lors des permanences suivantes :</p>
+            <p>
+              <strong>Mardi</strong> : 10h–12h (siège de Chenôve)<br>
+              <strong>Jeudi</strong> : 14h–16h30 (siège de Chenôve)<br>
+              En dehors de ces créneaux, vous pouvez joindre le CSE par e-mail.
+            </p>
+            <img class="image-info" src="/uploads/permanences-cse.jpg" alt="Affiche des permanences du CSE" onerror="this.style.display='none'">
+          </div>
+        </details>
+
+        <details class="bloc">
+          <summary>Informations diverses</summary>
+          <div class="bloc-contenu">
+            <p>Retrouvez ici les diverses informations communiquées par le CSE : activités sociales et culturelles, billetterie, partenariats, etc.</p>
+
+            <div class="ligne-doc">
+              <span class="titre-doc">Règlement des activités sociales et culturelles</span>
+              <div class="doc-actions">
+                <a class="btn-voir" href="/voir-pdf.html?doc=/uploads/reglement-asc.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Visualiser
+                </a>
+                <a class="btn-tel" href="/uploads/reglement-asc.pdf">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+                  Télécharger
+                </a>
+              </div>
+            </div>
+
+            <img class="image-info" src="/uploads/info-cse.jpg" alt="Information du CSE" onerror="this.style.display='none'">
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="pied">
+    <div class="pied-inner">
+      <div>
+        <h4>ADMR de Côte-d'Or</h4>
+        <p>Espace réservé aux salariés</p>
+      </div>
+      <div>
+        <h4>Un problème avec le site ?</h4>
+        <p>Écrivez à : <a href="mailto:communication@admr-21.com">communication@admr-21.com</a></p>
+      </div>
+      <p class="mention">Ce site est un espace d'information interne. Merci de ne pas communiquer son adresse à l'extérieur.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
