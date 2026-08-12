@@ -1,25 +1,341 @@
----
-title: Accueil
-layout: base.njk
----
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace salariés — ADMR Côte-d'Or</title>
+  <meta name="description" content="Espace d'information interne des salariés de l'ADMR de Côte-d'Or.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#5B9B31">
 
-<section aria-labelledby="titre-rubriques">
-  <h2 id="titre-rubriques">Rubriques</h2>
-<pre>{{ rubriques | dump }}</pre>
-<ul class="liste-rubriques">
-  {% for cle, rubrique in rubriques %}
-    {% if rubrique.title %}
-      <li class="liste-rubriques__item">
-        <a
-          href="/rubriques/{{ cle }}/"
-          style="border-color: {{ rubrique.couleur | default('#005a9c') }}"
-        >
-          <span>{{ rubrique.title }}</span>
+  <style>
+    :root {
+      --vert-admr:     #5B9B31;
+      --vert-fonce:    #2E5A1C;
+      --vert-clair:    #EAF4E0;
+      --orange-admr:   #E58A00;
+      --gris-texte:    #363636;
+      --gris-clair:    #6B6B6B;
+      --fond-page:     #F6F8F3;
+      --blanc:         #FFFFFF;
+
+      --coul-cse:           #2E7D9A;
+      --coul-qualite:       #E58A00;
+      --coul-rh:            #5B9B31;
+      --coul-communication: #B0553A;
+      --coul-limites:       #4A5A6A;
+      --coul-associations:  #C08A2E;
+    }
+
+    * { box-sizing: border-box; }
+    html { font-size: 112.5%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--fond-page);
+      color: var(--gris-texte);
+      line-height: 1.6;
+    }
+    .contenu { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .zone { padding: 46px 0; }
+
+    .entete { background: var(--blanc); border-bottom: 3px solid var(--vert-admr); }
+    .entete-inner {
+      max-width: 1120px; margin: 0 auto; padding: 14px 24px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .logo { height: 58px; width: auto; }
+    .titre-bloc { display: flex; flex-direction: column; }
+    .titre-site { font-size: 1.3rem; font-weight: 800; color: var(--vert-fonce); line-height: 1.15; }
+    .sous-titre-site { font-size: .88rem; color: var(--gris-clair); }
+
+    .hero { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--vert-admr), var(--vert-fonce)); color: #fff; }
+    .hero-inner { position: relative; z-index: 2; max-width: 1120px; margin: 0 auto; padding: 58px 24px; }
+    .hero h1 { margin: 0 0 12px; font-size: clamp(1.8rem, 4.2vw, 2.6rem); font-weight: 800; }
+    .hero p { margin: 0; font-size: 1.15rem; max-width: 640px; opacity: .96; }
+    .hero .cercle { position: absolute; border-radius: 50%; z-index: 1; }
+    .hero .c1 { width: 260px; height: 260px; background: rgba(255,255,255,.10); top: -80px; right: -40px; }
+    .hero .c2 { width: 160px; height: 160px; background: rgba(229,138,0,.30); bottom: -60px; right: 120px; }
+    .hero .c3 { width: 120px; height: 120px; background: rgba(255,255,255,.08); bottom: -30px; right: -20px; }
+
+    .section-titre { margin: 0 0 4px; font-size: 1.6rem; font-weight: 800; color: var(--vert-fonce); }
+    .section-soustitre { margin: 0 0 26px; color: var(--gris-clair); }
+
+    .rubriques { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+    .carte-rubrique {
+      display: flex; flex-direction: column; gap: 12px;
+      background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 18px;
+      padding: 24px; text-decoration: none; color: inherit;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .carte-rubrique:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(46,90,28,.14); border-color: transparent; }
+    .carte-icone { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #fff; }
+    .carte-icone svg { width: 30px; height: 30px; }
+    .carte-rubrique h3 { margin: 0; font-size: 1.2rem; color: var(--vert-fonce); }
+    .carte-rubrique .descr { margin: 0; color: var(--gris-clair); font-size: .98rem; }
+    .carte-fleche { margin-top: auto; font-weight: 700; color: var(--vert-admr); }
+
+    .liste-actus { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+    .actu { display: flex; flex-direction: column; background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 18px; overflow: hidden; }
+    .actu-image { width: 100%; height: 170px; object-fit: cover; display: block; background: var(--vert-clair); }
+    .actu-corps { display: flex; flex-direction: column; gap: 10px; padding: 22px; flex: 1; }
+    .actu-haut { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .badge-nouveau { background: var(--orange-admr); color: #fff; font-size: .70rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; }
+    .pastille { font-size: .72rem; font-weight: 700; color: #fff; padding: 4px 10px; border-radius: 999px; }
+    .actu-date { width: 100%; color: var(--gris-clair); font-size: .85rem; }
+    .actu h3 { margin: 2px 0 0; font-size: 1.2rem; color: var(--vert-fonce); }
+    .actu p { margin: 0; color: var(--gris-texte); }
+    .actu-lien { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: var(--vert-admr); color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; transition: background .15s ease; }
+    .actu-lien:hover { background: var(--vert-fonce); }
+    .actu-lien svg { width: 18px; height: 18px; }
+
+    .une-zone { background: var(--vert-clair); }
+    .une-entete { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .une-label { display: inline-flex; align-items: center; gap: 8px; background: var(--orange-admr); color: #fff; font-weight: 800; font-size: .95rem; letter-spacing: .02em; padding: 8px 16px; border-radius: 999px; }
+    .une-label svg { width: 20px; height: 20px; }
+    .une-date { color: var(--gris-clair); font-size: .95rem; }
+    .une-carte { background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 20px; padding: 26px; box-shadow: 0 10px 30px rgba(46,90,28,.08); }
+    .video-cadre { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 14px; overflow: hidden; margin-bottom: 22px; }
+    .video-cadre iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .une-carte h2 { margin: 0 0 12px; font-size: 1.5rem; color: var(--vert-fonce); }
+    .une-texte p { margin: 0 0 14px; font-size: 1.05rem; }
+    .une-texte p a { color: var(--vert-admr); font-weight: 700; }
+    .pdf-cadre { width: 100%; height: 500px; border: 1px solid #E7EBE1; border-radius: 14px; margin: 8px 0 18px; }
+
+    .pied { background: var(--vert-fonce); color: #DDEAD3; }
+    .pied-inner { max-width: 1120px; margin: 0 auto; padding: 34px 24px; display: flex; flex-wrap: wrap; gap: 26px; justify-content: space-between; }
+    .pied h4 { margin: 0 0 8px; color: #fff; font-size: 1.05rem; }
+    .pied a { color: #fff; }
+    .pied p { margin: 4px 0; }
+    .pied .mention { width: 100%; border-top: 1px solid rgba(255,255,255,.15); padding-top: 16px; font-size: .85rem; color: #BBD3AD; }
+
+    a:focus-visible, .carte-rubrique:focus-visible { outline: 3px solid var(--orange-admr); outline-offset: 2px; border-radius: 6px; }
+    @media (max-width: 520px) {
+      .entete-inner { flex-wrap: wrap; }
+      .titre-site { font-size: 1.15rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+      .carte-rubrique:hover { transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="entete">
+    <div class="entete-inner">
+      <img class="logo" src="/assets/logo-admr.png" alt="Logo ADMR de Côte-d'Or" onerror="this.style.display='none'">
+      <div class="titre-bloc">
+        <span class="titre-site">Espace salariés</span>
+        <span class="sous-titre-site">ADMR de Côte-d'Or</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="cercle c1"></span>
+    <span class="cercle c2"></span>
+    <span class="cercle c3"></span>
+    <div class="hero-inner">
+      <h1>Bienvenue sur votre espace d'information</h1>
+      <p>Retrouvez ici toutes les informations utiles à votre travail au quotidien : documents, actualités, contacts et démarches. Choisissez une rubrique ci-dessous.</p>
+    </div>
+  </section>
+
+  <section class="zone une-zone">
+    <div class="contenu">
+
+      <div class="une-entete">
+        <span class="une-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5v3a1 1 0 0 0 1 1h3l6 4V5.5l-6 4H4a1 1 0 0 0-1 1z"/><path d="M16 9a3.5 3.5 0 0 1 0 6"/></svg>
+          Dernière actualité
+        </span>
+        <span class="une-date">28 juillet 2026</span>
+      </div>
+
+      <article class="une-carte">
+
+        <div class="video-cadre">
+          <iframe src="https://www.youtube-nocookie.com/embed/_ZmsFhZOsTY"
+                  title="La retraite progressive"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen loading="lazy"></iframe>
+        </div>
+
+        <div class="une-texte">
+          <h2>La retraite progressive : aménagez votre temps de travail dès 60 ans</h2>
+
+          <p>Bonjour à toutes et à tous,</p>
+          <p>Vous avez 59 ans et vous envisagez d'aménager votre temps de travail dès 60 ans ? Alors pensez à la <strong>retraite progressive</strong> !</p>
+          <p>Que vous soyez cadre ou non-cadre, vous pouvez tous en bénéficier.</p>
+          <p>En effet, la retraite progressive offre la possibilité de bénéficier d'une pension de retraite de base et complémentaire, tout en poursuivant une activité à temps partiel comprise entre <strong>40&nbsp;% et 80&nbsp;%</strong> d'un temps complet, à condition d'acquérir, à 60&nbsp;ans, au moins <strong>150&nbsp;trimestres</strong>.</p>
+          <p>Pour en savoir plus, regardez la vidéo ci-dessus et/ou téléchargez le document ci-dessous.</p>
+          <p>Pour rappel, vous pouvez effectuer vos simulations sur votre compte retraite avec l'outil <a href="https://www.info-retraite.fr/portail-info/sites/PortailInformationnel/home/mon-estimation-retraite.html" target="_blank" rel="noopener">M@REL</a>.</p>
+          <p>Si vous désirez une estimation de votre salaire en retraite progressive à l'ADMR, vous pouvez vous adresser au <strong>Pôle RH Protection Sociale</strong> de la Fédération ADMR&nbsp;21.</p>
+
+          <a class="actu-lien" href="/uploads/retraite-progressive.pdf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+            Télécharger le document (PDF)
+          </a>
+
+        </div>
+
+      </article>
+    </div>
+  </section>
+
+  <section class="zone">
+    <div class="contenu">
+      <h2 class="section-titre">Les rubriques</h2>
+      <p class="section-soustitre">Cliquez sur une rubrique pour accéder aux informations.</p>
+
+      <div class="rubriques">
+
+        <a class="carte-rubrique" href="/cse.html">
+          <span class="carte-icone" style="background: var(--coul-cse);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16.5 4.2a3.2 3.2 0 0 1 0 5.9"/><path d="M18 13.4A6.5 6.5 0 0 1 21.5 20"/></svg>
+          </span>
+          <h3>CSE</h3>
+          <p class="descr">Comptes rendus, activités sociales et infos de vos représentants du personnel.</p>
+          <span class="carte-fleche">Accéder →</span>
         </a>
-      </li>
-    {% endif %}
-  {% else %}
-    <li>Aucune rubrique disponible.</li>
-  {% endfor %}
-</ul>
-</section>
+
+        <a class="carte-rubrique" href="/demarche-qualite.html">
+          <span class="carte-icone" style="background: var(--coul-qualite);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.9l-4.8 2.5.9-5.4-3.9-3.8 5.4-.8z"/><path d="M9.3 12.2l1.8 1.8 3.6-3.6"/></svg>
+          </span>
+          <h3>Démarche qualité</h3>
+          <p class="descr">Procédures, bonnes pratiques et documents de la démarche qualité.</p>
+          <span class="carte-fleche">Accéder →</span>
+        </a>
+
+        <a class="carte-rubrique" href="/ressources-humaines.html">
+          <span class="carte-icone" style="background: var(--coul-rh);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>
+          </span>
+          <h3>Ressources humaines</h3>
+          <p class="descr">Congés, formations, contrats et démarches administratives.</p>
+          <span class="carte-fleche">Accéder →</span>
+        </a>
+
+        <a class="carte-rubrique" href="/communication.html">
+          <span class="carte-icone" style="background: var(--coul-communication);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 3.5z"/><path d="M8 9h8"/><path d="M8 12.5h5"/></svg>
+          </span>
+          <h3>Communication</h3>
+          <p class="descr">Actualités, événements et messages de la fédération.</p>
+          <span class="carte-fleche">Accéder →</span>
+        </a>
+
+        <a class="carte-rubrique" href="/limites-professionnelles.html">
+          <span class="carte-icone" style="background: var(--coul-limites);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v5.1c0 4.4-3 7.8-7.2 9.3-4.2-1.5-7.2-4.9-7.2-9.3V5.4z"/><path d="M9 12h6"/></svg>
+          </span>
+          <h3>Limites professionnelles</h3>
+          <p class="descr">Le cadre du métier : ce qui relève ou non de votre intervention à domicile.</p>
+          <span class="carte-fleche">Accéder →</span>
+        </a>
+
+        <a class="carte-rubrique" href="/nos-associations.html">
+          <span class="carte-icone" style="background: var(--coul-associations);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.1-6.5-10a6.5 6.5 0 0 1 13 0c0 4.9-6.5 10-6.5 10z"/><circle cx="12" cy="11" r="2.4"/></svg>
+          </span>
+          <h3>Nos associations</h3>
+          <p class="descr">Les associations locales ADMR de Côte-d'Or et leurs coordonnées.</p>
+          <span class="carte-fleche">Accéder →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="zone" style="background: var(--vert-clair);">
+    <div class="contenu">
+      <h2 class="section-titre">Actualités précédentes</h2>
+      <p class="section-soustitre">Retrouvez les informations publiées récemment.</p>
+
+      <div class="liste-actus">
+
+        <article class="actu">
+          <div class="actu-corps">
+            <div class="actu-haut">
+              <span class="badge-nouveau">Nouveau</span>
+              <span class="pastille" style="background: var(--coul-cse);">CSE</span>
+              <span class="actu-date">22 juillet 2026</span>
+            </div>
+            <h3>Compte rendu de la réunion du CSE</h3>
+            <p>Le compte rendu de la dernière réunion est disponible. Points abordés : congés d'été, tickets restaurant et projets à venir.</p>
+            <a class="actu-lien" href="/cse.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11H4z"/><path d="M8 12h8M8 16h8M8 8h5"/></svg>
+              Lire l'article
+            </a>
+          </div>
+        </article>
+
+        <article class="actu">
+          <div class="actu-corps">
+            <div class="actu-haut">
+              <span class="pastille" style="background: var(--coul-qualite);">Démarche qualité</span>
+              <span class="actu-date">15 juillet 2026</span>
+            </div>
+            <h3>Nouvelle procédure d'accueil à domicile</h3>
+            <p>La procédure mise à jour est à télécharger et à appliquer dès à présent lors des premières visites.</p>
+            <a class="actu-lien" href="/uploads/procedure-qualite.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+              Télécharger le PDF
+            </a>
+          </div>
+        </article>
+
+        <article class="actu">
+          <div class="actu-corps">
+            <div class="actu-haut">
+              <span class="pastille" style="background: var(--coul-communication);">Communication</span>
+              <span class="actu-date">8 juillet 2026</span>
+            </div>
+            <h3>Message d'été de la direction</h3>
+            <p>Une courte vidéo pour remercier les équipes et présenter les temps forts de la rentrée.</p>
+            <a class="actu-lien" href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>
+              Voir la vidéo
+            </a>
+          </div>
+        </article>
+
+        <article class="actu">
+          <img class="actu-image" src="/uploads/photo-formation.jpg" alt="" onerror="this.style.display='none'">
+          <div class="actu-corps">
+            <div class="actu-haut">
+              <span class="pastille" style="background: var(--coul-rh);">Ressources humaines</span>
+              <span class="actu-date">1er juillet 2026</span>
+            </div>
+            <h3>Inscriptions aux formations 2026</h3>
+            <p>Le catalogue de formations est ouvert. Rapprochez-vous de votre responsable pour vous inscrire avant le 30 septembre.</p>
+            <a class="actu-lien" href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              En savoir plus
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="pied">
+    <div class="pied-inner">
+      <div>
+        <h4>ADMR de Côte-d'Or</h4>
+        <p>Espace réservé aux salariés</p>
+      </div>
+      <div>
+        <h4>Un problème avec le site ?</h4>
+        <p>Écrivez à : <a href="mailto:communication@admr-21.com">communication@admr-21.com</a></p>
+      </div>
+      <p class="mention">Ce site est un espace d'information interne. Merci de ne pas communiquer son adresse à l'extérieur.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
