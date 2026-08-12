@@ -75,7 +75,7 @@ collections:
       - { label: "Image (facultative)", name: "image", widget: "image", required: false }
 
   # ============================================================
-  #  Les rubriques (pages à sections déroulantes)
+  #  Les rubriques
   # ============================================================
   - name: "rubriques"
     label: "Rubriques (pages à sections)"
