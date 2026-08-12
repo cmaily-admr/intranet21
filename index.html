@@ -151,33 +151,31 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5v3a1 1 0 0 0 1 1h3l6 4V5.5l-6 4H4a1 1 0 0 0-1 1z"/><path d="M16 9a3.5 3.5 0 0 1 0 6"/></svg>
           Dernière actualité
         </span>
-        <span class="une-date">28 juillet 2026</span>
+        <span class="une-date">{{ une.date | dateFr }}</span>
       </div>
 
       <article class="une-carte">
 
+        {% if une.video_url %}
         <div class="video-cadre">
-          <iframe src="https://www.youtube-nocookie.com/embed/_ZmsFhZOsTY"
-                  title="La retraite progressive"
+          <iframe src="{{ une.video_url }}"
+                  title="{{ une.titre }}"
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen loading="lazy"></iframe>
         </div>
+        {% endif %}
 
         <div class="une-texte">
-          <h2>La retraite progressive : aménagez votre temps de travail dès 60 ans</h2>
+          <h2>{{ une.titre }}</h2>
 
-          <p>Bonjour à toutes et à tous,</p>
-          <p>Vous avez 59 ans et vous envisagez d'aménager votre temps de travail dès 60 ans ? Alors pensez à la <strong>retraite progressive</strong> !</p>
-          <p>Que vous soyez cadre ou non-cadre, vous pouvez tous en bénéficier.</p>
-          <p>En effet, la retraite progressive offre la possibilité de bénéficier d'une pension de retraite de base et complémentaire, tout en poursuivant une activité à temps partiel comprise entre <strong>40&nbsp;% et 80&nbsp;%</strong> d'un temps complet, à condition d'acquérir, à 60&nbsp;ans, au moins <strong>150&nbsp;trimestres</strong>.</p>
-          <p>Pour en savoir plus, regardez la vidéo ci-dessus et/ou téléchargez le document ci-dessous.</p>
-          <p>Pour rappel, vous pouvez effectuer vos simulations sur votre compte retraite avec l'outil <a href="https://www.info-retraite.fr/portail-info/sites/PortailInformationnel/home/mon-estimation-retraite.html" target="_blank" rel="noopener">M@REL</a>.</p>
-          <p>Si vous désirez une estimation de votre salaire en retraite progressive à l'ADMR, vous pouvez vous adresser au <strong>Pôle RH Protection Sociale</strong> de la Fédération ADMR&nbsp;21.</p>
+          {{ une.contenu | markdown }}
 
-          <a class="actu-lien" href="/uploads/retraite-progressive.pdf">
+          {% if une.document %}
+          <a class="actu-lien" href="{{ une.document }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
-            Télécharger le document (PDF)
+            {{ une.document_label | default: "Télécharger le document (PDF)" }}
           </a>
+          {% endif %}
 
         </div>
 
