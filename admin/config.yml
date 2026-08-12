@@ -73,7 +73,8 @@ collections:
                       - { label: "Titre du document", name: "titre_doc", widget: "string" }
                       - { label: "Précision (facultatif)", name: "precision", widget: "string", required: false, hint: "Ex. : À retourner avant le 30 novembre." }
                       - { label: "Fichier", name: "fichier", widget: "file" }
-                      - { label: "Badge « Nouveau » ?", name: "nouveau", widget: "boolean", default: false, required: false }
+                      - { label: "Date d'ajout", name: "date_ajout", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", required: false, default: "", hint: "Le badge « Nouveau » s'affiche automatiquement pendant 30 jours après cette date." }
+                      - { label: "Forcer le badge « Nouveau »", name: "nouveau", widget: "boolean", default: false, required: false, hint: "Laissez décoché : le badge est automatique. Cochez seulement pour forcer l'affichage." }
                   - label: "Image"
                     name: "image"
                     summary: "Image"
@@ -112,13 +113,43 @@ collections:
   # ============================================================
   - name: "actualites"
     label: "Actualités précédentes"
+    label_singular: "Actualité"
     folder: "_data/actualites"
     create: true
     extension: "json"
     format: "json"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{date}} — {{titre}}"
+    sortable_fields: ["date", "titre"]
+    editor:
+      preview: false
     fields:
       - { label: "Titre", name: "titre", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
-      - { label: "Contenu", name: "contenu", widget: "markdown" }
-      - { label: "Image", name: "image", widget: "image", required: false }
+      - label: "Rubrique concernée"
+        name: "rubrique"
+        widget: "select"
+        options: ["CSE", "Démarche qualité", "Ressources humaines", "Communication", "Limites professionnelles"]
+        hint: "Sert d'étiquette de couleur sur la carte."
+      - label: "Couleur de l'étiquette"
+        name: "couleur"
+        widget: "select"
+        options:
+          - { label: "CSE (bleu)", value: "#2E7D9A" }
+          - { label: "Démarche qualité (orange)", value: "#E58A00" }
+          - { label: "Ressources humaines (vert)", value: "#5B9B31" }
+          - { label: "Communication (brique)", value: "#B0553A" }
+          - { label: "Limites professionnelles (ardoise)", value: "#4A5A6A" }
+        hint: "Choisissez la couleur assortie à la rubrique."
+      - { label: "Résumé", name: "resume", widget: "text", hint: "Court texte affiché sur la carte." }
+      - label: "Type de lien"
+        name: "type_lien"
+        widget: "select"
+        options:
+          - { label: "Vers une page", value: "page" }
+          - { label: "Télécharger un PDF", value: "pdf" }
+          - { label: "Voir une vidéo", value: "video" }
+        default: "page"
+      - { label: "Adresse du lien", name: "lien", widget: "string", required: false, hint: "URL de la page, du PDF ou de la vidéo. Laissez # si pas encore de lien." }
+      - { label: "Texte du bouton", name: "texte_lien", widget: "string", required: false, default: "Lire l'article" }
+      - { label: "Image (facultative)", name: "image", widget: "image", required: false }

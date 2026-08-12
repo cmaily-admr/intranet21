@@ -105,8 +105,16 @@
       var params = new URLSearchParams(location.search);
       var doc = params.get('doc') || '';
 
-      var valide = doc && doc.indexOf('://') === -1 && doc.charAt(0) !== '/' &&
-                   doc.indexOf('..') === -1 && /\.pdf($|\?)/i.test(doc);
+      // Le document doit être un chemin interne (commençant par "/uploads/"),
+      // se terminer par .pdf, et ne pas contenir de remontée de dossier (..)
+      // ni de schéma externe (http://, //autre-site).
+      var valide = doc &&
+                   doc.indexOf('://') === -1 &&
+                   doc.indexOf('//') !== 0 &&
+                   doc.indexOf('..') === -1 &&
+                   doc.charAt(0) === '/' &&
+                   doc.indexOf('/uploads/') === 0 &&
+                   /\.pdf($|\?)/i.test(doc);
       if (!valide) { erreur("Document introuvable ou lien incorrect.", false); return; }
 
       dl.href = doc; dl.style.display = '';

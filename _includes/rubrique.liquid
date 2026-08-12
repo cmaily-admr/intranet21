@@ -133,9 +133,11 @@
                 <div data-doc data-recherche="{{ bloc.texte | escape }}">{{ bloc.texte | markdown }}</div>
 
               {% elsif bloc.type == "document" %}
-                <div class="ligne-doc" data-doc data-recherche="{{ bloc.titre_doc | escape }} {{ bloc.precision | escape }}">
+                {% assign recent = bloc.date_ajout | estRecent %}
+                {% if recent or bloc.nouveau %}{% assign marque_nouveau = "nouveau" %}{% else %}{% assign marque_nouveau = "" %}{% endif %}
+                <div class="ligne-doc" data-doc data-recherche="{{ bloc.titre_doc | escape }} {{ bloc.precision | escape }} {{ marque_nouveau }}">
                   <span class="titre-doc">
-                    {{ bloc.titre_doc }}{% if bloc.nouveau %}<span class="badge-nouveau">Nouveau</span>{% endif %}
+                    {{ bloc.titre_doc }}{% if recent or bloc.nouveau %}<span class="badge-nouveau">Nouveau</span>{% endif %}
                     {% if bloc.precision %}<small>{{ bloc.precision }}</small>{% endif %}
                   </span>
                   <div class="doc-actions">
