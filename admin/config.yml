@@ -38,11 +38,13 @@ collections:
       - label: "Rubrique concernée"
         name: "rubrique"
         widget: "select"
+        required: false
         options: ["CSE", "Démarche qualité", "Ressources humaines", "Communication", "Limites professionnelles"]
         hint: "Sert d'étiquette de couleur sur la carte."
       - label: "Couleur de l'étiquette"
         name: "couleur"
         widget: "select"
+        required: false
         options:
           - { label: "CSE (bleu)", value: "#2E7D9A" }
           - { label: "Démarche qualité (orange)", value: "#E58A00" }
