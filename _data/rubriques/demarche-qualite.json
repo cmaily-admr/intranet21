@@ -2,7 +2,12 @@
   "titre": "Démarche qualité",
   "sous_titre": "Limites et risques professionnelles, bonnes pratiques, outils, règlements et chartes",
   "couleur": "#E58A00",
-  "liens_utiles": [],
+  "liens_utiles": [
+    {
+      "libelle": "Espace Qualineo",
+      "url": "https://app.qualineo.io/"
+    }
+  ],
   "sections": [
     {
       "titre": "Limites professionnelles",
