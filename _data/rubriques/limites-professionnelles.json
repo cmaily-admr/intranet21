@@ -1,8 +1,0 @@
-{
-  "titre": "Limites professionnelles",
-  "sous_titre": "Le cadre du métier : ce qui relève ou non de votre intervention à domicile.",
-  "couleur": "#4A5A6A",
-  "sections": [
-    { "titre": "Section d'exemple", "ouvert": true, "blocs": [ { "type": "texte", "texte": "Cette rubrique est en cours de construction. Vous pourrez bientôt y retrouver les documents et informations. Ce contenu se modifie depuis l'espace d'administration." } ] }
-  ]
-}
