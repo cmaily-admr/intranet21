@@ -43,6 +43,13 @@
         {
           "type": "video",
           "video_url": "https://youtu.be/_ZmsFhZOsTY"
+        },
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "Désignation de bénéficiaire du capital décès",
+          "fichier": "/uploads/designation-de-beneficiaire.pdf"
         }
       ]
     },
