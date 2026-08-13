@@ -66,6 +66,40 @@ module.exports = function () {
             lien: lien,
             type: "lien",
           });
+        } else if (bloc.type === "texte" && bloc.texte) {
+          // Texte libre : pas de titre propre. On garde le texte comme
+          // matière de recherche, et on affiche un extrait comme titre.
+          const brut = bloc.texte
+            .replace(/[#*_>`\[\]()!-]/g, " ")   // retire les marques Markdown
+            .replace(/\s+/g, " ")
+            .trim();
+          const extrait = brut.length > 70 ? brut.slice(0, 70) + "…" : brut;
+          if (brut) {
+            index.push({
+              titre: extrait,
+              texte: brut,               // texte complet pour la recherche
+              rubrique: nomRubrique,
+              section: nomSection,
+              lien: lien,
+              type: "texte",
+            });
+          }
+        } else if (bloc.type === "image" && bloc.legende) {
+          index.push({
+            titre: bloc.legende,
+            rubrique: nomRubrique,
+            section: nomSection,
+            lien: lien,
+            type: "image",
+          });
+        } else if (bloc.type === "video" && bloc.titre_video) {
+          index.push({
+            titre: bloc.titre_video,
+            rubrique: nomRubrique,
+            section: nomSection,
+            lien: lien,
+            type: "vidéo",
+          });
         }
       }
     }

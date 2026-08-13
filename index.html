@@ -76,6 +76,7 @@
     .resultat-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 12px; padding: 13px 16px; text-decoration: none; color: var(--gris-texte); transition: background .12s ease; }
     .resultat-item:hover { background: var(--vert-clair); }
     .resultat-titre { font-weight: 700; color: var(--vert-fonce); }
+    .resultat-type { display: inline-block; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--gris-clair); background: var(--fond-page); border: 1px solid #E7EBE1; border-radius: 999px; padding: 1px 8px; vertical-align: middle; margin-left: 4px; }
     .resultat-loc { font-size: .85rem; color: var(--gris-clair); }
     .resultat-fleche { color: var(--vert-admr); font-weight: 700; flex: 0 0 auto; }
     .resultat-vide { text-align: center; color: var(--gris-clair); padding: 14px; }
@@ -351,7 +352,7 @@
       }
 
       var indexNorm = index.map(function (d) {
-        return { d: d, cle: norm(d.titre + " " + d.rubrique + " " + d.section) };
+        return { d: d, cle: norm(d.titre + " " + (d.texte || "") + " " + d.rubrique + " " + d.section) };
       });
 
       function echapper(t) {
@@ -382,9 +383,11 @@
           var a = document.createElement("a");
           a.className = "resultat-item";
           a.href = d.lien;
+          var typeLabel = { document: "Document", texte: "Texte", image: "Image", "vidéo": "Vidéo", lien: "Lien" }[d.type] || "";
           var loc = d.rubrique + (d.section ? " · " + d.section : "");
           a.innerHTML =
             '<span><span class="resultat-titre">' + echapper(d.titre) + '</span>' +
+            (typeLabel ? ' <span class="resultat-type">' + typeLabel + '</span>' : '') +
             '<br><span class="resultat-loc">' + echapper(loc) + '</span></span>' +
             '<span class="resultat-fleche">Voir →</span>';
           zone.appendChild(a);
