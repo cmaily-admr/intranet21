@@ -1,0 +1,11 @@
+# En-têtes appliqués par Cloudflare Pages à toutes les réponses.
+
+/*
+  X-Robots-Tag: noindex, nofollow
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  X-Frame-Options: SAMEORIGIN
+
+# Renforcement spécifique pour les documents téléchargeables.
+/uploads/*
+  X-Robots-Tag: noindex, nofollow
