@@ -10,6 +10,11 @@ module.exports = function(eleventyConfig) {
   // Sans cette ligne, /api/auth renvoie 404 et le « Login with GitHub » échoue.
   eleventyConfig.addPassthroughCopy("functions");
 
+  // Sécurité / obscurité : robots.txt bloque les moteurs, _headers ajoute
+  // l'en-tête noindex au niveau HTTP (y compris pour les PDF de /uploads).
+  eleventyConfig.addPassthroughCopy("robots.txt");
+  eleventyConfig.addPassthroughCopy("_headers");
+
   // voir-pdf.html reste une page statique (visionneuse PDF.js) : recopiée telle quelle.
   eleventyConfig.addPassthroughCopy("voir-pdf.html");
   eleventyConfig.ignores.add("voir-pdf.html");
