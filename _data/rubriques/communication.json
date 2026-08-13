@@ -4,8 +4,42 @@
   "couleur": "#B0553A",
   "liens_utiles": [],
   "sections": [
-    { "titre": "Action logement", "ouvert": true, "blocs": [] },
-    { "titre": "Actualité ORFAE", "ouvert": false, "blocs": [] },
-    { "titre": "Organigramme et trombinoscope", "ouvert": false, "blocs": [] }
+    {
+      "titre": "Action logement",
+      "ouvert": true,
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "L'accompagnement social - Action logement",
+          "fichier": "/uploads/20221027_fiche_service_accompagnemt_social_oct2022-1-1.pdf"
+        },
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "Mon parcours locatif - Action Logement",
+          "fichier": "/uploads/20230913_mon_parcours_locatif_sept23.pdf"
+        },
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "Un projet de logement ? Action logement",
+          "fichier": "/uploads/dijon-fiche_toutes-solutions_sept24-1.pdf"
+        }
+      ]
+    },
+    {
+      "titre": "Actualité ORFAE",
+      "ouvert": false,
+      "blocs": []
+    },
+    {
+      "titre": "Organigramme et trombinoscope",
+      "ouvert": false,
+      "blocs": []
+    }
   ]
 }
