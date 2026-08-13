@@ -35,13 +35,13 @@ collections:
         hint: "Cochez pour afficher cette actualité en grand, en haut de l'accueil. Si plusieurs sont cochées, la plus récente gagne — l'ancienne redescend toute seule dans les actualités précédentes."
       - { label: "Titre", name: "titre", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
-      - label: "Rubrique concernée (facultatif)"
+      - label: "Rubrique concernée"
         name: "rubrique"
         widget: "select"
         required: false
         options: ["CSE", "Démarche qualité", "Ressources humaines", "Communication", "Limites professionnelles"]
-        hint: "Sert d'étiquette de couleur sur la carte. Laissez vide pour une actualité générale (aucune étiquette)."
-      - label: "Couleur de l'étiquette (facultatif)"
+        hint: "Sert d'étiquette de couleur sur la carte."
+      - label: "Couleur de l'étiquette"
         name: "couleur"
         widget: "select"
         required: false
@@ -51,7 +51,7 @@ collections:
           - { label: "Ressources humaines (vert)", value: "#5B9B31" }
           - { label: "Communication (brique)", value: "#B0553A" }
           - { label: "Limites professionnelles (ardoise)", value: "#4A5A6A" }
-        hint: "Choisissez la couleur assortie à la rubrique. Sans effet si aucune rubrique."
+        hint: "Choisissez la couleur assortie à la rubrique."
       - { label: "Résumé", name: "resume", widget: "text", hint: "Court texte affiché sur la carte (et en secours si aucun texte long à la une)." }
 
       # --- Champs utilisés surtout quand l'actu est à la une ---
@@ -75,7 +75,7 @@ collections:
       - { label: "Image (facultative)", name: "image", widget: "image", required: false }
 
   # ============================================================
-  #  Les rubriques
+  #  Les rubriques (pages à sections déroulantes)
   # ============================================================
   - name: "rubriques"
     label: "Rubriques (pages à sections)"
@@ -144,9 +144,4 @@ collections:
       - name: "communication"
         label: "Communication"
         file: "_data/rubriques/communication.json"
-        fields: *champs_rubrique
-
-      - name: "limites-professionnelles"
-        label: "Limites professionnelles"
-        file: "_data/rubriques/limites-professionnelles.json"
         fields: *champs_rubrique
