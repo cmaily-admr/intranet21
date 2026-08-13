@@ -1,0 +1,11 @@
+{
+  "titre": "CSE",
+  "sous_titre": "Comité Social et Économique : comptes rendus, commandes groupées, permanences et informations de vos élus. Cliquez sur une section pour la dérouler.",
+  "couleur": "#2E7D9A",
+  "sections": [
+    { "titre": "PV CSE", "ouvert": true, "blocs": [] },
+    { "titre": "Commandes groupées", "ouvert": false, "blocs": [] },
+    { "titre": "Horaires permanences", "ouvert": false, "blocs": [] },
+    { "titre": "Informations et autres documents", "ouvert": false, "blocs": [] }
+  ]
+}

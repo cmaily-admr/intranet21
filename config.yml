@@ -39,7 +39,7 @@ collections:
         name: "rubrique"
         widget: "select"
         required: false
-        options: ["CSE", "Démarche qualité", "Ressources humaines", "Communication", "Limites professionnelles"]
+        options: ["CSE", "Démarche qualité", "Ressources humaines", "Divers"]
         hint: "Sert d'étiquette de couleur sur la carte."
       - label: "Couleur de l'étiquette"
         name: "couleur"
@@ -49,8 +49,7 @@ collections:
           - { label: "CSE (bleu)", value: "#2E7D9A" }
           - { label: "Démarche qualité (orange)", value: "#E58A00" }
           - { label: "Ressources humaines (vert)", value: "#5B9B31" }
-          - { label: "Communication (brique)", value: "#B0553A" }
-          - { label: "Limites professionnelles (ardoise)", value: "#4A5A6A" }
+          - { label: "Divers (brique)", value: "#B0553A" }
         hint: "Choisissez la couleur assortie à la rubrique."
       - { label: "Résumé", name: "resume", widget: "text", hint: "Court texte affiché sur la carte (et en secours si aucun texte long à la une)." }
 
@@ -142,6 +141,11 @@ collections:
         fields: *champs_rubrique
 
       - name: "communication"
-        label: "Communication"
+        label: "Divers"
         file: "_data/rubriques/communication.json"
+        fields: *champs_rubrique
+
+      - name: "limites-professionnelles"
+        label: "Limites professionnelles"
+        file: "_data/rubriques/limites-professionnelles.json"
         fields: *champs_rubrique

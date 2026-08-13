@@ -1,0 +1,10 @@
+{
+  "titre": "Divers",
+  "sous_titre": "Informations diverses : logement, actualités ORFAE, organigramme. Cliquez sur une section pour la dérouler.",
+  "couleur": "#B0553A",
+  "sections": [
+    { "titre": "Action logement", "ouvert": true, "blocs": [] },
+    { "titre": "Actualité ORFAE", "ouvert": false, "blocs": [] },
+    { "titre": "Organigramme et trombinoscope", "ouvert": false, "blocs": [] }
+  ]
+}

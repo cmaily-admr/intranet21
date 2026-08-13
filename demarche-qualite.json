@@ -1,0 +1,13 @@
+{
+  "titre": "Démarche qualité",
+  "sous_titre": "Procédures, bonnes pratiques et documents de la démarche qualité. Cliquez sur une section pour la dérouler.",
+  "couleur": "#E58A00",
+  "sections": [
+    { "titre": "Limites professionnelles", "ouvert": true, "blocs": [] },
+    { "titre": "Risques professionnels", "ouvert": false, "blocs": [] },
+    { "titre": "Les bonnes pratiques", "ouvert": false, "blocs": [] },
+    { "titre": "Utilisation des outils", "ouvert": false, "blocs": [] },
+    { "titre": "Règlement & charte SI", "ouvert": false, "blocs": [] },
+    { "titre": "Charte des droits et des libertés", "ouvert": false, "blocs": [] }
+  ]
+}
