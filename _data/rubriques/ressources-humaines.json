@@ -7,7 +7,20 @@
     {
       "titre": "Convention collective",
       "ouvert": true,
-      "blocs": []
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "Convention collective",
+          "fichier": "/uploads/ccb-version-13-juillet-2026.pdf"
+        },
+        {
+          "type": "image",
+          "image": "/uploads/listecongésbad.png",
+          "legende": "Liste congés BAD"
+        }
+      ]
     },
     {
       "titre": "Informations mutuelle (Aésio)",
