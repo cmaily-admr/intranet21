@@ -28,6 +28,12 @@ module.exports = function(eleventyConfig) {
 
   // Convertit le Markdown (champs "texte"/"contenu" du CMS) en HTML
   const md = new markdownIt({ html: true, linkify: true, breaks: true });
+  // Sérialise une valeur en JSON pour l'injecter dans un <script>.
+  // Échappe < pour ne pas casser la balise script.
+  eleventyConfig.addFilter("jsonifie", (valeur) => {
+    return JSON.stringify(valeur || []).replace(/</g, "\\u003c");
+  });
+
   eleventyConfig.addFilter("markdown", (str) => {
     if (!str) return "";
     return md.render(str);
