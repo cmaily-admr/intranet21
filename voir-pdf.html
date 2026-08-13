@@ -13,6 +13,7 @@
       --vert-admr:#5B9B31; --vert-fonce:#2E5A1C; --vert-clair:#EAF4E0;
       --orange-admr:#E58A00; --gris-texte:#363636; --gris-clair:#6B6B6B;
       --fond-page:#F6F8F3; --blanc:#FFFFFF;
+      --police-titres: Georgia, "Times New Roman", serif;
     }
     * { box-sizing: border-box; }
     html { font-size: 112.5%; }
@@ -22,7 +23,9 @@
     .entete-inner { max-width:1120px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:16px; }
     .logo { height:58px; width:auto; }
     .titre-bloc { display:flex; flex-direction:column; }
-    .titre-site { font-size:1.3rem; font-weight:800; color:var(--vert-fonce); line-height:1.15; }
+    .titre-site { font-size:1.3rem; font-weight:800; color:var(--vert-fonce); line-height:1.15; display:inline-flex; align-items:center; gap:8px; }
+    .ico-kiosque { width:22px; height:22px; color:var(--vert-admr); flex:0 0 auto; }
+    .titre-site { font-family: var(--police-titres); }
     .sous-titre-site { font-size:.88rem; color:var(--gris-clair); }
     .lien-accueil { margin-left:auto; display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--vert-fonce); font-weight:700; font-size:.95rem; padding:8px 14px; border:1px solid #E7EBE1; border-radius:999px; background:var(--fond-page); }
     .lien-accueil:hover { background:var(--vert-clair); }
@@ -54,7 +57,10 @@
     <div class="entete-inner">
       <img class="logo" src="/assets/logo-admr.png" alt="Logo ADMR de Côte-d'Or" onerror="this.style.display='none'">
       <div class="titre-bloc">
-        <span class="titre-site">Espace salariés</span>
+        <span class="titre-site">
+          <svg class="ico-kiosque" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V11l8-3 8 3v11"/><path d="M4 11h16"/><path d="M9 22v-6h6v6"/><path d="M12 8V4"/><path d="M9 4h6"/></svg>
+          Le Kiosque ADMR
+        </span>
         <span class="sous-titre-site">ADMR de Côte-d'Or</span>
       </div>
       <a class="lien-accueil" href="/">← Accueil</a>
@@ -77,7 +83,7 @@
   </main>
 
   <footer class="pied">
-    <div class="pied-inner">Espace salariés — ADMR de Côte-d'Or · <a href="/">Retour à l'accueil</a></div>
+    <div class="pied-inner">Le Kiosque ADMR — ADMR de Côte-d'Or · <a href="/">Retour à l'accueil</a></div>
   </footer>
 
   <script src="/assets/pdf.min.js"></script>

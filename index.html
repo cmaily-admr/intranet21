@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Espace salariés — ADMR Côte-d'Or</title>
+  <title>Le Kiosque ADMR — ADMR Côte-d'Or</title>
   <meta name="description" content="Espace d'information interne des salariés de l'ADMR de Côte-d'Or.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#5B9B31">
@@ -18,6 +18,7 @@
       --gris-clair:    #6B6B6B;
       --fond-page:     #F6F8F3;
       --blanc:         #FFFFFF;
+      --police-titres: Georgia, "Times New Roman", serif;
 
       --coul-cse:           #2E7D9A;
       --coul-qualite:       #E58A00;
@@ -46,7 +47,9 @@
     }
     .logo { height: 58px; width: auto; }
     .titre-bloc { display: flex; flex-direction: column; }
-    .titre-site { font-size: 1.3rem; font-weight: 800; color: var(--vert-fonce); line-height: 1.15; }
+    .titre-site { font-size: 1.3rem; font-weight: 800; color: var(--vert-fonce); line-height: 1.15; display: inline-flex; align-items: center; gap: 8px; }
+    .ico-kiosque { width: 22px; height: 22px; color: var(--vert-admr); flex: 0 0 auto; }
+    .titre-site, .hero h1, .section-titre, .carte-rubrique h3, .actu h3, .une-carte h2 { font-family: var(--police-titres); }
     .sous-titre-site { font-size: .88rem; color: var(--gris-clair); }
 
     .hero { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--vert-admr), var(--vert-fonce)); color: #fff; }
@@ -128,7 +131,10 @@
     <div class="entete-inner">
       <img class="logo" src="/assets/logo-admr.png" alt="Logo ADMR de Côte-d'Or" onerror="this.style.display='none'">
       <div class="titre-bloc">
-        <span class="titre-site">Espace salariés</span>
+        <span class="titre-site">
+          <svg class="ico-kiosque" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V11l8-3 8 3v11"/><path d="M4 11h16"/><path d="M9 22v-6h6v6"/><path d="M12 8V4"/><path d="M9 4h6"/></svg>
+          Le Kiosque ADMR
+        </span>
         <span class="sous-titre-site">ADMR de Côte-d'Or</span>
       </div>
     </div>
@@ -139,8 +145,8 @@
     <span class="cercle c2"></span>
     <span class="cercle c3"></span>
     <div class="hero-inner">
-      <h1>Bienvenue sur votre espace d'information</h1>
-      <p>Retrouvez ici toutes les informations utiles à votre travail au quotidien : documents, actualités, contacts et démarches. Choisissez une rubrique ci-dessous.</p>
+      <h1>Bienvenue au Kiosque</h1>
+      <p>Votre point d'information au quotidien : passez y prendre les dernières actualités, les documents utiles, les contacts et les démarches. Servez-vous, tout est à portée de main.</p>
     </div>
   </section>
 
