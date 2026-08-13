@@ -32,7 +32,14 @@
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "Tarifs mutuelle Aesio",
-          "fichier": "/uploads/tarifs_actifs_mut_2026_.pdf"
+          "fichier": "/uploads/tarifs_actifs_mut_01-04-2026-1.pdf"
+        },
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "Fond social Aesio",
+          "fichier": "/uploads/aesio-fonds_social-bad-sante.pdf"
         }
       ]
     },
@@ -70,12 +77,35 @@
     {
       "titre": "Pros-Consulte",
       "ouvert": false,
-      "blocs": []
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "fichier": "/uploads/pros-consulte-112024-2.pdf",
+          "titre_doc": "Pros consulte - informations"
+        },
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "pros consulte - Appli",
+          "fichier": "/uploads/plaquette-appli-mobile-pros-consulte-2023.pdf"
+        }
+      ]
     },
     {
       "titre": "AGEFIPH",
       "ouvert": false,
-      "blocs": []
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "AGEFIPH - Dépliant",
+          "fichier": "/uploads/agefiph-depliant.pdf"
+        }
+      ]
     },
     {
       "titre": "Trames entretien pros",
