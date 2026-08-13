@@ -21,6 +21,10 @@
 
     .entete { background:var(--blanc); border-bottom:3px solid var(--vert-admr); }
     .entete-inner { max-width:1120px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:16px; }
+    .logo-lien { display: inline-flex; align-items: center; text-decoration: none; transition: opacity .15s ease; }
+    .logo-lien:hover { opacity: .85; }
+    .logo-kiosque { height: 62px; width: auto; display: block; }
+    @media (max-width: 640px) { .logo-kiosque { height: 50px; } }
     .logo { height:58px; width:auto; }
     .titre-bloc { display:flex; flex-direction:column; }
     .titre-site { font-size:1.3rem; font-weight:800; color:var(--vert-fonce); line-height:1.15; display:inline-flex; align-items:center; gap:8px; }
@@ -55,14 +59,9 @@
 
   <header class="entete">
     <div class="entete-inner">
-      <img class="logo" src="/assets/logo-admr.png" alt="Logo ADMR de Côte-d'Or" onerror="this.style.display='none'">
-      <div class="titre-bloc">
-        <span class="titre-site">
-          <svg class="ico-kiosque" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V11l8-3 8 3v11"/><path d="M4 11h16"/><path d="M9 22v-6h6v6"/><path d="M12 8V4"/><path d="M9 4h6"/></svg>
-          Le Kiosque ADMR
-        </span>
-        <span class="sous-titre-site">ADMR de Côte-d'Or</span>
-      </div>
+      <a class="logo-lien" href="/" aria-label="Le Kiosque ADMR — retour à l'accueil">
+        <img class="logo-kiosque" src="/assets/logo-kiosque.svg" alt="Le Kiosque ADMR — ADMR de Côte-d'Or">
+      </a>
       <a class="lien-accueil" href="/">← Accueil</a>
     </div>
   </header>
