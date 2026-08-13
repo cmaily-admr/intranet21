@@ -1,0 +1,3 @@
+# Espace salariés ADMR 21 — site interne, non destiné au référencement.
+User-agent: *
+Disallow: /
