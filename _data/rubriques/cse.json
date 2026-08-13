@@ -4,9 +4,45 @@
   "couleur": "#2E7D9A",
   "liens_utiles": [],
   "sections": [
-    { "titre": "PV CSE", "ouvert": true, "blocs": [] },
-    { "titre": "Commandes groupées", "ouvert": false, "blocs": [] },
-    { "titre": "Horaires permanences", "ouvert": false, "blocs": [] },
-    { "titre": "Informations et autres documents", "ouvert": false, "blocs": [] }
+    {
+      "titre": "PV CSE",
+      "ouvert": true,
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "2026-08-13",
+          "nouveau": true,
+          "titre_doc": "PV CSE - 2 juillet",
+          "fichier": "/uploads/pv-cse-2-juillet-26-signe.pdf"
+        },
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "PV CSE - 10 juin",
+          "fichier": "/uploads/pv-cse-10-juin-26-signe.pdf"
+        }
+      ]
+    },
+    {
+      "titre": "Commandes groupées",
+      "ouvert": false,
+      "blocs": []
+    },
+    {
+      "titre": "Horaires permanences",
+      "ouvert": false,
+      "blocs": [
+        {
+          "type": "texte",
+          "texte": "Mercredi 08 juillet de 9h30 à 12h et de 14h à 15h30\n\nLundi 13 juillet de 9h30 à 12h et de 14h à 15h 30\n\nLundi 20 juillet de 9h30 à 12h et de 14h à 15h 30\n\nVendredi 24 juillet de 9h30 à 12h et de 14h à 15h30\n\nMercredi 29 juillet de 9h30 à 12h et de 14h à 15h30\n\nVendredi 31 juillet de 9h30 à 12h et de 14h à 15h30\n\nLundi 3 août de 9h30 à 12h et de 14h à 15h30\n\nMercredi 12 août de 9h30 à 12h et de 14h à 15h30\n\nVendredi 14 août de 9h30 à 12h et de 14h à 15h30\n\nMercredi 19 août de 9h30 à 12h et de 14h à 15h30\n\nJeudi 20 août de 9h30 à 12h et de 14h à 15h30\n\nMercredi 26 août de 9h30 à 12h et de 14h à 15h30\n\nVendredi 28 août de 9h30 à 12h et de 14h à 15h30"
+        }
+      ]
+    },
+    {
+      "titre": "Informations et autres documents",
+      "ouvert": false,
+      "blocs": []
+    }
   ]
 }
