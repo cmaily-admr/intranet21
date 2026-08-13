@@ -1,15 +1,79 @@
 {
   "titre": "Ressources humaines",
-  "sous_titre": "Convention collective, mutuelle, prévoyance et démarches administratives. Cliquez sur une section pour la dérouler.",
+  "sous_titre": "Convention collective, mutuelle, prévoyance et démarches administratives",
   "couleur": "#5B9B31",
   "liens_utiles": [],
   "sections": [
-    { "titre": "Convention collective", "ouvert": true, "blocs": [] },
-    { "titre": "Informations mutuelle (Aésio)", "ouvert": false, "blocs": [] },
-    { "titre": "Informations AG2R (prévoyance)", "ouvert": false, "blocs": [] },
-    { "titre": "Aide à domicile – la branche", "ouvert": false, "blocs": [] },
-    { "titre": "Pros-Consulte", "ouvert": false, "blocs": [] },
-    { "titre": "AGEFIPH", "ouvert": false, "blocs": [] },
-    { "titre": "Trames entretien pros", "ouvert": false, "blocs": [] }
+    {
+      "titre": "Convention collective",
+      "ouvert": true,
+      "blocs": []
+    },
+    {
+      "titre": "Informations mutuelle (Aésio)",
+      "ouvert": false,
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "fichier": "/uploads/garanties-base-confort-confort-2024.pdf",
+          "titre_doc": "Garanties Aesio Base & confort"
+        },
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "fichier": "/uploads/flyer-espace-adherent-aesio-2-.pdf",
+          "titre_doc": "Flyer - Espace adhérent"
+        },
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "Tarifs mutuelle Aesio",
+          "fichier": "/uploads/tarifs_actifs_mut_2026_.pdf"
+        }
+      ]
+    },
+    {
+      "titre": "Informations AG2R (prévoyance)",
+      "ouvert": false,
+      "blocs": [
+        {
+          "type": "video",
+          "video_url": "https://youtu.be/_ZmsFhZOsTY"
+        }
+      ]
+    },
+    {
+      "titre": "Aide à domicile – la branche",
+      "ouvert": false,
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": true,
+          "fichier": "/uploads/livret-bad-générique-v2-2026.pdf",
+          "titre_doc": "Livret Branche aide à domicile",
+          "precision": "Toutes les aides de la branche"
+        }
+      ]
+    },
+    {
+      "titre": "Pros-Consulte",
+      "ouvert": false,
+      "blocs": []
+    },
+    {
+      "titre": "AGEFIPH",
+      "ouvert": false,
+      "blocs": []
+    },
+    {
+      "titre": "Trames entretien pros",
+      "ouvert": false,
+      "blocs": []
+    }
   ]
 }
