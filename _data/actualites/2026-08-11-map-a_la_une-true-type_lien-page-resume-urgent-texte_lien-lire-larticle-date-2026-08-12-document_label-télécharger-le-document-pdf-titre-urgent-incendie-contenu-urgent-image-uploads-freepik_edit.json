@@ -1,12 +1,14 @@
 {
   "a_la_une": true,
   "type_lien": "page",
-  "resume": "Pendant les fortes chaleurs, protégez vous",
+  "rubrique": "Démarche qualité",
+  "resume": "Canicule, les bons reflexes à domicile",
   "texte_lien": "Lire l'article",
   "date": "2026-08-13",
   "document_label": "Télécharger le document (PDF)",
   "titre": "ALERTE : Canicule",
-  "contenu": "Cette semaine sera marquée par une vague de chaleur.Nous vous invitons à redoubler de vigilance et à appliquer les consignes de prévention rappelées sur l’affiche ci-dessous, afin de préserver votre santé ainsi que celle de vos collègues.À titre exceptionnel, les collaborateurs éligibles au télétravail peuvent solliciter des journées/demi-journées supplémentaires de télétravail, sous réserve de l’accord préalable de leur responsable (avec un maximum de 2 jours ou  4 demi-journées par semaine).Par ailleurs, pour le personnel de la Fédération basé à Chenôve, plusieurs espaces climatisés sont mis à votre disposition :\n\n* La salle de réunion du 2ᵉ étage et plusieurs bureaux situés au même niveau ;\n* La salle des Bleuets.\n\nNous vous encourageons également, lorsque cela est possible, à adapter votre organisation de travail (horaires, pauses, hydratation, etc.) et à signaler toute difficulté rencontrée.Nous vous remercions de votre vigilance et de votre sens des responsabilités pour contribuer à la sécurité et au bien-être de tous",
-  "document": "",
-  "image": "/uploads/45d996ab-0b90-4112-a39d-d99630e6851b.png"
+  "contenu": "L'Agence Régionale de Santé de Bourgogne-Franche-Comté nous informe que le département de la Côte-d'Or sera placé en vigilance ORANGE canicule à compter du 18 juin à 12h.Dans ce contexte, nous vous demandons d'appliquer avec une vigilance renforcée les mesures de prévention prévues dans le Plan Canicule, joint au présent message. Tous les services sont concernés.Pour les services à domicile, une attention particulière devra être portée : \n\n1. au repérage et au recensement des personnes les plus à risque (personnes âgées isolées, personnes en perte d'autonomie, souffrant de pathologies chroniques, troubles cognitifs, difficultés d'hydratation, etc.) ;\n2. à la mise en place et à l'utilisation des outils prévus au domicile lorsque la situation le nécessite, notamment la fiche de suivi hydrique ;\n3. à l'encouragement systématique à l'hydratation et à la surveillance de la consommation réelle de boissons ;\n4. à la limitation de l'exposition à la chaleur et à l'application des mesures de rafraîchissement du logement.\n\nNous vous demandons également d'être particulièrement vigilants quant à la remontée des informations.Toute situation préoccupante ou difficulté rencontrée en lien avec la canicule devra être signalée sans délai à votre responsable de secteur ou à votre hiérarchie, notamment en cas : \n\n* de déshydratation suspectée ou avérée ;\n* de malaise, chute ou aggravation de l'état de santé ;\n* de refus répétés de s'hydrater ;\n* d'isolement important ou d'absence de soutien de l'entourage ;\n* de logement particulièrement exposé à la chaleur ;\n* de toute situation nécessitant une vigilance renforcée.",
+  "document": "/uploads/fiche-réflexe-domicile_vig-orange.pdf",
+  "image": "/uploads/45d996ab-0b90-4112-a39d-d99630e6851b.png",
+  "couleur": "#E58A00"
 }
