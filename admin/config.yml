@@ -91,6 +91,16 @@ collections:
           - { label: "Titre de la page", name: "titre", widget: "string" }
           - { label: "Sous-titre (bandeau)", name: "sous_titre", widget: "text" }
           - { label: "Couleur d'accent", name: "couleur", widget: "color", required: false, default: "#2E7D9A" }
+          - label: "Liens utiles (boutons en bas de page)"
+            name: "liens_utiles"
+            widget: "list"
+            required: false
+            label_singular: "Lien"
+            summary: "{{fields.libelle}}"
+            hint: "Boutons affichés tout en bas de la rubrique, indépendamment des sections."
+            fields:
+              - { label: "Libellé du bouton", name: "libelle", widget: "string" }
+              - { label: "Adresse du lien (URL)", name: "url", widget: "string", hint: "https://… — s'ouvre dans un nouvel onglet." }
           - label: "Sections déroulantes"
             name: "sections"
             widget: "list"
@@ -130,6 +140,12 @@ collections:
                     fields:
                       - { label: "Titre de la vidéo (facultatif)", name: "titre_video", widget: "string", required: false }
                       - { label: "Lien de la vidéo", name: "video_url", widget: "string", hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT" }
+                  - label: "Bouton lien"
+                    name: "bouton"
+                    summary: "{{fields.libelle}}"
+                    fields:
+                      - { label: "Libellé du bouton", name: "libelle", widget: "string", hint: "Ex. : Espace Aésio, Portail AGEFIPH…" }
+                      - { label: "Adresse du lien (URL)", name: "url", widget: "string", hint: "https://… — s'ouvre dans un nouvel onglet." }
 
       - name: "demarche-qualite"
         label: "Démarche qualité"

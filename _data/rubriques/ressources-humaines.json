@@ -1,8 +1,15 @@
 {
   "titre": "Ressources humaines",
-  "sous_titre": "Congés, formations, contrats et démarches administratives.",
+  "sous_titre": "Convention collective, mutuelle, prévoyance et démarches administratives. Cliquez sur une section pour la dérouler.",
   "couleur": "#5B9B31",
+  "liens_utiles": [],
   "sections": [
-    { "titre": "Section d'exemple", "ouvert": true, "blocs": [ { "type": "texte", "texte": "Cette rubrique est en cours de construction. Vous pourrez bientôt y retrouver les documents et informations. Ce contenu se modifie depuis l'espace d'administration." } ] }
+    { "titre": "Convention collective", "ouvert": true, "blocs": [] },
+    { "titre": "Informations mutuelle (Aésio)", "ouvert": false, "blocs": [] },
+    { "titre": "Informations AG2R (prévoyance)", "ouvert": false, "blocs": [] },
+    { "titre": "Aide à domicile – la branche", "ouvert": false, "blocs": [] },
+    { "titre": "Pros-Consulte", "ouvert": false, "blocs": [] },
+    { "titre": "AGEFIPH", "ouvert": false, "blocs": [] },
+    { "titre": "Trames entretien pros", "ouvert": false, "blocs": [] }
   ]
 }

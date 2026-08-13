@@ -66,6 +66,19 @@
     .hero .c3 { width: 120px; height: 120px; background: rgba(255,255,255,.08); bottom: -30px; right: -20px; }
 
     .section-titre { margin: 0 0 4px; font-size: 1.6rem; font-weight: 800; color: var(--vert-fonce); }
+
+    .recherche-globale { padding: 30px 0 0; }
+    .barre-recherche-g { position: relative; max-width: 640px; margin: 0 auto; }
+    .barre-recherche-g input { width: 100%; padding: 15px 18px 15px 48px; font-size: 1.05rem; border: 1px solid #E7EBE1; border-radius: 14px; background: var(--blanc); color: var(--gris-texte); box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+    .barre-recherche-g input:focus { outline: 3px solid var(--orange-admr); outline-offset: 1px; border-color: transparent; }
+    .barre-recherche-g svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; color: var(--gris-clair); }
+    .resultats-recherche { max-width: 640px; margin: 10px auto 0; display: flex; flex-direction: column; gap: 8px; }
+    .resultat-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 12px; padding: 13px 16px; text-decoration: none; color: var(--gris-texte); transition: background .12s ease; }
+    .resultat-item:hover { background: var(--vert-clair); }
+    .resultat-titre { font-weight: 700; color: var(--vert-fonce); }
+    .resultat-loc { font-size: .85rem; color: var(--gris-clair); }
+    .resultat-fleche { color: var(--vert-admr); font-weight: 700; flex: 0 0 auto; }
+    .resultat-vide { text-align: center; color: var(--gris-clair); padding: 14px; }
     .section-soustitre { margin: 0 0 26px; color: var(--gris-clair); }
 
     .rubriques { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
@@ -146,6 +159,16 @@
     <div class="hero-inner">
       <h1>Bienvenue au Kiosque</h1>
       <p>Votre point d'information au quotidien : passez y prendre les dernières actualités, les documents utiles, les contacts et les démarches. Servez-vous, tout est à portée de main.</p>
+    </div>
+  </section>
+
+  <section class="zone recherche-globale">
+    <div class="contenu">
+      <div class="barre-recherche-g">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="recherche-globale" placeholder="Rechercher un document dans tout le Kiosque…" aria-label="Rechercher un document dans toutes les rubriques" autocomplete="off">
+      </div>
+      <div id="resultats-recherche" class="resultats-recherche" role="listbox" aria-label="Résultats de recherche"></div>
     </div>
   </section>
 
@@ -308,6 +331,67 @@
       <p class="mention">Ce site est un espace d'information interne. Merci de ne pas communiquer son adresse à l'extérieur.</p>
     </div>
   </footer>
+
+  <script id="donnees-recherche" type="application/json">{{ indexRecherche | jsonifie }}</script>
+  <script>
+    (function () {
+      var champ = document.getElementById("recherche-globale");
+      var zone = document.getElementById("resultats-recherche");
+      if (!champ || !zone) return;
+
+      var index = [];
+      try {
+        index = JSON.parse(document.getElementById("donnees-recherche").textContent) || [];
+      } catch (e) { index = []; }
+
+      // Normalise (minuscules, sans accents) pour une recherche tolérante.
+      function norm(s) {
+        return (s || "").toString().toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      }
+
+      var indexNorm = index.map(function (d) {
+        return { d: d, cle: norm(d.titre + " " + d.rubrique + " " + d.section) };
+      });
+
+      function echapper(t) {
+        var div = document.createElement("div");
+        div.textContent = t;
+        return div.innerHTML;
+      }
+
+      champ.addEventListener("input", function () {
+        var q = norm(champ.value.trim());
+        zone.innerHTML = "";
+        if (q === "") return;
+
+        var trouves = indexNorm.filter(function (x) {
+          return x.cle.indexOf(q) !== -1;
+        }).slice(0, 20);
+
+        if (trouves.length === 0) {
+          var vide = document.createElement("p");
+          vide.className = "resultat-vide";
+          vide.textContent = "Aucun document trouvé pour « " + champ.value.trim() + " ».";
+          zone.appendChild(vide);
+          return;
+        }
+
+        trouves.forEach(function (x) {
+          var d = x.d;
+          var a = document.createElement("a");
+          a.className = "resultat-item";
+          a.href = d.lien;
+          var loc = d.rubrique + (d.section ? " · " + d.section : "");
+          a.innerHTML =
+            '<span><span class="resultat-titre">' + echapper(d.titre) + '</span>' +
+            '<br><span class="resultat-loc">' + echapper(loc) + '</span></span>' +
+            '<span class="resultat-fleche">Voir →</span>';
+          zone.appendChild(a);
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>

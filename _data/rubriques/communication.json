@@ -1,8 +1,11 @@
 {
-  "titre": "Communication",
-  "sous_titre": "Actualités, événements et messages de la fédération.",
+  "titre": "Divers",
+  "sous_titre": "Informations diverses : logement, actualités ORFAE, organigramme. Cliquez sur une section pour la dérouler.",
   "couleur": "#B0553A",
+  "liens_utiles": [],
   "sections": [
-    { "titre": "Section d'exemple", "ouvert": true, "blocs": [ { "type": "texte", "texte": "Cette rubrique est en cours de construction. Vous pourrez bientôt y retrouver les documents et informations. Ce contenu se modifie depuis l'espace d'administration." } ] }
+    { "titre": "Action logement", "ouvert": true, "blocs": [] },
+    { "titre": "Actualité ORFAE", "ouvert": false, "blocs": [] },
+    { "titre": "Organigramme et trombinoscope", "ouvert": false, "blocs": [] }
   ]
 }

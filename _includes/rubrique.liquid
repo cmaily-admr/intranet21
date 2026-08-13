@@ -71,6 +71,12 @@
     .titre-doc small { display: block; font-size: .85rem; color: var(--gris-clair); font-weight: 400; }
     .doc-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; flex: 0 1 auto; }
     .btn-tel { display: inline-flex; align-items: center; gap: 8px; background: var(--vert-admr); color: #fff; text-decoration: none; padding: 9px 15px; border-radius: 9px; font-weight: 700; font-size: .9rem; }
+
+    .btn-lien { display: inline-flex; align-items: center; gap: 8px; background: var(--vert-admr); color: #fff; text-decoration: none; padding: 10px 18px; border-radius: 9px; font-weight: 700; font-size: .95rem; margin: 6px 0; transition: background .15s ease; }
+    .btn-lien:hover { background: var(--vert-fonce); }
+    .liens-utiles { margin: 34px 0 0; padding: 26px 0 0; border-top: 2px solid #E7EBE1; }
+    .liens-titre { font-family: var(--police-titres); margin: 0 0 16px; font-size: 1.4rem; color: var(--vert-fonce); font-weight: 800; }
+    .liens-grille { display: flex; flex-wrap: wrap; gap: 12px; }
     .btn-tel:hover { background: var(--vert-fonce); }
     .btn-tel svg { width: 16px; height: 16px; }
     .btn-voir { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--vert-admr); border: 2px solid var(--vert-admr); text-decoration: none; padding: 7px 13px; border-radius: 9px; font-weight: 700; font-size: .9rem; }
@@ -166,6 +172,13 @@
                     <iframe src="{{ bloc.video_url }}" title="{{ bloc.titre_video | default: 'Vidéo' }}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                   </div>
                 </div>
+
+              {% elsif bloc.type == "bouton" %}
+                <div data-doc data-recherche="{{ bloc.libelle | escape }}">
+                  <a class="btn-lien" href="{{ bloc.url }}" target="_blank" rel="noopener">
+                    {{ bloc.libelle }}
+                  </a>
+                </div>
               {% endif %}
 
             {% endfor %}
@@ -173,6 +186,17 @@
         </details>
         {% endfor %}
       </div>
+
+      {% if rubrique.liens_utiles and rubrique.liens_utiles.size > 0 %}
+      <div class="liens-utiles">
+        <h2 class="liens-titre">Liens utiles</h2>
+        <div class="liens-grille">
+          {% for lien in rubrique.liens_utiles %}
+          <a class="btn-lien" href="{{ lien.url }}" target="_blank" rel="noopener">{{ lien.libelle }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
 
     </div>
   </section>

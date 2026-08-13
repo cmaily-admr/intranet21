@@ -1,63 +1,12 @@
 {
   "titre": "CSE",
-  "sous_titre": "Comité Social et Économique : comptes rendus, commandes groupées, permanences et informations de vos élus. Cliquez sur une rubrique pour la dérouler.",
+  "sous_titre": "Comité Social et Économique : comptes rendus, commandes groupées, permanences et informations de vos élus. Cliquez sur une section pour la dérouler.",
   "couleur": "#2E7D9A",
+  "liens_utiles": [],
   "sections": [
-    {
-      "titre": "PV CSE",
-      "ouvert": true,
-      "blocs": [
-        {
-          "type": "document",
-          "titre_doc": "PV du CSE — 2 Juillet",
-          "precision": "",
-          "fichier": "/uploads/pv-cse-2-juillet-26-signe.pdf",
-          "nouveau": true
-        },
-        {
-          "type": "document",
-          "titre_doc": "PV du CSE — 10 juin 2026",
-          "precision": "",
-          "fichier": "/uploads/pv-cse-2025-11-18.pdf",
-          "date_ajout": ""
-        }
-      ]
-    },
-    {
-      "titre": "Commandes groupées",
-      "ouvert": false,
-      "blocs": [
-        {
-          "type": "texte",
-          "texte": "Mercredi 08 juillet de 9h30 à 12h et de 14h à 15h30\n\nLundi 13 juillet de 9h30 à 12h et de 14h à 15h 30\n\nLundi 20 juillet de 9h30 à 12h et de 14h à 15h 30\n\nVendredi 24 juillet de 9h30 à 12h et de 14h à 15h30\n\nMercredi 29 juillet de 9h30 à 12h et de 14h à 15h30\n\nVendredi 31 juillet de 9h30 à 12h et de 14h à 15h30\n\nLundi 3 août de 9h30 à 12h et de 14h à 15h30\n\nMercredi 12 août de 9h30 à 12h et de 14h à 15h30\n\nVendredi 14 août de 9h30 à 12h et de 14h à 15h30\n\nMercredi 19 août de 9h30 à 12h et de 14h à 15h30\n\nJeudi 20 août de 9h30 à 12h et de 14h à 15h30\n\nMercredi 26 août de 9h30 à 12h et de 14h à 15h30\n\nVendredi 28 août de 9h30 à 12h et de 14h à 15h30"
-        }
-      ]
-    },
-    {
-      "titre": "Horaires permanences",
-      "ouvert": false,
-      "blocs": []
-    },
-    {
-      "titre": "Informations diverses",
-      "ouvert": false,
-      "blocs": [
-        {
-          "type": "texte",
-          "texte": "Retrouvez ici les diverses informations communiquées par le CSE : activités sociales et culturelles, billetterie, partenariats, etc."
-        },
-        {
-          "type": "document",
-          "titre_doc": "Règlement des activités sociales et culturelles",
-          "precision": "",
-          "fichier": "/uploads/reglement-asc.pdf"
-        },
-        {
-          "type": "image",
-          "image": "/uploads/info-cse.jpg",
-          "legende": "Information du CSE"
-        }
-      ]
-    }
+    { "titre": "PV CSE", "ouvert": true, "blocs": [] },
+    { "titre": "Commandes groupées", "ouvert": false, "blocs": [] },
+    { "titre": "Horaires permanences", "ouvert": false, "blocs": [] },
+    { "titre": "Informations et autres documents", "ouvert": false, "blocs": [] }
   ]
 }
