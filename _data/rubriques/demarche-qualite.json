@@ -1,14 +1,52 @@
 {
   "titre": "Démarche qualité",
-  "sous_titre": "Procédures, bonnes pratiques et documents de la démarche qualité. Cliquez sur une section pour la dérouler.",
+  "sous_titre": "Limites et risques professionnelles, bonnes pratiques, outils, règlements et chartes",
   "couleur": "#E58A00",
   "liens_utiles": [],
   "sections": [
-    { "titre": "Limites professionnelles", "ouvert": true, "blocs": [] },
-    { "titre": "Risques professionnels", "ouvert": false, "blocs": [] },
-    { "titre": "Les bonnes pratiques", "ouvert": false, "blocs": [] },
-    { "titre": "Utilisation des outils", "ouvert": false, "blocs": [] },
-    { "titre": "Règlement & charte SI", "ouvert": false, "blocs": [] },
-    { "titre": "Charte des droits et des libertés", "ouvert": false, "blocs": [] }
+    {
+      "titre": "Limites professionnelles",
+      "ouvert": true,
+      "blocs": []
+    },
+    {
+      "titre": "Risques professionnels",
+      "ouvert": false,
+      "blocs": []
+    },
+    {
+      "titre": "Les bonnes pratiques",
+      "ouvert": false,
+      "blocs": []
+    },
+    {
+      "titre": "Utilisation des outils",
+      "ouvert": false,
+      "blocs": []
+    },
+    {
+      "titre": "Règlement & charte SI",
+      "ouvert": false,
+      "blocs": []
+    },
+    {
+      "titre": "Charte des droits et des libertés",
+      "ouvert": false,
+      "blocs": [
+        {
+          "type": "video",
+          "titre_video": "",
+          "video_url": "https://youtu.be/u8rbakWhTuo"
+        },
+        {
+          "type": "video",
+          "video_url": "https://youtu.be/FhSXdhXKHyI"
+        },
+        {
+          "type": "video",
+          "video_url": "https://youtu.be/gP0E8FfE0Ts"
+        }
+      ]
+    }
   ]
 }
