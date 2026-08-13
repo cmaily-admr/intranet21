@@ -1,11 +1,12 @@
 {
   "a_la_une": true,
   "type_lien": "page",
-  "resume": "Urgent",
+  "resume": "Pendant les fortes chaleurs, protégez vous",
   "texte_lien": "Lire l'article",
-  "date": "2026-08-12",
+  "date": "2026-08-13",
   "document_label": "Télécharger le document (PDF)",
-  "titre": "URGENT : incendie !",
-  "contenu": "urgent",
-  "image": "/uploads/freepik_edit_-.png"
+  "titre": "ALERTE : Canicule",
+  "contenu": "Cette semaine sera marquée par une vague de chaleur.Nous vous invitons à redoubler de vigilance et à appliquer les consignes de prévention rappelées sur l’affiche ci-dessous, afin de préserver votre santé ainsi que celle de vos collègues.À titre exceptionnel, les collaborateurs éligibles au télétravail peuvent solliciter des journées/demi-journées supplémentaires de télétravail, sous réserve de l’accord préalable de leur responsable (avec un maximum de 2 jours ou  4 demi-journées par semaine).Par ailleurs, pour le personnel de la Fédération basé à Chenôve, plusieurs espaces climatisés sont mis à votre disposition :\n\n* La salle de réunion du 2ᵉ étage et plusieurs bureaux situés au même niveau ;\n* La salle des Bleuets.\n\nNous vous encourageons également, lorsque cela est possible, à adapter votre organisation de travail (horaires, pauses, hydratation, etc.) et à signaler toute difficulté rencontrée.Nous vous remercions de votre vigilance et de votre sens des responsabilités pour contribuer à la sécurité et au bien-être de tous",
+  "document": "",
+  "image": "/uploads/45d996ab-0b90-4112-a39d-d99630e6851b.png"
 }
