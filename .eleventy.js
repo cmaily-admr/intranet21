@@ -30,6 +30,23 @@ module.exports = function(eleventyConfig) {
   const md = new markdownIt({ html: true, linkify: true, breaks: true });
   // Sérialise une valeur en JSON pour l'injecter dans un <script>.
   // Échappe < pour ne pas casser la balise script.
+  // Convertit n'importe quel lien YouTube (youtu.be, watch?v=, embed, shorts)
+  // vers le format d'intégration RGPD : youtube-nocookie.com/embed/ID.
+  // Permet de coller le lien de partage YouTube directement dans le CMS.
+  eleventyConfig.addFilter("youtubeEmbed", (url) => {
+    if (!url) return "";
+    url = String(url).trim();
+    let id = "";
+    let m;
+    if ((m = url.match(/[?&]v=([A-Za-z0-9_-]{6,})/))) id = m[1];              // watch?v=ID
+    else if ((m = url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/))) id = m[1];   // youtu.be/ID
+    else if ((m = url.match(/\/embed\/([A-Za-z0-9_-]{6,})/))) id = m[1];     // .../embed/ID
+    else if ((m = url.match(/\/shorts\/([A-Za-z0-9_-]{6,})/))) id = m[1];    // .../shorts/ID
+    else if ((m = url.match(/^([A-Za-z0-9_-]{6,})$/))) id = m[1];             // juste l'ID
+    if (!id) return url; // format inconnu : on renvoie tel quel plutôt que de casser
+    return "https://www.youtube-nocookie.com/embed/" + id;
+  });
+
   eleventyConfig.addFilter("jsonifie", (valeur) => {
     return JSON.stringify(valeur || []).replace(/</g, "\\u003c");
   });
