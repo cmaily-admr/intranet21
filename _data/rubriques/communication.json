@@ -39,7 +39,18 @@
     {
       "titre": "Organigramme et trombinoscope",
       "ouvert": false,
-      "blocs": []
+      "blocs": [
+        {
+          "type": "image",
+          "image": "/uploads/trombinoscope0626v2.png",
+          "legende": "Trombinoscope CA fédéral"
+        },
+        {
+          "type": "image",
+          "image": "/uploads/organigramme_0826.png",
+          "legende": "Organigramme fédération"
+        }
+      ]
     }
   ]
 }
