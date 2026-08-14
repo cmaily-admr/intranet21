@@ -83,7 +83,7 @@
     .btn-voir:hover { background: var(--vert-clair); }
     .btn-voir svg { width: 16px; height: 16px; }
 
-    .image-info { max-width: 100%; height: auto; border-radius: 12px; display: block; margin: 10px 0; border: 1px solid #E7EBE1; }
+    .image-info { max-width: 100%; max-height: 400px; width: auto; height: auto; border-radius: 12px; display: block; margin: 10px auto; border: 1px solid #E7EBE1; }
     .video-cadre { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; margin: 10px 0; }
     .video-cadre iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
@@ -169,7 +169,7 @@
                 <div data-doc data-recherche="{{ bloc.titre_video | escape }}">
                   {% if bloc.titre_video %}<p><strong>{{ bloc.titre_video }}</strong></p>{% endif %}
                   <div class="video-cadre">
-                    <iframe src="{{ bloc.video_url }}" title="{{ bloc.titre_video | default: 'Vidéo' }}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    <iframe src="{{ bloc.video_url | youtubeEmbed }}" title="{{ bloc.titre_video | default: 'Vidéo' }}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                   </div>
                 </div>
 
