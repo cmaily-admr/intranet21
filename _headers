@@ -3,7 +3,7 @@
 /*
   X-Robots-Tag: noindex, nofollow
   X-Content-Type-Options: nosniff
-  Referrer-Policy: no-referrer
+  Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
 
 # Renforcement spécifique pour les documents téléchargeables.
