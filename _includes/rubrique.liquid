@@ -84,6 +84,13 @@
     .btn-voir svg { width: 16px; height: 16px; }
 
     .image-info { max-width: 100%; max-height: 400px; width: auto; height: auto; border-radius: 12px; display: block; margin: 10px auto; border: 1px solid #E7EBE1; }
+    .zoomable { cursor: zoom-in; transition: opacity .12s ease; }
+    .zoomable:hover { opacity: .9; }
+    .lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; padding: 20px; }
+    .lightbox.ouvert { display: flex; }
+    .lightbox img { max-width: 96vw; max-height: 92vh; width: auto; height: auto; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+    .lightbox-fermer { position: absolute; top: 16px; right: 20px; width: 44px; height: 44px; border: none; border-radius: 50%; background: rgba(255,255,255,.15); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .lightbox-fermer:hover { background: rgba(255,255,255,.3); }
     .video-cadre { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; margin: 10px 0; }
     .video-cadre iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
@@ -162,7 +169,7 @@
 
               {% elsif bloc.type == "image" %}
                 <div data-doc data-recherche="{{ bloc.legende | escape }}">
-                  <img class="image-info" src="{{ bloc.image }}" alt="{{ bloc.legende }}" onerror="this.style.display='none'">
+                  <img class="image-info zoomable" src="{{ bloc.image }}" alt="{{ bloc.legende }}" onerror="this.style.display='none'">
                 </div>
 
               {% elsif bloc.type == "video" %}
@@ -248,6 +255,45 @@
         });
 
         msgVide.style.display = (q !== "" && totalVisible === 0) ? "block" : "none";
+      });
+    })();
+  </script>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image agrandie">
+    <button class="lightbox-fermer" id="lightbox-fermer" aria-label="Fermer">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <script>
+    (function () {
+      var boite = document.getElementById("lightbox");
+      var img = document.getElementById("lightbox-img");
+      var fermer = document.getElementById("lightbox-fermer");
+      if (!boite || !img) return;
+
+      function ouvrir(src, alt) {
+        img.src = src;
+        img.alt = alt || "";
+        boite.classList.add("ouvert");
+        document.body.style.overflow = "hidden";
+      }
+      function fermerBoite() {
+        boite.classList.remove("ouvert");
+        img.src = "";
+        document.body.style.overflow = "";
+      }
+
+      document.querySelectorAll(".zoomable").forEach(function (el) {
+        el.addEventListener("click", function () {
+          ouvrir(el.getAttribute("src"), el.getAttribute("alt"));
+        });
+      });
+
+      fermer.addEventListener("click", fermerBoite);
+      boite.addEventListener("click", function (e) {
+        if (e.target === boite) fermerBoite(); // clic sur le fond ferme
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && boite.classList.contains("ouvert")) fermerBoite();
       });
     })();
   </script>
