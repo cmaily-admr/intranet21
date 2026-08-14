@@ -120,7 +120,7 @@
     .video-cadre iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .une-carte h2 { margin: 0 0 12px; font-size: 1.5rem; color: var(--vert-fonce); }
     .une-texte p { margin: 0 0 14px; font-size: 1.05rem; }
-    .une-image { width: 100%; height: auto; border-radius: 12px; margin: 4px 0 18px; display: block; }
+    .une-image { max-width: 100%; max-height: 400px; width: auto; height: auto; border-radius: 12px; margin: 4px auto 18px; display: block; }
     .une-texte p a { color: var(--vert-admr); font-weight: 700; }
     .pdf-cadre { width: 100%; height: 500px; border: 1px solid #E7EBE1; border-radius: 14px; margin: 8px 0 18px; }
 
@@ -190,7 +190,7 @@
 
         {% if une.video_url and une.video_url != "" %}
         <div class="video-cadre">
-          <iframe src="{{ une.video_url }}"
+          <iframe src="{{ une.video_url | youtubeEmbed }}"
                   title="{{ une.titre }}"
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen loading="lazy"></iframe>
