@@ -55,7 +55,7 @@ collections:
       - { label: "Résumé", name: "resume", widget: "text", hint: "Court texte affiché sur la carte (et en secours si aucun texte long à la une)." }
 
       # --- Champs utilisés surtout quand l'actu est à la une ---
-      - { label: "Texte complet (pour la une)", name: "contenu", widget: "markdown", required: false, hint: "Texte long affiché quand l'actu est à la une. Laissez vide pour n'afficher que le résumé." }
+      - { label: "Texte complet (pour la une)", name: "contenu", widget: "markdown", required: false, hint: "Texte long affiché quand l'actu est à la une. Laissez vide pour n'afficher que le résumé. Séparateurs illustrés : tapez [[sepa:nom]] sur une ligne — noms : actu, alerte, cse, rh, branche, ag2r, logement, aist, fete." }
       - { label: "Lien vidéo (pour la une)", name: "video_url", widget: "string", required: false, hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT — affichée en haut de la une." }
       - { label: "Document à télécharger (pour la une)", name: "document", widget: "file", required: false }
       - { label: "Texte du bouton document", name: "document_label", widget: "string", required: false, default: "Télécharger le document (PDF)" }
@@ -146,6 +146,24 @@ collections:
                     fields:
                       - { label: "Libellé du bouton", name: "libelle", widget: "string", hint: "Ex. : Espace Aésio, Portail AGEFIPH…" }
                       - { label: "Adresse du lien (URL)", name: "url", widget: "string", hint: "https://… — s'ouvre dans un nouvel onglet." }
+                  - label: "Séparateur décoratif"
+                    name: "separateur"
+                    summary: "Séparateur : {{fields.modele}}"
+                    fields:
+                      - label: "Thème du séparateur"
+                        name: "modele"
+                        widget: "select"
+                        hint: "Choisissez le séparateur illustré à insérer."
+                        options:
+                          - { label: "Actu", value: "sepa_Actu.svg" }
+                          - { label: "Alerte", value: "sepa_Alerte.svg" }
+                          - { label: "CSE", value: "sepa_CSE.svg" }
+                          - { label: "RH et info", value: "sepa_RHetinfo.svg" }
+                          - { label: "La branche", value: "sepa_La_branche.svg" }
+                          - { label: "AG2R", value: "sepa_AG2R.svg" }
+                          - { label: "Action logement", value: "sepa_Action_logement.svg" }
+                          - { label: "AIST", value: "sepa_AIST.svg" }
+                          - { label: "Fête", value: "sepa_Fete.svg" }
 
       - name: "demarche-qualite"
         label: "Démarche qualité"
