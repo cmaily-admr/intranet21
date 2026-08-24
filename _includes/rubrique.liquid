@@ -149,7 +149,7 @@
             {% for bloc in section.blocs %}
 
               {% if bloc.type == "texte" %}
-                <div data-doc data-recherche="{{ bloc.texte | escape }}">{{ bloc.texte | couleurs | encadres | markdown }}</div>
+                <div data-doc data-recherche="{{ bloc.texte | escape }}">{{ bloc.texte | couleurs | encadres | separateurs | markdown }}</div>
 
               {% elsif bloc.type == "document" %}
                 {% assign recent = bloc.date_ajout | estRecent %}
