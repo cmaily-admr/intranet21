@@ -56,30 +56,6 @@ module.exports = function(eleventyConfig) {
     return md.render(str);
   });
 
-  // Table des séparateurs thématiques (code court -> fichier SVG).
-  const SEPARATEURS = {
-    "actu": "sepa_Actu.svg",
-    "alerte": "sepa_Alerte.svg",
-    "cse": "sepa_CSE.svg",
-    "rh": "sepa_RHetinfo.svg",
-    "branche": "sepa_La_branche.svg",
-    "ag2r": "sepa_AG2R.svg",
-    "logement": "sepa_Action_logement.svg",
-    "aist": "sepa_AIST.svg",
-    "fete": "sepa_Fete.svg",
-  };
-
-  // Remplace les codes [[sepa:nom]] par l'image du séparateur correspondant.
-  // Utilisé dans le contenu Markdown des actualités.
-  eleventyConfig.addFilter("separateurs", (str) => {
-    if (!str) return "";
-    return String(str).replace(/\[\[sepa:([a-z0-9]+)\]\]/gi, (bloc, nom) => {
-      const fichier = SEPARATEURS[nom.toLowerCase()];
-      if (!fichier) return ""; // code inconnu : on retire le code sans rien afficher
-      return `<img class="separateur" src="/assets/separateurs/${fichier}" alt="" aria-hidden="true">`;
-    });
-  });
-
   // Transforme un objet (dossier de données Eleventy) en tableau de ses valeurs,
   // pour pouvoir trier/boucler. Ex. : {{ actualites | valeurs | sort: "date" }}
   eleventyConfig.addFilter("valeurs", (obj) => {
