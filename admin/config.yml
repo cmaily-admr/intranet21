@@ -55,7 +55,7 @@ collections:
       - { label: "Résumé", name: "resume", widget: "text", hint: "Court texte affiché sur la carte (et en secours si aucun texte long à la une)." }
 
       # --- Champs utilisés surtout quand l'actu est à la une ---
-      - { label: "Texte complet (pour la une)", name: "contenu", widget: "markdown", required: false, hint: "Texte long affiché quand l'actu est à la une. Laissez vide pour n'afficher que le résumé. Séparateurs illustrés : tapez [[sepa:nom]] sur une ligne — noms : actu, alerte, cse, rh, branche, ag2r, logement, aist, fete." }
+      - { label: "Texte complet (pour la une)", name: "contenu", widget: "markdown", required: false, hint: "Séparateurs : [[sepa:nom]] (actu, alerte, cse, rh, branche, ag2r, logement, aist, fete). Mots en couleur : {orange|mon texte} (couleurs : vert, orange, bleu, rouge, prune). Encadré coloré : [[encadre:orange]] mon texte [[/encadre]]." }
       - { label: "Lien vidéo (pour la une)", name: "video_url", widget: "string", required: false, hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT — affichée en haut de la une." }
       - { label: "Document à télécharger (pour la une)", name: "document", widget: "file", required: false }
       - { label: "Texte du bouton document", name: "document_label", widget: "string", required: false, default: "Télécharger le document (PDF)" }
@@ -118,7 +118,7 @@ collections:
                     name: "texte"
                     summary: "Texte"
                     fields:
-                      - { label: "Texte", name: "texte", widget: "markdown" }
+                      - { label: "Texte", name: "texte", widget: "markdown", hint: "Mots en couleur : {orange|mon texte} (vert, orange, bleu, rouge, prune). Encadré : [[encadre:orange]] mon texte [[/encadre]]." }
                   - label: "Document (PDF)"
                     name: "document"
                     summary: "{{fields.titre_doc}}"
