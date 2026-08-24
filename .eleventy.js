@@ -56,6 +56,71 @@ module.exports = function(eleventyConfig) {
     return md.render(str);
   });
 
+  // Table des séparateurs thématiques (code court -> fichier SVG).
+  const SEPARATEURS = {
+    "actu": "sepa_Actu.svg",
+    "alerte": "sepa_Alerte.svg",
+    "cse": "sepa_CSE.svg",
+    "rh": "sepa_RHetinfo.svg",
+    "branche": "sepa_La_branche.svg",
+    "ag2r": "sepa_AG2R.svg",
+    "logement": "sepa_Action_logement.svg",
+    "aist": "sepa_AIST.svg",
+    "fete": "sepa_Fete.svg",
+  };
+
+  // Remplace les codes [[sepa:nom]] par l'image du séparateur correspondant.
+  // Utilisé dans le contenu Markdown des actualités.
+  eleventyConfig.addFilter("separateurs", (str) => {
+    if (!str) return "";
+    return String(str).replace(/\[\[sepa:([a-z0-9]+)\]\]/gi, (bloc, nom) => {
+      const fichier = SEPARATEURS[nom.toLowerCase()];
+      if (!fichier) return ""; // code inconnu : on retire le code sans rien afficher
+      return `<img class="separateur" src="/assets/separateurs/${fichier}" alt="" aria-hidden="true">`;
+    });
+  });
+
+  // Palette de charte pour la coloration de texte (code court -> couleur).
+  const COULEURS_TEXTE = {
+    "vert": "#5B9B31",
+    "orange": "#E58A00",
+    "bleu": "#2E7D9A",
+    "rouge": "#B00020",
+    "prune": "#B0553A",
+  };
+
+  // Colore des mots : {couleur|texte} -> <span style="color:...">texte</span>.
+  // Palette limitée à la charte ADMR pour garder un rendu harmonieux.
+  eleventyConfig.addFilter("couleurs", (str) => {
+    if (!str) return "";
+    return String(str).replace(/\{(vert|orange|bleu|rouge|prune)\|([^}]+)\}/gi, (bloc, coul, texte) => {
+      const c = COULEURS_TEXTE[coul.toLowerCase()];
+      if (!c) return texte;
+      return `<span style="color:${c};font-weight:700;">${texte}</span>`;
+    });
+  });
+
+  // Encadrés colorés : [[encadre:couleur]] ... [[/encadre]].
+  // Fond doux + bordure gauche de la couleur choisie. Effet « post-it / à noter ».
+  const FONDS_ENCADRE = {
+    "vert":   { bord: "#5B9B31", fond: "#EFF6E8" },
+    "orange": { bord: "#E58A00", fond: "#FDF2E2" },
+    "bleu":   { bord: "#2E7D9A", fond: "#E8F2F6" },
+    "rouge":  { bord: "#B00020", fond: "#FBEAED" },
+    "prune":  { bord: "#B0553A", fond: "#F7ECE8" },
+  };
+  eleventyConfig.addFilter("encadres", (str) => {
+    if (!str) return "";
+    return String(str).replace(
+      /\[\[encadre:(vert|orange|bleu|rouge|prune)\]\]([\s\S]*?)\[\[\/encadre\]\]/gi,
+      (bloc, coul, contenu) => {
+        const c = FONDS_ENCADRE[coul.toLowerCase()];
+        if (!c) return contenu;
+        return `<div class="encadre" style="background:${c.fond};border-left:4px solid ${c.bord};">${contenu.trim()}</div>`;
+      }
+    );
+  });
+
   // Transforme un objet (dossier de données Eleventy) en tableau de ses valeurs,
   // pour pouvoir trier/boucler. Ex. : {{ actualites | valeurs | sort: "date" }}
   eleventyConfig.addFilter("valeurs", (obj) => {
