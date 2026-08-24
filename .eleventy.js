@@ -73,7 +73,7 @@ module.exports = function(eleventyConfig) {
   // Utilisé dans le contenu Markdown des actualités.
   eleventyConfig.addFilter("separateurs", (str) => {
     if (!str) return "";
-    return String(str).replace(/\[\[sepa:([a-z0-9]+)\]\]/gi, (bloc, nom) => {
+    return String(str).replace(/\\?\[\\?\[sepa:([a-z0-9]+)\\?\]\\?\]/gi, (bloc, nom) => {
       const fichier = SEPARATEURS[nom.toLowerCase()];
       if (!fichier) return ""; // code inconnu : on retire le code sans rien afficher
       return `<img class="separateur" src="/assets/separateurs/${fichier}" alt="" aria-hidden="true">`;
@@ -112,7 +112,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("encadres", (str) => {
     if (!str) return "";
     return String(str).replace(
-      /\[\[encadre:(vert|orange|bleu|rouge|prune)\]\]([\s\S]*?)\[\[\/encadre\]\]/gi,
+      /\\?\[\\?\[encadre:(vert|orange|bleu|rouge|prune)\\?\]\\?\]([\s\S]*?)\\?\[\\?\[\/encadre\\?\]\\?\]/gi,
       (bloc, coul, contenu) => {
         const c = FONDS_ENCADRE[coul.toLowerCase()];
         if (!c) return contenu;
