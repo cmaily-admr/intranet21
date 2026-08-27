@@ -138,6 +138,7 @@
     .popup-actu-entete { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
     .popup-actu-titre { font-family: var(--police-titres); color: var(--vert-fonce); margin: 0 0 16px; font-size: 1.6rem; padding-right: 40px; }
     .popup-actu-contenu { color: var(--gris-texte); line-height: 1.6; }
+    .popup-actu-image { max-width: 100%; max-height: 360px; width: auto; height: auto; border-radius: 10px; display: block; margin: 0 auto 16px; cursor: zoom-in; }
     .popup-actu-contenu img { max-width: 100%; height: auto; }
     .lightbox.ouvert { display: flex; }
     .lightbox img { max-width: 96vw; max-height: 92vh; width: auto; height: auto; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
@@ -311,6 +312,10 @@
 
         {% assign liste = actualites | actusPrecedentes %}
         {% for actu in liste %}
+        {% assign a_popup = false %}
+        {% if actu.contenu and actu.contenu != "" %}{% assign a_popup = true %}{% endif %}
+        {% if actu.image and actu.image != "" %}{% assign a_popup = true %}{% endif %}
+        {% if actu.video_url and actu.video_url != "" %}{% assign a_popup = true %}{% endif %}
         <article class="actu">
           {% if actu.image and actu.image != "" %}
           <img class="actu-image" src="{{ actu.image }}" alt="" onerror="this.style.display='none'">
@@ -334,7 +339,7 @@
               {% endif %}
               {{ actu.texte_lien | default: "Lire l'article" }}
             </a>
-            {% elsif actu.contenu and actu.contenu != "" %}
+            {% elsif a_popup %}
             <button class="actu-lien actu-popup-btn" data-popup="popup-{{ forloop.index }}" type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11H4z"/><path d="M8 12h8M8 16h8M8 8h5"/></svg>
               {{ actu.texte_lien | default: "Lire l'article" }}
@@ -342,7 +347,7 @@
             {% endif %}
           </div>
         </article>
-        {% if actu.contenu and actu.contenu != "" %}
+        {% if a_popup %}
         <div class="popup-actu" id="popup-{{ forloop.index }}" role="dialog" aria-modal="true" aria-label="{{ actu.titre | escape }}">
           <div class="popup-actu-boite">
             <button class="popup-actu-fermer" aria-label="Fermer">&times;</button>
@@ -351,6 +356,14 @@
               <span class="actu-date">{{ actu.date | dateFr }}</span>
             </div>
             <h2 class="popup-actu-titre">{{ actu.titre }}</h2>
+            {% if actu.image and actu.image != "" %}
+            <img class="popup-actu-image zoomable" src="{{ actu.image }}" alt="{{ actu.titre }}" onerror="this.style.display='none'">
+            {% endif %}
+            {% if actu.video_url and actu.video_url != "" %}
+            <div class="video-cadre">
+              <iframe src="{{ actu.video_url | youtubeEmbed }}" title="{{ actu.titre }}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+            {% endif %}
             <div class="popup-actu-contenu">{{ actu.contenu | couleurs | encadres | separateurs | markdown }}</div>
           </div>
         </div>
