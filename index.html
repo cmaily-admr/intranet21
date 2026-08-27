@@ -129,7 +129,7 @@
     .zoomable:hover { opacity: .9; }
     .lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; padding: 20px; }
 
-    .actu-popup-btn { background: none; border: none; cursor: pointer; font: inherit; }
+    .actu-popup-btn { border: none; cursor: pointer; font: inherit; color: #fff; }
     .popup-actu { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,.6); display: none; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto; }
     .popup-actu.ouvert { display: flex; }
     .popup-actu-boite { background: var(--blanc); border-radius: 16px; max-width: 720px; width: 100%; padding: 30px 34px 34px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,.3); margin: auto; }
@@ -458,10 +458,21 @@
       function fermerBoite() {
         boite.classList.remove("ouvert");
         img.src = "";
-        document.body.style.overflow = "";
+        // Ne réactive le défilement que si aucun popup d'actu n'est encore ouvert.
+        if (!document.querySelector(".popup-actu.ouvert")) {
+          document.body.style.overflow = "";
+        }
       }
 
       document.querySelectorAll(".zoomable").forEach(function (el) {
+        el.addEventListener("click", function () {
+          ouvrir(el.getAttribute("src"), el.getAttribute("alt"));
+        });
+      });
+
+      // Rendre aussi cliquables (zoom) les images à l'intérieur des popups d'actus.
+      document.querySelectorAll(".popup-actu-contenu img").forEach(function (el) {
+        el.style.cursor = "zoom-in";
         el.addEventListener("click", function () {
           ouvrir(el.getAttribute("src"), el.getAttribute("alt"));
         });
