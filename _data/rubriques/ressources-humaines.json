@@ -62,7 +62,8 @@
       "blocs": [
         {
           "type": "video",
-          "video_url": "https://youtu.be/_ZmsFhZOsTY"
+          "video_url": "https://youtu.be/_ZmsFhZOsTY",
+          "titre_video": "La retraite progressive ADMR"
         },
         {
           "type": "document",
