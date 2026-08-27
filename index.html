@@ -128,6 +128,17 @@
     .zoomable { cursor: zoom-in; transition: opacity .12s ease; }
     .zoomable:hover { opacity: .9; }
     .lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; padding: 20px; }
+
+    .actu-popup-btn { background: none; border: none; cursor: pointer; font: inherit; }
+    .popup-actu { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,.6); display: none; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto; }
+    .popup-actu.ouvert { display: flex; }
+    .popup-actu-boite { background: var(--blanc); border-radius: 16px; max-width: 720px; width: 100%; padding: 30px 34px 34px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,.3); margin: auto; }
+    .popup-actu-fermer { position: absolute; top: 14px; right: 16px; width: 40px; height: 40px; border: none; border-radius: 50%; background: #F0F0EC; color: var(--gris-texte); font-size: 1.5rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .popup-actu-fermer:hover { background: #E2E2DC; }
+    .popup-actu-entete { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .popup-actu-titre { font-family: var(--police-titres); color: var(--vert-fonce); margin: 0 0 16px; font-size: 1.6rem; padding-right: 40px; }
+    .popup-actu-contenu { color: var(--gris-texte); line-height: 1.6; }
+    .popup-actu-contenu img { max-width: 100%; height: auto; }
     .lightbox.ouvert { display: flex; }
     .lightbox img { max-width: 96vw; max-height: 92vh; width: auto; height: auto; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
     .lightbox-fermer { position: absolute; top: 16px; right: 20px; width: 44px; height: 44px; border: none; border-radius: 50%; background: rgba(255,255,255,.15); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -312,7 +323,8 @@
             </div>
             <h3>{{ actu.titre }}</h3>
             <p>{{ actu.resume }}</p>
-            <a class="actu-lien" href="{{ actu.lien | default: '#' }}">
+            {% if actu.lien and actu.lien != "" %}
+            <a class="actu-lien" href="{{ actu.lien }}">
               {% if actu.type_lien == "pdf" %}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
               {% elsif actu.type_lien == "video" %}
@@ -322,8 +334,27 @@
               {% endif %}
               {{ actu.texte_lien | default: "Lire l'article" }}
             </a>
+            {% elsif actu.contenu and actu.contenu != "" %}
+            <button class="actu-lien actu-popup-btn" data-popup="popup-{{ forloop.index }}" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11H4z"/><path d="M8 12h8M8 16h8M8 8h5"/></svg>
+              {{ actu.texte_lien | default: "Lire l'article" }}
+            </button>
+            {% endif %}
           </div>
         </article>
+        {% if actu.contenu and actu.contenu != "" %}
+        <div class="popup-actu" id="popup-{{ forloop.index }}" role="dialog" aria-modal="true" aria-label="{{ actu.titre | escape }}">
+          <div class="popup-actu-boite">
+            <button class="popup-actu-fermer" aria-label="Fermer">&times;</button>
+            <div class="popup-actu-entete">
+              {% if actu.rubrique and actu.rubrique != "" %}<span class="pastille" style="background: {{ actu.couleur | default: '#5B9B31' }};">{{ actu.rubrique }}</span>{% endif %}
+              <span class="actu-date">{{ actu.date | dateFr }}</span>
+            </div>
+            <h2 class="popup-actu-titre">{{ actu.titre }}</h2>
+            <div class="popup-actu-contenu">{{ actu.contenu | couleurs | encadres | separateurs | markdown }}</div>
+          </div>
+        </div>
+        {% endif %}
         {% endfor %}
 
       </div>
@@ -442,6 +473,38 @@
       });
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape" && boite.classList.contains("ouvert")) fermerBoite();
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // Ouverture / fermeture des popups d'actualités.
+      var boutons = document.querySelectorAll(".actu-popup-btn");
+      function fermerTous() {
+        document.querySelectorAll(".popup-actu.ouvert").forEach(function (p) {
+          p.classList.remove("ouvert");
+        });
+        document.body.style.overflow = "";
+      }
+      boutons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var cible = document.getElementById(btn.getAttribute("data-popup"));
+          if (cible) {
+            cible.classList.add("ouvert");
+            document.body.style.overflow = "hidden";
+          }
+        });
+      });
+      document.querySelectorAll(".popup-actu").forEach(function (popup) {
+        var fermer = popup.querySelector(".popup-actu-fermer");
+        if (fermer) fermer.addEventListener("click", fermerTous);
+        popup.addEventListener("click", function (e) {
+          if (e.target === popup) fermerTous(); // clic sur le fond
+        });
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") fermerTous();
       });
     })();
   </script>
