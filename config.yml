@@ -55,7 +55,7 @@ collections:
       - { label: "Résumé", name: "resume", widget: "text", hint: "Court texte affiché sur la carte (et en secours si aucun texte long à la une)." }
 
       # --- Champs utilisés surtout quand l'actu est à la une ---
-      - { label: "Texte complet (pour la une)", name: "contenu", widget: "markdown", required: false, hint: "Séparateurs : [[sepa:nom]] (actu, alerte, cse, rh, branche, ag2r, logement, aist, aesio, fete). Mots en couleur : {orange|mon texte} (couleurs : vert, orange, bleu, rouge, prune). Encadré coloré : [[encadre:orange]] mon texte [[/encadre]]." }
+      - { label: "Texte complet (pour la une)", name: "contenu", widget: "markdown", required: false, hint: "Séparateurs : [[sepa:nom]] (actu, alerte, cse, rh, branche, ag2r, logement, aist, fete). Mots en couleur : {orange|mon texte} (couleurs : vert, orange, bleu, rouge, prune). Encadré coloré : [[encadre:orange]] mon texte [[/encadre]]." }
       - { label: "Lien vidéo (pour la une)", name: "video_url", widget: "string", required: false, hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT — affichée en haut de la une." }
       - { label: "Document à télécharger (pour la une)", name: "document", widget: "file", required: false }
       - { label: "Texte du bouton document", name: "document_label", widget: "string", required: false, default: "Télécharger le document (PDF)" }
@@ -138,7 +138,7 @@ collections:
                     name: "video"
                     summary: "{{fields.titre_video}}"
                     fields:
-                      - { label: "Titre de la vidéo (facultatif)", name: "titre_video", widget: "string", required: false }
+                      - { label: "Titre de la vidéo", name: "titre_video", widget: "string", required: true, hint: "Obligatoire : c'est ce titre qui rend la vidéo trouvable dans la recherche. Ex. : La charte des droits et libertés." }
                       - { label: "Lien de la vidéo", name: "video_url", widget: "string", hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT" }
                   - label: "Bouton lien"
                     name: "bouton"
@@ -163,7 +163,6 @@ collections:
                           - { label: "AG2R", value: "sepa_AG2R.svg" }
                           - { label: "Action logement", value: "sepa_Action_logement.svg" }
                           - { label: "AIST", value: "sepa_AIST.svg" }
-                          - { label: "Aésio", value: "sepa_Aesio.svg" }
                           - { label: "Fête", value: "sepa_Fete.svg" }
 
       - name: "demarche-qualite"
