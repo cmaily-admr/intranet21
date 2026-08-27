@@ -40,16 +40,18 @@
       "blocs": [
         {
           "type": "video",
-          "titre_video": "",
+          "titre_video": "Article 1 - Non discrimination",
           "video_url": "https://youtu.be/u8rbakWhTuo"
         },
         {
           "type": "video",
-          "video_url": "https://youtu.be/FhSXdhXKHyI"
+          "video_url": "https://youtu.be/FhSXdhXKHyI",
+          "titre_video": "Article 2 - Prise en charge et accompagnement adaptée"
         },
         {
           "type": "video",
-          "video_url": "https://youtu.be/gP0E8FfE0Ts"
+          "video_url": "https://youtu.be/gP0E8FfE0Ts",
+          "titre_video": "Article 3 - Droit à l'information"
         }
       ]
     }
