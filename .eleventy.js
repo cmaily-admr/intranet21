@@ -66,6 +66,7 @@ module.exports = function(eleventyConfig) {
     "ag2r": "sepa_AG2R.svg",
     "logement": "sepa_Action_logement.svg",
     "aist": "sepa_AIST.svg",
+    "aesio": "sepa_Aesio.svg",
     "fete": "sepa_Fete.svg",
   };
 
