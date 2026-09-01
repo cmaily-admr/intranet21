@@ -62,7 +62,15 @@
     .h-jour { color: var(--gris-texte); font-weight: 600; }
     .h-val { color: var(--gris-texte); text-align: right; }
     .h-ligne.ferme .h-jour, .h-ligne.ferme .h-val { color: #B0B0B0; font-weight: 400; }
-    .asso-itineraire { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: var(--vert-admr); color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; font-size: .92rem; transition: background .15s ease; }
+    .h-permanence { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #EEF1EA; }
+    .h-permanence .h-perm-titre { font-size: .8rem; font-weight: 700; color: var(--vert-admr); display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+    .h-permanence .h-perm-titre svg { width: 14px; height: 14px; }
+    .h-permanence .h-perm-detail { font-size: .88rem; color: var(--gris-texte); }
+    .asso-actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
+    .asso-mail { display: inline-flex; align-items: center; gap: 8px; background: var(--blanc); color: var(--vert-fonce); border: 1.5px solid var(--vert-admr); text-decoration: none; padding: 9px 15px; border-radius: 10px; font-weight: 700; font-size: .92rem; transition: background .15s ease; }
+    .asso-mail:hover { background: var(--vert-clair); }
+    .asso-mail svg { width: 16px; height: 16px; }
+    .asso-itineraire { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: var(--vert-admr); color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; font-size: .92rem; transition: background .15s ease; }
     .asso-itineraire:hover { background: var(--vert-fonce); }
     .asso-itineraire svg { width: 16px; height: 16px; }
 
@@ -119,18 +127,28 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+          <div class="h-permanence">
+            <div class="h-perm-titre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg> Permanence téléphonique</div>
+            <div class="h-perm-detail">Vendredi : 9h – 12h, 14h – 16h</div>
+          </div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CXEPtCFTbEXzEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CXEPtCFTbEXzEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:arnayleduc@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr d'auxonne 60 rue antoine masson, 21130 auxonne">
         <h3 class="asso-nom">ADMR d'Auxonne</h3>
@@ -144,18 +162,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CUQdTgYT5HFoEBM/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CUQdTgYT5HFoEBM/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:genlisauxonne@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de beaune 2b av. roger duchet, 21200 beaune">
         <h3 class="asso-nom">ADMR de Beaune</h3>
@@ -169,18 +193,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CdXdV2lmMwAlEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CdXdV2lmMwAlEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:sudcotedor@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de dijon 60 av. du 14 juillet bât f, 21300 chenôve">
         <h3 class="asso-nom">ADMR de Dijon</h3>
@@ -194,18 +224,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CW8_mLjhV0mSEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CW8_mLjhV0mSEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:dijonmetropole@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr du pays châtillonnais 2 bis rue de la libération, 21400 châtillon-sur-seine">
         <h3 class="asso-nom">ADMR du Pays Châtillonnais</h3>
@@ -219,18 +255,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CX4AGwUxFAo4EBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CX4AGwUxFAo4EBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:payschatillonnais@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de genlis 4 rue de la gare, 21110 genlis">
         <h3 class="asso-nom">ADMR de Genlis</h3>
@@ -244,18 +286,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CQJfh7SRFZIREBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CQJfh7SRFZIREBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:genlisauxonne@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de gevrey-chambertin 10 rue mal de lattre de tassigny, 21220 gevrey-chambertin">
         <h3 class="asso-nom">ADMR de Gevrey-Chambertin</h3>
@@ -269,18 +317,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 11h30</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CYSeHBEh1V6aEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CYSeHBEh1V6aEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:gevreynuits@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr d'is-sur-tille 16 pl. du général leclerc, 21120 is-sur-tille">
         <h3 class="asso-nom">ADMR d'Is-sur-Tille</h3>
@@ -294,18 +348,28 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+          <div class="h-permanence">
+            <div class="h-perm-titre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg> Permanence téléphonique</div>
+            <div class="h-perm-detail">Mercredi : 9h – 12h, 14h – 16h</div>
+          </div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CT5Up-LU8-ThEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CT5Up-LU8-ThEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:3rivieres@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de laignes 3 grande rue porte de la croix, 21330 laignes">
         <h3 class="asso-nom">ADMR de Laignes</h3>
@@ -319,7 +383,7 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">13h30 – 17h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Mardi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Jeudi</span><span class="h-val">Fermé</span></div>
@@ -327,10 +391,16 @@
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CZNzk7oIOVDEEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CZNzk7oIOVDEEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:laignes@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de liernais rue de la place martin dosse, 21430 liernais">
         <h3 class="asso-nom">ADMR de Liernais</h3>
@@ -344,18 +414,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 13h – 16h30</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 16h30</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 11h45</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 16h30</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 11h45</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">7h45 – 12h, 13h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">7h45 – 12h, 13h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">7h45 – 12h, 13h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CWze-0f1SzHBEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CWze-0f1SzHBEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:liernais@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de mirebeau-sur-bèze 8 pl. général viard, 21310 mirebeau-sur-bèze">
         <h3 class="asso-nom">ADMR de Mirebeau-sur-Bèze</h3>
@@ -369,18 +445,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/Cej_oTkPU3vxEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/Cej_oTkPU3vxEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:mirebeau@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de montbard 3 rue carnot, 21500 montbard">
         <h3 class="asso-nom">ADMR de Montbard</h3>
@@ -394,18 +476,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 13h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CXC4ZtYx4STdEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CXC4ZtYx4STdEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:montbardsemur@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de semur-en-auxois 2ter av. de ciney, 21140 semur-en-auxois">
         <h3 class="asso-nom">ADMR de Semur-en-Auxois</h3>
@@ -419,18 +507,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CZvf5xNQdZkEEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CZvf5xNQdZkEEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:montbardsemur@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de nuits-saint-georges 3 rue jean moulin, 21700 nuits-saint-georges">
         <h3 class="asso-nom">ADMR de Nuits-Saint-Georges</h3>
@@ -444,18 +538,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h, 12h30 – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CVUdz5qb3j4fEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CVUdz5qb3j4fEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:gevreynuits@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de pontailler-sur-saône 1 rue du 8 mai 1945, 21270 pontailler-sur-saône">
         <h3 class="asso-nom">ADMR de Pontailler-sur-Saône</h3>
@@ -469,18 +569,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mardi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/Cfr61kOM2Eg3EBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/Cfr61kOM2Eg3EBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:pontailler@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de pouilly-en-auxois 16 pl. pierre et marie curie, 21320 pouilly-en-auxois">
         <h3 class="asso-nom">ADMR de Pouilly-en-Auxois</h3>
@@ -494,18 +600,28 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne ferme"><span class="h-jour">Lundi</span><span class="h-val">Fermé</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">10h – 12h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h</span></div>
+          <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+          <div class="h-permanence">
+            <div class="h-perm-titre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg> Permanence téléphonique</div>
+            <div class="h-perm-detail">Du lundi au vendredi : 9h – 12h, 14h – 16h</div>
+          </div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CYK6SktusT-bEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CYK6SktusT-bEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:pouilly@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de saint-jean-de-losne 19 all. du bastion des charmilles, 21170 saint-jean-de-losne">
         <h3 class="asso-nom">ADMR de Saint-Jean-de-Losne</h3>
@@ -519,18 +635,28 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Mardi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+          <div class="h-permanence">
+            <div class="h-perm-titre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg> Permanence téléphonique</div>
+            <div class="h-perm-detail">Mardi et mercredi : 9h – 12h, 14h – 16h</div>
+          </div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CeHNjnEi5-OlEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CeHNjnEi5-OlEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:stjean@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de saint-seine-l'abbaye 4 av. de la gare, 21440 saint-seine-l'abbaye">
         <h3 class="asso-nom">ADMR de Saint-Seine-l'Abbaye</h3>
@@ -545,17 +671,23 @@
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
           <div class="h-ligne ferme"><span class="h-jour">Lundi</span><span class="h-val">Fermé</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">8h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Mercredi</span><span class="h-val">Fermé</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 13h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CbF12PRSBhZiEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CbF12PRSBhZiEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:stseine@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de saulieu 3 rue du tour des fossés, 21210 saulieu">
         <h3 class="asso-nom">ADMR de Saulieu</h3>
@@ -569,18 +701,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CSSS-Ir8uAOPEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CSSS-Ir8uAOPEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:saulieu@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de seurre 22 gd rue du faubourg saint-georges, 21250 seurre">
         <h3 class="asso-nom">ADMR de Seurre</h3>
@@ -594,18 +732,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">9h – 12h, 14h – 16h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">9h – 12h</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">9h – 12h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CSaBarrNDZBXEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CSaBarrNDZBXEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:seurre@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de venarey-les-laumes 5 av. jean jaurès, 21150 venarey-les-laumes">
         <h3 class="asso-nom">ADMR de Venarey-les-Laumes</h3>
@@ -620,17 +764,27 @@
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
           <div class="h-ligne ferme"><span class="h-jour">Lundi</span><span class="h-val">Fermé</span></div>
-          <div class="h-ligne "><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
-          <div class="h-ligne "><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mardi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
+          <div class="h-ligne"><span class="h-jour">Jeudi</span><span class="h-val">8h30 – 12h, 13h30 – 17h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Vendredi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
+          <div class="h-permanence">
+            <div class="h-perm-titre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg> Permanence téléphonique</div>
+            <div class="h-perm-detail">Lundi et vendredi : 8h30 – 12h, 13h30 – 17h</div>
+          </div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CfKl-LgRH8DlEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CfKl-LgRH8DlEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:venarey@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       <article class="asso-carte" data-recherche="admr de vitteaux 21 rue edmé millot, 21350 vitteaux">
         <h3 class="asso-nom">ADMR de Vitteaux</h3>
@@ -644,18 +798,24 @@
         </p>
         <div class="asso-horaires">
           <div class="h-titre">Horaires d'ouverture</div>
-          <div class="h-ligne "><span class="h-jour">Lundi</span><span class="h-val">9h – 11h30, 14h – 16h30</span></div>
+          <div class="h-ligne"><span class="h-jour">Lundi</span><span class="h-val">8h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Mardi</span><span class="h-val">Fermé</span></div>
-          <div class="h-ligne "><span class="h-jour">Mercredi</span><span class="h-val">9h30 – 11h30</span></div>
+          <div class="h-ligne"><span class="h-jour">Mercredi</span><span class="h-val">8h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Jeudi</span><span class="h-val">Fermé</span></div>
-          <div class="h-ligne "><span class="h-jour">Vendredi</span><span class="h-val">9h – 11h30, 14h – 16h30</span></div>
+          <div class="h-ligne"><span class="h-jour">Vendredi</span><span class="h-val">8h30 – 16h</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Samedi</span><span class="h-val">Fermé</span></div>
           <div class="h-ligne ferme"><span class="h-jour">Dimanche</span><span class="h-val">Fermé</span></div>
         </div>
-        <a class="asso-itineraire" href="https://g.page/r/CRJFQPx9Bw9OEBM" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Voir l'itinéraire
-        </a>
+        <div class="asso-actions">
+          <a class="asso-itineraire" href="https://g.page/r/CRJFQPx9Bw9OEBM" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Voir l'itinéraire
+          </a>
+          <a class="asso-mail" href="mailto:vitteaux@admr21.fr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Envoyer un mail
+          </a>
+        </div>
       </article>
       </div>
 
