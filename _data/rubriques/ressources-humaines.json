@@ -6,7 +6,7 @@
   "sections": [
     {
       "titre": "Convention collective",
-      "ouvert": true,
+      "ouvert": false,
       "blocs": [
         {
           "type": "document",
@@ -128,7 +128,16 @@
     },
     {
       "ouvert": false,
-      "titre": "Règlement intérieure"
+      "titre": "Règlement intérieure",
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "titre_doc": "Règlement intérieur",
+          "fichier": "/uploads/règlement-intérieur-ues-admr-21_-2022.pdf"
+        }
+      ]
     }
   ]
 }
