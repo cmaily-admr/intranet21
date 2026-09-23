@@ -1,0 +1,250 @@
+<!-- ============================================================
+     VISIONNEUSE D'IMAGES (lightbox) AVEC ZOOM
+     Fichier unique, inclus par index.html et par rubrique.liquid.
+     Toute modification ici s'applique à toutes les pages.
+
+     Utilisation : donner la classe "zoomable" à une <img>.
+     Depuis un script : window.ouvrirLightbox(src, alt).
+
+     Commandes côté visiteur :
+       molette / pincement ........ zoomer
+       double-clic ................ 1x <-> 2,5x
+       glisser .................... déplacer l'image zoomée
+       + / - / 0 (clavier) ........ zoomer, dézoomer, réinitialiser
+       Échap ou clic sur le fond .. fermer
+     ============================================================ -->
+<style>
+  .zoomable { cursor: zoom-in; transition: opacity .12s ease; }
+  .zoomable:hover { opacity: .9; }
+
+  .lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.88);
+              display: none; align-items: center; justify-content: center;
+              padding: 20px; overflow: hidden; touch-action: none; }
+  .lightbox.ouvert { display: flex; }
+
+  .lightbox img { max-width: 96vw; max-height: 92vh; width: auto; height: auto;
+                  border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.5);
+                  transform-origin: center center; will-change: transform;
+                  user-select: none; -webkit-user-drag: none; cursor: zoom-in; }
+  .lightbox img.zoome { cursor: grab; border-radius: 0; }
+  .lightbox img.attrape { cursor: grabbing; transition: none !important; }
+  .lightbox img.anime { transition: transform .18s ease; }
+
+  .lightbox-fermer { position: absolute; top: 16px; right: 20px; width: 44px; height: 44px;
+                     border: none; border-radius: 50%; background: rgba(255,255,255,.15);
+                     color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer;
+                     display: flex; align-items: center; justify-content: center; }
+  .lightbox-fermer:hover { background: rgba(255,255,255,.3); }
+
+  /* Barre d'outils : dézoomer / niveau / zoomer. Toujours visible pour que
+     le zoom soit découvrable sans connaître le raccourci molette. */
+  .lightbox-outils { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+                     display: flex; align-items: center; gap: 4px; padding: 5px;
+                     background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.18);
+                     border-radius: 999px; backdrop-filter: blur(6px); }
+  .lightbox-outils button { width: 38px; height: 38px; border: none; border-radius: 50%;
+                            background: transparent; color: #fff; font-size: 1.25rem;
+                            line-height: 1; cursor: pointer; display: flex;
+                            align-items: center; justify-content: center; }
+  .lightbox-outils button:hover:not(:disabled) { background: rgba(255,255,255,.18); }
+  .lightbox-outils button:disabled { opacity: .35; cursor: default; }
+  .lightbox-niveau { min-width: 74px; white-space: nowrap; text-align: center; color: #fff; font-size: .85rem;
+                     font-variant-numeric: tabular-nums; background: none; border: none;
+                     cursor: pointer; padding: 0 2px; }
+  .lightbox-niveau:hover { text-decoration: underline; }
+
+  @media (max-width: 520px) {
+    .lightbox { padding: 10px; }
+    .lightbox-outils { bottom: 12px; }
+  }
+</style>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image agrandie">
+  <button class="lightbox-fermer" id="lightbox-fermer" aria-label="Fermer">&times;</button>
+  <img id="lightbox-img" src="" alt="" draggable="false">
+  <div class="lightbox-outils">
+    <button id="lightbox-moins" aria-label="Dézoomer">&minus;</button>
+    <button class="lightbox-niveau" id="lightbox-niveau" aria-label="Réinitialiser le zoom">100&nbsp;%</button>
+    <button id="lightbox-plus" aria-label="Zoomer">+</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var boite   = document.getElementById("lightbox");
+  var img     = document.getElementById("lightbox-img");
+  var fermer  = document.getElementById("lightbox-fermer");
+  var bMoins  = document.getElementById("lightbox-moins");
+  var bPlus   = document.getElementById("lightbox-plus");
+  var niveau  = document.getElementById("lightbox-niveau");
+  if (!boite || !img) return;
+
+  var MIN = 1, MAX = 6;
+  var ech = 1, tx = 0, ty = 0;   // échelle et déplacement courants
+  var glisse = false, xDep = 0, yDep = 0, txDep = 0, tyDep = 0;
+  var ecartDoigts = 0;           // distance entre deux doigts (pincement)
+
+  function centre() {
+    return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  }
+
+  // Empêche l'image de sortir complètement de l'écran quand elle est zoomée.
+  function borner() {
+    var l = img.offsetWidth * ech, h = img.offsetHeight * ech;
+    var maxX = Math.max(0, (l - window.innerWidth) / 2 + 20);
+    var maxY = Math.max(0, (h - window.innerHeight) / 2 + 20);
+    tx = Math.min(maxX, Math.max(-maxX, tx));
+    ty = Math.min(maxY, Math.max(-maxY, ty));
+  }
+
+  function appliquer(anime) {
+    borner();
+    img.classList.toggle("anime", !!anime);
+    img.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + ech + ")";
+    img.classList.toggle("zoome", ech > 1.01);
+    niveau.textContent = Math.round(ech * 100) + "\u00A0%";   // espace insécable : évite le retour à la ligne
+    bMoins.disabled = ech <= MIN + 0.01;
+    bPlus.disabled  = ech >= MAX - 0.01;
+    if (anime) setTimeout(function () { img.classList.remove("anime"); }, 200);
+  }
+
+  // Zoome vers un point précis de l'écran : ce point reste sous le curseur.
+  function zoomerVers(nouvelleEch, px, py, anime) {
+    nouvelleEch = Math.min(MAX, Math.max(MIN, nouvelleEch));
+    if (Math.abs(nouvelleEch - ech) < 0.001) return;
+    var c = centre();
+    if (px === undefined) { px = c.x; py = c.y; }
+    // position du point dans l'image, indépendante de l'échelle
+    var ix = (px - c.x - tx) / ech;
+    var iy = (py - c.y - ty) / ech;
+    ech = nouvelleEch;
+    tx = px - c.x - ix * ech;
+    ty = py - c.y - iy * ech;
+    if (ech <= MIN + 0.001) { tx = 0; ty = 0; }
+    appliquer(anime);
+  }
+
+  function reinitialiser(anime) {
+    ech = 1; tx = 0; ty = 0;
+    appliquer(anime);
+  }
+
+  function ouvrir(src, alt) {
+    img.src = src;
+    img.alt = alt || "";
+    reinitialiser(false);
+    boite.classList.add("ouvert");
+    document.body.style.overflow = "hidden";
+  }
+
+  function fermerBoite() {
+    boite.classList.remove("ouvert");
+    img.src = "";
+    reinitialiser(false);
+    // Ne réactive le défilement que si aucun popup d'actualité n'est encore ouvert.
+    if (!document.querySelector(".popup-actu.ouvert")) {
+      document.body.style.overflow = "";
+    }
+  }
+
+  // Accessible aux autres scripts de la page (popups d'actualités).
+  window.ouvrirLightbox = ouvrir;
+
+  // --- Molette ---------------------------------------------------------
+  boite.addEventListener("wheel", function (e) {
+    if (!boite.classList.contains("ouvert")) return;
+    e.preventDefault();
+    zoomerVers(ech * (e.deltaY < 0 ? 1.18 : 1 / 1.18), e.clientX, e.clientY, false);
+  }, { passive: false });
+
+  // --- Double-clic : bascule 1x / 2,5x ---------------------------------
+  img.addEventListener("dblclick", function (e) {
+    e.stopPropagation();
+    if (ech > 1.01) reinitialiser(true);
+    else zoomerVers(2.5, e.clientX, e.clientY, true);
+  });
+
+  // --- Glisser à la souris ---------------------------------------------
+  img.addEventListener("mousedown", function (e) {
+    if (ech <= 1.01) return;
+    e.preventDefault();
+    glisse = true; xDep = e.clientX; yDep = e.clientY; txDep = tx; tyDep = ty;
+    img.classList.add("attrape");
+  });
+  window.addEventListener("mousemove", function (e) {
+    if (!glisse) return;
+    tx = txDep + (e.clientX - xDep);
+    ty = tyDep + (e.clientY - yDep);
+    appliquer(false);
+  });
+  window.addEventListener("mouseup", function () {
+    glisse = false; img.classList.remove("attrape");
+  });
+
+  // --- Tactile : pincement à deux doigts, déplacement à un doigt -------
+  function distance(t) {
+    var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+  boite.addEventListener("touchstart", function (e) {
+    if (e.touches.length === 2) {
+      ecartDoigts = distance(e.touches);
+    } else if (e.touches.length === 1 && ech > 1.01) {
+      glisse = true; xDep = e.touches[0].clientX; yDep = e.touches[0].clientY;
+      txDep = tx; tyDep = ty;
+    }
+  }, { passive: true });
+
+  boite.addEventListener("touchmove", function (e) {
+    if (e.touches.length === 2 && ecartDoigts > 0) {
+      e.preventDefault();
+      var d = distance(e.touches);
+      var mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      var my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      zoomerVers(ech * (d / ecartDoigts), mx, my, false);
+      ecartDoigts = d;
+    } else if (glisse && e.touches.length === 1) {
+      e.preventDefault();
+      tx = txDep + (e.touches[0].clientX - xDep);
+      ty = tyDep + (e.touches[0].clientY - yDep);
+      appliquer(false);
+    }
+  }, { passive: false });
+
+  boite.addEventListener("touchend", function (e) {
+    if (e.touches.length < 2) ecartDoigts = 0;
+    if (e.touches.length === 0) glisse = false;
+  }, { passive: true });
+
+  // --- Barre d'outils ---------------------------------------------------
+  bPlus.addEventListener("click", function () { zoomerVers(ech * 1.5, undefined, undefined, true); });
+  bMoins.addEventListener("click", function () { zoomerVers(ech / 1.5, undefined, undefined, true); });
+  niveau.addEventListener("click", function () { reinitialiser(true); });
+
+  // --- Clavier ----------------------------------------------------------
+  document.addEventListener("keydown", function (e) {
+    if (!boite.classList.contains("ouvert")) return;
+    if (e.key === "Escape") fermerBoite();
+    else if (e.key === "+" || e.key === "=") zoomerVers(ech * 1.5, undefined, undefined, true);
+    else if (e.key === "-") zoomerVers(ech / 1.5, undefined, undefined, true);
+    else if (e.key === "0") reinitialiser(true);
+  });
+
+  // --- Fermeture --------------------------------------------------------
+  fermer.addEventListener("click", fermerBoite);
+  boite.addEventListener("click", function (e) {
+    // Un clic sur le fond ferme, mais pas juste après un déplacement.
+    if (e.target === boite) fermerBoite();
+  });
+  window.addEventListener("resize", function () {
+    if (boite.classList.contains("ouvert")) appliquer(false);
+  });
+
+  // --- Images cliquables de la page ------------------------------------
+  document.querySelectorAll(".zoomable").forEach(function (el) {
+    el.addEventListener("click", function () {
+      ouvrir(el.getAttribute("src"), el.getAttribute("alt"));
+    });
+  });
+})();
+</script>
