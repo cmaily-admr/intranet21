@@ -17,7 +17,7 @@
         },
         {
           "type": "image",
-          "image": "/uploads/rh/listecongésbad.png",
+          "image": "/uploads/rh/liste-conges-bad.png",
           "legende": "Liste congés BAD"
         }
       ]
@@ -82,7 +82,7 @@
           "type": "document",
           "date_ajout": "",
           "nouveau": true,
-          "fichier": "/uploads/rh/livret-bad-générique-v2-2026.pdf",
+          "fichier": "/uploads/rh/livret-bad-generique-v2-2026.pdf",
           "titre_doc": "Livret Branche aide à domicile",
           "precision": "Toutes les aides de la branche"
         }
@@ -135,7 +135,7 @@
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "Règlement intérieur",
-          "fichier": "/uploads/rh/règlement-intérieur-ues-admr-21_-2022.pdf"
+          "fichier": "/uploads/rh/reglement-interieur-ues-admr-21-2022.pdf"
         }
       ]
     }
