@@ -2,6 +2,7 @@ backend:
   name: github
   repo: cmaily-admr/intranet21
   branch: main
+  base_url: https://kiosque.admr-21.fr
   auth_endpoint: api/auth
   commit_message: "CMS: {{message}}"
   client_id: Ov23liE6Gvj39lE3gtYk
