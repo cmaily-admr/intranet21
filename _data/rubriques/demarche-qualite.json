@@ -22,7 +22,93 @@
     {
       "titre": "Les bonnes pratiques",
       "ouvert": false,
-      "blocs": []
+      "blocs": [
+        {
+          "type": "fiche",
+          "titre_fiche": "FICHE BONNE CONDUITE N°1 - BIENTRAITANCE",
+          "categorie": "MES INDISPENSABLES",
+          "personnel": "Le personnel d’intervention · Le personnel support",
+          "chapo": "La bientraitance est une culture qui vise à promouvoir le bien-être de la personne accompagnée, que ce soit par la parole ou par les gestes, en gardant à l’esprit le risque de maltraitance.\n\nLa bientraitance ne se réduit pas à l’absence de maltraitance ou au refus de toute violence. Elle suppose d’avoir une attitude et des relations bienveillantes et respectueuses de l’autre. A noter que les termes bientraitances et maltraitances ne s’appliquent qu'aux personnes en situation de vulnérabilité",
+          "encadres": [
+            {
+              "titre_encadre": "Règles d'or",
+              "couleur": "vert",
+              "contenu": "- Je **vouvoie** la personne accompagnée, sauf si elle m’autorise à la tutoyer\n- Je lui parle avec **douceur,** je l’**écoute** et je **valorise** sa parole, je recherche son **consentement** (ex : êtes-vous d’accord ?)\n- Je **respecte** son identité, ses croyances, ses opinions et ses choix de vie, **sans jugement**\n- Je **respecte** son **rythme** (ex : sommeil, repas) ses **goûts** (ex : culinaires), ses **préférences** (ex : agencement du domicile), ainsi que ses **refus**\n- Je **respecte son intimité, son corps, sa pudeur**, en particulier lors de l’aide à la toilette\n- **Je m’adapte** à ses capacités, je reste **patient** face à ses limites physiques ou cognitives (ex : répéter une question si besoin)\n- Je fais preuve de **réserve**, je ne dévoile pas d’informations qui pourraient **porter préjudice**, sauf si cela se fait dans le cadre d’un signalement de maltraitance\n- Je reste **ferme** face aux **paroles** et aux **gestes déplacés**, je demande à être **respecté**"
+            },
+            {
+              "titre_encadre": "Points de vigilance",
+              "couleur": "bleu",
+              "contenu": "- Le manque de bientraitance peut naitre d’une bonne intention (ex : aider la personne). Il peut s’installer sans s’en rendre compte et peut prendre différentes formes :\n- **Parler de façon irrespectueuse** à une personne, vulnérable ou non\n- **Manipuler** physiquement une personne de façon **incorrecte ou brusque**\n- **Décider ou faire à la place** de la personne alors qu’elle en est capable (ex : réorganiser le logement sans associer la personne, répondre au téléphone/aller ouvrir la porte à sa place pour ne pas la fatiguer)\n- La **négligence active** (abandon, mise en danger) et/ou **passive** (oublis, inattentions)\n- La **contention** physique imposée\n- La **privation** **de soins ou de médicaments**\n- La **privation de libertés ou de droits** (ex : pratique religieuse, utiliser un téléphone)\n- Le **vol** ou l’escroquerie (ex : signature forcée)\n- Les personnes accompagnées sont souvent **vulnérables** et ne peuvent pas toujours se protéger des actes de maltraitance\n- La personne maltraitante peut être un proche-aidant, un autre professionnel, mais aussi la personne accompagnée elle-même, qui peut maltraiter son entourage"
+            },
+            {
+              "titre_encadre": "Comment réagir ?",
+              "couleur": "prune",
+              "contenu": "- Si ce que souhaite la personne accompagnée met sa sécurité en jeu (ex : sortir seul alors qu’elle a tendance à s’égarer en raison de troubles cognitifs), j’en parle avec elle, ses proches-aidants et l’association pour trouver une solution adaptée.\n- Si je suis témoin d’actes de maltraitance, que je détecte des signes (bleus, douleurs, humeur affectée etc.) ou que je soupçonne une situation de maltraitance, je n’interviens pas directement mais j’en parle d’abord à mon association, qui me demandera peut-être d’écrire mes observations. En effet, un signalement sera peut-être nécessaire, notamment si la personne maltraitée est vulnérable (ex : enfants etc.).\n- Si je m’interroge sur ma pratique ou si j’ai l’impression de ne pas être bientraitant, j’en parle à mon entourage professionnel et à mon association, qui pourra me proposer des formations ou des échanges entre pairs.\n- Si je suis face à une situation d’urgence médicale, je préviens les secours (SAMU : 15) puis mon association.\n- Si je suis face à une situation qui présente un danger, je veille à ma sécurité et si possible celle des autres et je préviens les secours (Police : 17) puis mon association."
+            },
+            {
+              "titre_encadre": "Prévention des risques",
+              "couleur": "orange",
+              "contenu": "- Si je suis affecté psychologiquement par une situation de maltraitance dont je suis témoin, j’en parle à mon entourage personnel ou professionnel, mon médecin traitant ou à un psychologue de Pros-Consulte (0805 23 23 40 ou application mobile)\n- Une formation sur la bientraitance permet d’analyser sa pratique. Je peux demander à mon association d’en bénéficier."
+            }
+          ],
+          "pdf": "/uploads/fiche-bonne-conduite-n-01-bientraitance.pdf"
+        },
+        {
+          "type": "fiche",
+          "titre_fiche": "FICHE BONNE CONDUITE N°2 – ATTITUDE PROFESSIONNELLE",
+          "categorie": "MES INDISPENSABLES",
+          "personnel": "Le personnel d’intervention",
+          "chapo": "En toute circonstance et notamment lors des interventions, je dois garder une attitude professionnelle, c’est-à-dire trouver un équilibre relationnel, situé entre la distance professionnelle et la relation de confiance avec la personne accompagnée\n\nGarder une attitude professionnelle permet notamment de garantir un service de qualité, de représenter positivement son employeur, d’obtenir la confiance des personnes accompagnées et d’adopter une attitude bientraitante dans le respect de leur dignité",
+          "encadres": [
+            {
+              "titre_encadre": "Règles d'or",
+              "couleur": "vert",
+              "contenu": "- **Je choisis une communication adaptée.**\n\nEn arrivant chez la personne aidée, **je dis bonjour** et je demande comment elle va aujourd’hui. Je me montre à l’écoute, je parle clairement, avec bienveillance, sans infantiliser ni tutoyer sans autorisation. Je reformule les consignes ou les demandes si nécessaire, avec patience. Je trouve un équilibre entre proximité et réserve dans ma communication, en m’adaptant au public accompagné (ex : enfants).\n- **Je choisis une tenue adaptée.**\n\nJe choisis une tenue propre, confortable et adaptée à mon travail. **J’évite les vêtements trop décontractés, inappropriés ou les accessoires encombrants (**ex : bijoux trop volumineux, bracelets etc.) (cf. fiche sur la tenue de travail). **Je respecte** les règles d’hygiène (ex : cheveux propres et attachés, ongles propres et courts, sans vernis ni faux-ongles, hygiène personnelle etc.).\n- **Je veille à mon attitude et à mon comportement.**\n\nJe suis, dans la mesure du possible, ponctuel et je préviens mon association le plus tôt possible en cas de retard ou en cas d’absence (ex : maladie).\n\nJe me montre professionnel, dynamique et actif auprès de la personne que j’accompagne et je ne donne pas l’impression d’être comme chez moi (ex : me servir du café ou m’asseoir sur le canapé pour discuter sans y avoir été invité). Sauf en cas d’urgence, j’évite d’utiliser mon téléphone personnel pendant les interventions.\n\nEn toutes circonstances, je reste honnête (ex : ne pas accepter de dons ou de cadeaux etc.) et neutre (ex : ne pas faire de jugements de valeur) vis-à-vis des personnes accompagnées ou de mes collègues.\n- **Je respecte la vie privée de chacun, y compris la mienne.**\n\nJe garde confidentielles les informations vues ou entendues, dans le respect de l’intimité de chacun. J’évite de parler de ma vie personnelle ou de partager mes opinions.\n\nJe ne relaie pas fausses informations (ex : rumeurs). Je ne transmets pas mes coordonnées personnelles aux personnes accompagnées ou à des tiers (ex : ne pas se déclarer contact d’urgence pour de la téléassistance).\n- **Je gère mes émotions**\n\nJe maintiens une certaine distance et j’essaye de ne pas prendre à cœur les difficultés rencontrées chez les personnes accompagnées (ex : maladies, fins de vie, isolement social, précarité etc.). Je fais appel à des relais ou j’oriente la famille vers des services spécialisés qui pourront les aider.\n\nJe conserve mon calme et ma patience face à des propos ou des attitudes désobligeantes, inadaptées ou provocatrices. Néanmoins, je préserve ma santé mentale en ne tolérant pas d’agressivité verbale ou physique, que je signale dès que possible à l’association, sans me mettre en danger.\n- **Je respecte les limites professionnelles**\n\nPour garder une posture professionnelle adéquate, je connais et je respecte le cadre de l’intervention et les limites professionnelles définies par l’association. En cas de doute, je temporise auprès de la personne accompagnée, et je contacte l’association avant d’accepter une demande. Le cas échéant, je refuse la demande et j’explique les raisons de ce refus."
+            },
+            {
+              "titre_encadre": "Comment réagir ?",
+              "couleur": "prune",
+              "contenu": "Une fiche « Bientraitance » est également disponible pour développer l’attitude professionnelle vis-à-vis des personnes en situation de vulnérabilité."
+            },
+            {
+              "titre_encadre": "Prévention des risques",
+              "couleur": "orange",
+              "contenu": "- Adopter une attitude professionnelle adéquate est une mesure de prévention face aux risques psychosociaux, en permettant de préserver ma santé mentale, et en évitant un stress important pouvant conduire à un épuisement émotionnel.\n- La situation personnelle d’une personne accompagnée peut m’impacter en tant qu’intervenant et entrainer diverses réactions (angoisse, anxiété, peur, déprime, stress, tristesse…). Cela peut provoquer une charge émotionnelle et avoir un impact psychologique.\n- Si la situation devient trop pesante et que je me retrouve en difficulté pour maintenir une attitude professionnelle, je n’hésite pas à demander de l’aide à mon association pour qu’elle trouve une solution (ex : trouver un relais).\n- Si j’en ressens la nécessité, je peux en parler à mon entourage, à mon médecin traitant, ou contacter le dispositif de soutien psychologique **PROS-CONSULTE** au 0805 23 23 40 ou en utilisant l’application mobile"
+            }
+          ],
+          "pdf": "/uploads/fiche-bonne-conduite-n-02-attitude-professionnelle.pdf"
+        },
+        {
+          "type": "fiche",
+          "titre_fiche": "FICHE BONNE CONDUITE N°3 - PROJET D’ACCOMPAGNEMENT PERSONNALISE",
+          "categorie": "MES INDISPENSABLES",
+          "personnel": "Le personnel d’intervention",
+          "chapo": "Un projet d’accompagnement personnalisé est un **outil de coordination** des actions de l’équipe pluridisciplinaire qui place la personne au cœur de son accompagnement, en répondant à ses **besoins** et à ses **attentes** sur le long terme. Le plan d’aide définit les modalités d’intervention et fait partie du projet d’accompagnement personnalisé. Le projet permet à la personne accompagnée d’exprimer ses **envies**, ses **souhaits** afin de bénéficier d’un accompagnement de qualité.\n\nC’est une construction commune entre la personne accompagnée, le proche-aidant et les professionnels, à laquelle je peux être amené à participer activement.  Le projet d’accompagnement est constitué **d’objectifs** et de **moyens**. Cet outil permet de valoriser l’accompagnement fait par les professionnels d’intervention auprès des personnes fragiles.",
+          "encadres": [
+            {
+              "titre_encadre": "Règles d'or",
+              "couleur": "vert",
+              "contenu": "- Je prends connaissance des éléments du projet  (ex : objectifs moyens) afin de préparer au mieux mes interventions.\n- Je participe à la mise en œuvre du projet d’accompagnement personnalisé en proposant des **activités pertinentes** par rapport aux objectifs (ex : permettre à la personne accompagnée de retrouver de l’autonomie pour faire sa toilette).\n- Au cours de mes interventions, je déploie les **moyens préconisés** dans le projet d’accompagnement (ex: stimuler la personne lors de la toilette, rassurer et encourager, ne pas faire à la place de la personne etc.).\n- Je veille à ce que mes actions soient en **cohérence** avec le projet de la personne accompagnée, en particulier sur la préservation de son **autonomie** et le respect de ses droits (cf. ci-dessous)\n- J’entretiens une **communication adaptée** avec les autres professionnels impliqués dans le suivi de la personne pour garantir un accompagnement cohérent et de qualité."
+            },
+            {
+              "titre_encadre": "Points de vigilance",
+              "couleur": "bleu",
+              "contenu": "- Je respecte les **missions** qui me sont confiées et mes **limites** d’intervention\n- Je protège les **informations personnelles** de la personne en ne les partageant pas en dehors du cadre professionnel\n- Je suis attentif aux **signes de dégradation de la santé et de la perte d’autonomie** de la personne que j’accompagne, qu’ils soient physiques ou psychologiques.\n- Si je constate que le déploiement des moyens représente un **risque** pour l’usager ou pour moi-même, ou que les actions à réaliser ne sont plus adaptées, **j’alerte** l’association"
+            },
+            {
+              "titre_encadre": "Comment réagir ?",
+              "couleur": "prune",
+              "contenu": "**Quels sont les droits de la personne accompagnée à respecter, en lien avec la charte des droits et des libertés ?**\n- Liberté d’aller et venir\n- Droit à la dignité et à l’intégrité\n- Respect de l’intimité et de la vie privée\n- Liberté d’opinion, de croyance et de vie spirituelle\n- Droit à l’image"
+            },
+            {
+              "titre_encadre": "Prévention des risques",
+              "couleur": "orange",
+              "contenu": "- La mise en œuvre du projet d’accompagnement personnalisé peut être une source de stress. Si mon moral est affecté par la situation, j’en parle à mon entourage personnel ou professionnel, mon médecin traitant ou à un psychologue de Pros-Consulte (0805 23 23 40 ou application mobile)"
+            }
+          ],
+          "pdf": "/uploads/fiche-bonne-conduite-n-03-projet-daccompagnement-personnalise.pdf"
+        }
+      ]
     },
     {
       "titre": "Utilisation des outils",

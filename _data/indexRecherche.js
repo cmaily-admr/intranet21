@@ -23,6 +23,20 @@ module.exports = function () {
   const dossier = path.join(__dirname, "rubriques");
   const index = [];
 
+  /**
+   * Nettoie un texte Markdown pour la recherche : retire les marques de mise
+   * en forme et les puces de début de ligne, mais conserve les traits d'union
+   * à l'intérieur des mots (Pros-Consulte, Saint-Jean…).
+   */
+  function texteCherchable(md) {
+    return String(md || "")
+      .replace(/^[ \t]*[-*+]\s+/gm, " ")
+      .replace(/^[ \t]*#{1,6}\s*/gm, " ")
+      .replace(/[*_>`\[\]()!]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
   let fichiers = [];
   try {
     fichiers = fs.readdirSync(dossier).filter((f) => f.endsWith(".json"));
@@ -69,10 +83,7 @@ module.exports = function () {
         } else if (bloc.type === "texte" && bloc.texte) {
           // Texte libre : pas de titre propre. On garde le texte comme
           // matière de recherche, et on affiche un extrait comme titre.
-          const brut = bloc.texte
-            .replace(/[#*_>`\[\]()!-]/g, " ")   // retire les marques Markdown
-            .replace(/\s+/g, " ")
-            .trim();
+          const brut = texteCherchable(bloc.texte);
           const extrait = brut.length > 70 ? brut.slice(0, 70) + "…" : brut;
           if (brut) {
             index.push({
@@ -99,6 +110,22 @@ module.exports = function () {
             section: nomSection,
             lien: lien,
             type: "vidéo",
+          });
+        } else if (bloc.type === "fiche" && bloc.titre_fiche) {
+          // Une fiche est cherchable sur tout son contenu, encadrés compris.
+          const encadres = Array.isArray(bloc.encadres) ? bloc.encadres : [];
+          const corps = texteCherchable(
+            [bloc.chapo || ""]
+              .concat(encadres.map((e) => `${e.titre_encadre || ""} ${e.contenu || ""}`))
+              .join(" ")
+          );
+          index.push({
+            titre: bloc.titre_fiche,
+            texte: corps,
+            rubrique: nomRubrique,
+            section: nomSection,
+            lien: lien,
+            type: "fiche",
           });
         }
       }

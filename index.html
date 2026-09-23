@@ -467,7 +467,7 @@
           var a = document.createElement("a");
           a.className = "resultat-item";
           a.href = d.lien;
-          var typeLabel = { document: "Document", texte: "Texte", image: "Image", "vidéo": "Vidéo", lien: "Lien" }[d.type] || "";
+          var typeLabel = { document: "Document", texte: "Texte", image: "Image", "vidéo": "Vidéo", lien: "Lien", fiche: "Fiche" }[d.type] || "";
           var loc = d.rubrique + (d.section ? " · " + d.section : "");
           a.innerHTML =
             '<span><span class="resultat-titre">' + echapper(d.titre) + '</span>' +

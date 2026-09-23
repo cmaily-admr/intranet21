@@ -88,6 +88,32 @@
     .encadre { padding: 14px 18px; border-radius: 10px; margin: 16px 0; }
     .encadre > :first-child { margin-top: 0; }
     .encadre > :last-child { margin-bottom: 0; }
+
+    /* Fiches dépliables (fiches bonne conduite) */
+    .fiche { border: 1px solid #E7EBE1; border-radius: 12px; margin: 10px 0; background: var(--blanc); overflow: hidden; }
+    .fiche > summary { list-style: none; cursor: pointer; padding: 14px 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .fiche > summary::-webkit-details-marker { display: none; }
+    .fiche > summary::after { content: ""; width: 9px; height: 9px; border-right: 2.5px solid var(--vert-admr); border-bottom: 2.5px solid var(--vert-admr); transform: rotate(45deg); transition: transform .2s ease; margin: 0 2px 3px auto; flex: 0 0 auto; }
+    .fiche[open] > summary::after { transform: rotate(225deg); margin: 3px 2px 0 auto; }
+    .fiche > summary:hover { background: var(--vert-clair); }
+    .fiche-titre { font-weight: 700; color: var(--vert-fonce); }
+    .fiche-cat { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--gris-clair); background: var(--fond-page); border: 1px solid #E7EBE1; border-radius: 999px; padding: 2px 9px; }
+    .fiche-corps { padding: 4px 18px 18px; }
+    .fiche-personnel { font-size: .85rem; color: var(--gris-clair); margin: 0 0 12px; }
+    .fiche-chapo { margin-bottom: 4px; }
+    .encadre-titre { font-weight: 800; margin: 0 0 8px; }
+    .encadre ul { margin: 6px 0; padding-left: 20px; }
+    .encadre li { margin: 4px 0; }
+    .encadre-vert   { background: #EFF6E8; border-left: 4px solid #5B9B31; }
+    .encadre-vert   .encadre-titre { color: #2E5A1C; }
+    .encadre-bleu   { background: #E8F2F6; border-left: 4px solid #2E7D9A; }
+    .encadre-bleu   .encadre-titre { color: #1D5468; }
+    .encadre-orange { background: #FDF2E2; border-left: 4px solid #E58A00; }
+    .encadre-orange .encadre-titre { color: #8A5400; }
+    .encadre-prune  { background: #F7ECE8; border-left: 4px solid #B0553A; }
+    .encadre-prune  .encadre-titre { color: #7A3826; }
+    .encadre-rouge  { background: #FBEAED; border-left: 4px solid #B00020; }
+    .encadre-rouge  .encadre-titre { color: #7D0017; }
     .zoomable { cursor: zoom-in; transition: opacity .12s ease; }
     .zoomable:hover { opacity: .9; }
     .lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; padding: 20px; }
@@ -193,6 +219,43 @@
 
               {% elsif bloc.type == "separateur" %}
                 <img class="separateur" src="/assets/separateurs/{{ bloc.modele }}" alt="" aria-hidden="true">
+
+              {% elsif bloc.type == "fiche" %}
+                <details class="fiche" data-doc data-recherche="{{ bloc.titre_fiche | escape }} {{ bloc.chapo | escape }}">
+                  <summary>
+                    <span class="fiche-titre">{{ bloc.titre_fiche }}</span>
+                    {% if bloc.categorie and bloc.categorie != "" %}<span class="fiche-cat">{{ bloc.categorie }}</span>{% endif %}
+                  </summary>
+                  <div class="fiche-corps">
+                    {% if bloc.personnel and bloc.personnel != "" %}
+                    <p class="fiche-personnel">Concerne : {{ bloc.personnel }}</p>
+                    {% endif %}
+                    {% if bloc.chapo and bloc.chapo != "" %}
+                    <div class="fiche-chapo">{{ bloc.chapo | couleurs | encadres | markdown }}</div>
+                    {% endif %}
+                    {% for e in bloc.encadres %}
+                    <div class="encadre encadre-{{ e.couleur }}">
+                      <p class="encadre-titre">{{ e.titre_encadre }}</p>
+                      {{ e.contenu | couleurs | markdown }}
+                    </div>
+                    {% endfor %}
+                    {% if bloc.pdf and bloc.pdf != "" %}
+                    <div class="ligne-doc">
+                      <span class="titre-doc">Fiche à imprimer</span>
+                      <div class="doc-actions">
+                        <a class="btn-voir" href="/voir-pdf.html?doc={{ bloc.pdf }}">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                          Visualiser
+                        </a>
+                        <a class="btn-tel" href="{{ bloc.pdf }}">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+                          Télécharger
+                        </a>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </div>
+                </details>
               {% endif %}
 
             {% endfor %}

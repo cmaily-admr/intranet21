@@ -165,6 +165,34 @@ collections:
                           - { label: "AIST", value: "sepa_AIST.svg" }
                           - { label: "Aésio", value: "sepa_Aesio.svg" }
                           - { label: "Fête", value: "sepa_Fete.svg" }
+                  - label: "Fiche dépliable"
+                    name: "fiche"
+                    summary: "{{fields.titre_fiche}}"
+                    fields:
+                      - { label: "Titre de la fiche", name: "titre_fiche", widget: "string", hint: "Ex. : Fiche bonne conduite n°1 - Bientraitance" }
+                      - { label: "Catégorie", name: "categorie", widget: "string", required: false, hint: "Étiquette affichée à droite du titre. Ex. : Mes indispensables" }
+                      - { label: "Personnel concerné", name: "personnel", widget: "string", required: false, hint: "Ex. : Le personnel d'intervention · Le personnel support" }
+                      - { label: "Texte d'introduction", name: "chapo", widget: "markdown", required: false }
+                      - label: "Encadrés colorés"
+                        name: "encadres"
+                        widget: "list"
+                        required: false
+                        label_singular: "Encadré"
+                        summary: "{{fields.titre_encadre}}"
+                        fields:
+                          - { label: "Titre de l'encadré", name: "titre_encadre", widget: "string", hint: "Ex. : Règles d'or, Points de vigilance…" }
+                          - label: "Couleur"
+                            name: "couleur"
+                            widget: "select"
+                            default: "vert"
+                            options:
+                              - { label: "Vert (règles d'or)", value: "vert" }
+                              - { label: "Bleu (points de vigilance)", value: "bleu" }
+                              - { label: "Prune (comment réagir)", value: "prune" }
+                              - { label: "Orange (prévention des risques)", value: "orange" }
+                              - { label: "Rouge (alerte)", value: "rouge" }
+                          - { label: "Contenu", name: "contenu", widget: "markdown" }
+                      - { label: "Fiche à imprimer (PDF)", name: "pdf", widget: "file", required: false, hint: "Version PDF de la fiche, proposée en bas." }
 
       - name: "demarche-qualite"
         label: "Démarche qualité"
