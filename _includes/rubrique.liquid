@@ -126,12 +126,6 @@
 
     .badge-nouveau { display: inline-block; background: var(--orange-admr); color: #fff; font-size: .68rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; margin-left: 8px; vertical-align: middle; }
 
-    .pied { background: var(--vert-fonce); color: #DDEAD3; }
-    .pied-inner { max-width: 1120px; margin: 0 auto; padding: 34px 24px; display: flex; flex-wrap: wrap; gap: 26px; justify-content: space-between; }
-    .pied h4 { margin: 0 0 8px; color: #fff; font-size: 1.05rem; }
-    .pied a { color: #fff; }
-    .pied p { margin: 4px 0; }
-    .pied .mention { width: 100%; border-top: 1px solid rgba(255,255,255,.15); padding-top: 16px; font-size: .85rem; color: #BBD3AD; }
 
     a:focus-visible, summary:focus-visible { outline: 3px solid var(--orange-admr); outline-offset: 2px; border-radius: 6px; }
   </style>
@@ -278,19 +272,7 @@
     </div>
   </section>
 
-  <footer class="pied">
-    <div class="pied-inner">
-      <div>
-        <h4>ADMR de Côte-d'Or</h4>
-        <p>Espace réservé aux salariés</p>
-      </div>
-      <div>
-        <h4>Un problème avec le site ?</h4>
-        <p>Écrivez à : <a href="mailto:communication@admr-21.com">communication@admr-21.com</a></p>
-      </div>
-      <p class="mention">Ce site est un espace d'information interne. Merci de ne pas communiquer son adresse à l'extérieur.</p>
-    </div>
-  </footer>
+{% include "pied.liquid" %}
 
   <script>
     // Recherche instantanée : filtre les documents et masque les sections vides.
