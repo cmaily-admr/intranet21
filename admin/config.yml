@@ -197,6 +197,13 @@ collections:
       - name: "demarche-qualite"
         label: "Démarche qualité"
         file: "_data/rubriques/demarche-qualite.json"
+        # Les documents de cette rubrique vivent dans leur propre sous-dossier :
+        # le sélecteur de fichiers n'affiche que ceux-ci, et tout nouvel envoi
+        # depuis cette page s'y range automatiquement.
+        # IMPORTANT : chemins ABSOLUS (barre oblique initiale). Sans elle, Decap
+        # les résout depuis _data/rubriques/ et crée un dossier fantôme.
+        media_folder: "/uploads/qualite"
+        public_folder: "/uploads/qualite"
         fields: *champs_rubrique
 
       - name: "ressources-humaines"
