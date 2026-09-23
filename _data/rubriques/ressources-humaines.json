@@ -125,6 +125,10 @@
       "titre": "Trames entretien pros",
       "ouvert": false,
       "blocs": []
+    },
+    {
+      "ouvert": false,
+      "titre": "Règlement intérieure"
     }
   ]
 }
