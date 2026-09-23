@@ -13,14 +13,14 @@
           "date_ajout": "2026-08-13",
           "nouveau": true,
           "titre_doc": "PV CSE - 2 juillet",
-          "fichier": "/uploads/pv-cse-2-juillet-26-signe.pdf"
+          "fichier": "/uploads/cse/pv-cse-2-juillet-26-signe.pdf"
         },
         {
           "type": "document",
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "PV CSE - 10 juin",
-          "fichier": "/uploads/pv-cse-10-juin-26-signe.pdf"
+          "fichier": "/uploads/cse/pv-cse-10-juin-26-signe.pdf"
         }
       ]
     },
@@ -34,7 +34,7 @@
           "nouveau": true,
           "precision": "Les commandes devront être remises au bureau du CSE avant le 1er octobre 2026 et le règlement sera par chèque, à l'ordre de \"CSE ADMR 21\".",
           "titre_doc": "Commande groupée Octobre Rose",
-          "fichier": "/uploads/bon-de-commande-cse-_-octobre-rose-2026.pdf"
+          "fichier": "/uploads/cse/bon-de-commande-cse-_-octobre-rose-2026.pdf"
         }
       ]
     },

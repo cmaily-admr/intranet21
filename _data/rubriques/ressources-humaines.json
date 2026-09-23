@@ -13,11 +13,11 @@
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "Convention collective",
-          "fichier": "/uploads/ccb-version-13-juillet-2026.pdf"
+          "fichier": "/uploads/rh/ccb-version-13-juillet-2026.pdf"
         },
         {
           "type": "image",
-          "image": "/uploads/listecongésbad.png",
+          "image": "/uploads/rh/listecongésbad.png",
           "legende": "Liste congés BAD"
         }
       ]
@@ -30,14 +30,14 @@
           "type": "document",
           "date_ajout": "",
           "nouveau": false,
-          "fichier": "/uploads/garanties-base-confort-confort-2024.pdf",
+          "fichier": "/uploads/rh/garanties-base-confort-confort-2024.pdf",
           "titre_doc": "Garanties Aesio Base & confort"
         },
         {
           "type": "document",
           "date_ajout": "",
           "nouveau": false,
-          "fichier": "/uploads/flyer-espace-adherent-aesio-2-.pdf",
+          "fichier": "/uploads/rh/flyer-espace-adherent-aesio-2-.pdf",
           "titre_doc": "Flyer - Espace adhérent"
         },
         {
@@ -45,14 +45,14 @@
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "Tarifs mutuelle Aesio",
-          "fichier": "/uploads/tarifs_actifs_mut_01-04-2026-1.pdf"
+          "fichier": "/uploads/rh/tarifs_actifs_mut_01-04-2026-1.pdf"
         },
         {
           "type": "document",
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "Fond social Aesio",
-          "fichier": "/uploads/aesio-fonds_social-bad-sante.pdf"
+          "fichier": "/uploads/rh/aesio-fonds_social-bad-sante.pdf"
         }
       ]
     },
@@ -70,7 +70,7 @@
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "Désignation de bénéficiaire du capital décès",
-          "fichier": "/uploads/designation-de-beneficiaire.pdf"
+          "fichier": "/uploads/rh/designation-de-beneficiaire.pdf"
         }
       ]
     },
@@ -82,7 +82,7 @@
           "type": "document",
           "date_ajout": "",
           "nouveau": true,
-          "fichier": "/uploads/livret-bad-générique-v2-2026.pdf",
+          "fichier": "/uploads/rh/livret-bad-générique-v2-2026.pdf",
           "titre_doc": "Livret Branche aide à domicile",
           "precision": "Toutes les aides de la branche"
         }
@@ -96,7 +96,7 @@
           "type": "document",
           "date_ajout": "",
           "nouveau": false,
-          "fichier": "/uploads/pros-consulte-112024-2.pdf",
+          "fichier": "/uploads/rh/pros-consulte-112024-2.pdf",
           "titre_doc": "Pros consulte - informations"
         },
         {
@@ -104,7 +104,7 @@
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "pros consulte - Appli",
-          "fichier": "/uploads/plaquette-appli-mobile-pros-consulte-2023.pdf"
+          "fichier": "/uploads/rh/plaquette-appli-mobile-pros-consulte-2023.pdf"
         }
       ]
     },
@@ -117,7 +117,7 @@
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "AGEFIPH - Dépliant",
-          "fichier": "/uploads/agefiph-depliant.pdf"
+          "fichier": "/uploads/rh/agefiph-depliant.pdf"
         }
       ]
     },
@@ -135,7 +135,7 @@
           "date_ajout": "",
           "nouveau": false,
           "titre_doc": "Règlement intérieur",
-          "fichier": "/uploads/règlement-intérieur-ues-admr-21_-2022.pdf"
+          "fichier": "/uploads/rh/règlement-intérieur-ues-admr-21_-2022.pdf"
         }
       ]
     }
