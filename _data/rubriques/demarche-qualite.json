@@ -32,7 +32,15 @@
     {
       "titre": "Charte SI",
       "ouvert": false,
-      "blocs": []
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "",
+          "nouveau": false,
+          "fichier": "/uploads/charte-du-si-ues-admr-21_2022.pdf",
+          "titre_doc": "Charte du SI"
+        }
+      ]
     },
     {
       "titre": "Charte des droits et des libertés",
