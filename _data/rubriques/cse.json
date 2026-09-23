@@ -27,7 +27,16 @@
     {
       "titre": "Commandes groupées",
       "ouvert": false,
-      "blocs": []
+      "blocs": [
+        {
+          "type": "document",
+          "date_ajout": "2026-09-23",
+          "nouveau": true,
+          "precision": "Les commandes devront être remises au bureau du CSE avant le 1er octobre 2026 et le règlement sera par chèque, à l'ordre de \"CSE ADMR 21\".",
+          "titre_doc": "Commande groupée Octobre Rose",
+          "fichier": "/uploads/bon-de-commande-cse-_-octobre-rose-2026.pdf"
+        }
+      ]
     },
     {
       "titre": "Horaires permanences",
