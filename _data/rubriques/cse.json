@@ -44,7 +44,7 @@
       "blocs": [
         {
           "type": "texte",
-          "texte": "Mercredi 08 juillet de 9h30 à 12h et de 14h à 15h30\n\nLundi 13 juillet de 9h30 à 12h et de 14h à 15h 30\n\nLundi 20 juillet de 9h30 à 12h et de 14h à 15h 30\n\nVendredi 24 juillet de 9h30 à 12h et de 14h à 15h30\n\nMercredi 29 juillet de 9h30 à 12h et de 14h à 15h30\n\nVendredi 31 juillet de 9h30 à 12h et de 14h à 15h30\n\nLundi 3 août de 9h30 à 12h et de 14h à 15h30\n\nMercredi 12 août de 9h30 à 12h et de 14h à 15h30\n\nVendredi 14 août de 9h30 à 12h et de 14h à 15h30\n\nMercredi 19 août de 9h30 à 12h et de 14h à 15h30\n\nJeudi 20 août de 9h30 à 12h et de 14h à 15h30\n\nMercredi 26 août de 9h30 à 12h et de 14h à 15h30\n\nVendredi 28 août de 9h30 à 12h et de 14h à 15h30"
+          "texte": "\\[[encadre:bleu]] MARDI 6 OCTOBRE            de 9h30 à 12h \n\nMERCREDI 7 OCTOBRE   de 14h à 15h30 \n\nMARDI 13 OCTOBRE          de 9h30 à 12h  \n\nJEUDI 15 OCTOBRE            de 14h à 15h 30 \n\nLUNDI 19 OCTOBRE           de 9h30 à 12h et de 14h à 15h30 \n\nJEUDI 22 OCTOBRE             de 14h à 15h30 \n\nMARDI 27 OCTOBRE           de 9h30 à 12h et de 14h à 15h30 \n\nVENDREDI 30 OCTOBRE   de 9h30 à 12h et de 14h à 15h30 \\[[/encadre]]"
         }
       ]
     },
