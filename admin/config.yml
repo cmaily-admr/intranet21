@@ -57,8 +57,23 @@ collections:
       # --- Champs utilisés surtout quand l'actu est à la une ---
       - { label: "Texte complet (pour la une)", name: "contenu", widget: "markdown", required: false, hint: "Séparateurs : [[sepa:nom]] (actu, alerte, cse, rh, branche, ag2r, logement, aist, fete). Mots en couleur : {orange|mon texte} (couleurs : vert, orange, bleu, rouge, prune). Encadré coloré : [[encadre:orange]] mon texte [[/encadre]]." }
       - { label: "Lien vidéo (pour la une)", name: "video_url", widget: "string", required: false, hint: "https://www.youtube-nocookie.com/embed/IDENTIFIANT — affichée en haut de la une." }
-      - { label: "Document à télécharger (pour la une)", name: "document", widget: "file", required: false }
-      - { label: "Texte du bouton document", name: "document_label", widget: "string", required: false, default: "Télécharger le document (PDF)" }
+      # Ancien champ « un seul document », conservé en widget caché : les
+      # actualités déjà saisies gardent leur PDF et continuent de l'afficher,
+      # même si elles sont rouvertes et réenregistrées dans le CMS.
+      # Ne rien y saisir : tout nouveau document passe par la liste ci-dessous.
+      - { label: "Document (ancien champ)", name: "document", widget: "hidden", required: false }
+      - { label: "Libellé (ancien champ)", name: "document_label", widget: "hidden", required: false }
+
+      - label: "Documents à télécharger"
+        name: "documents"
+        widget: "list"
+        required: false
+        label_singular: "Document"
+        summary: "{{fields.titre_doc}}"
+        hint: "Autant de PDF que nécessaire : « Add Document » pour en ajouter un, glisser-déposer pour les réordonner. Ils s'affichent côte à côte, à la une comme dans la fenêtre de l'actualité."
+        fields:
+          - { label: "Texte du bouton", name: "titre_doc", widget: "string", default: "Télécharger le document (PDF)", hint: "Avec plusieurs documents, donnez à chacun un libellé distinct : « Bon de commande crème mains », « Bon de commande bougie »…" }
+          - { label: "Fichier", name: "fichier", widget: "file" }
 
       # --- Champs utilisés surtout sur la carte « précédente » ---
       - label: "Type de lien (pour la carte)"
