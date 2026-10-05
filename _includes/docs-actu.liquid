@@ -1,0 +1,38 @@
+<!-- ============================================================
+     BOUTONS DE TÉLÉCHARGEMENT D'UNE ACTUALITÉ
+     Inclus deux fois dans index.html : sur l'actu à la une et dans
+     la fenêtre des actualités précédentes. Une seule version à maintenir.
+
+     À appeler ainsi, en passant l'actualité concernée :
+     {% raw %}{% assign doc_actu = une %}{% include "docs-actu.liquid" %}{% endraw %}
+
+     Gère les deux formats :
+       - « documents » : la liste (plusieurs PDF) — format actuel
+       - « document » + « document_label » : l'ancien champ unique.
+         Son bouton s'affiche EN PREMIER, avant ceux de la liste, pour
+         que les actualités déjà saisies gardent leur PDF sans retouche.
+     ============================================================ -->
+{% assign docs = doc_actu.documents %}
+{% assign nb_liste = 0 %}
+{% if docs %}{% assign nb_liste = docs.size %}{% endif %}
+{% assign a_ancien = false %}
+{% if doc_actu.document and doc_actu.document != "" %}{% assign a_ancien = true %}{% endif %}
+
+{% if a_ancien or nb_liste > 0 %}
+<div class="actu-docs">
+  {% if a_ancien %}
+  <a class="actu-lien" href="{{ doc_actu.document }}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+    {{ doc_actu.document_label | default: "Télécharger le document (PDF)" }}
+  </a>
+  {% endif %}
+  {% for d in docs %}
+    {% if d.fichier and d.fichier != "" %}
+    <a class="actu-lien" href="{{ d.fichier }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+      {{ d.titre_doc | default: "Télécharger le document (PDF)" }}
+    </a>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
