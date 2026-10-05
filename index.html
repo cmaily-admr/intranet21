@@ -123,6 +123,8 @@
     .actu-date { width: 100%; color: var(--gris-clair); font-size: .85rem; }
     .actu h3 { margin: 2px 0 0; font-size: 1.2rem; color: var(--vert-fonce); }
     .actu p { margin: 0; color: var(--gris-texte); }
+    .actu-docs { margin-top: auto; display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; }
+    .actu-docs .actu-lien { margin-top: 0; }
     .actu-lien { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: var(--vert-admr); color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; transition: background .15s ease; }
     .actu-lien:hover { background: var(--vert-fonce); }
     .actu-lien svg { width: 18px; height: 18px; }
@@ -237,12 +239,7 @@
             <p>{{ une.resume }}</p>
           {% endif %}
 
-          {% if une.document and une.document != "" %}
-          <a class="actu-lien" href="{{ une.document }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
-            {{ une.document_label | default: "Télécharger le document (PDF)" }}
-          </a>
-          {% endif %}
+          {% assign doc_actu = une %}{% include "docs-actu.liquid" %}
 
         </div>
 
@@ -318,6 +315,7 @@
             </div>
             {% endif %}
             <div class="popup-actu-contenu">{{ actu.contenu | couleurs | encadres | separateurs | markdown }}</div>
+            {% assign doc_actu = actu %}{% include "docs-actu.liquid" %}
           </div>
         </div>
         {% endif %}
