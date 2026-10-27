@@ -1,0 +1,21 @@
+{
+  "a_la_une": true,
+  "type_lien": "pdf",
+  "rubrique": "CSE",
+  "resume": "PV CSE Août & Septembre",
+  "texte_lien": "Lire l'article",
+  "date": "2026-10-27",
+  "titre": "PV CSE Août & Septembre",
+  "documents": [
+    {
+      "titre_doc": "Télécharger le document (PDF)",
+      "fichier": "/uploads/pv-cse-aout-26-signe.pdf"
+    },
+    {
+      "titre_doc": "Télécharger le document (PDF)",
+      "fichier": "/uploads/pv-cse-15-septembre-26-signe.pdf"
+    }
+  ],
+  "contenu": "\\[[sepa:cse]]\n\nVous trouverez ci-joint les PV des réunions du CSE du 6 août 2026 et du 15 septembre 2026.",
+  "couleur": "#2E7D9A"
+}
