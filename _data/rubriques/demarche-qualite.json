@@ -1147,6 +1147,26 @@
           "type": "video",
           "video_url": "https://youtu.be/TVBI3MDUVwY",
           "titre_video": "Article 8 – Droit à l’autonomie"
+        },
+        {
+          "type": "video",
+          "video_url": "https://youtu.be/IIIRAeJiq6k",
+          "titre_video": "Article 9 – Principe de prévention et de soutien"
+        },
+        {
+          "type": "video",
+          "video_url": "https://youtu.be/HlbtwqzxZxc",
+          "titre_video": "Article 10 – Droit à l’exercice des droits civiques"
+        },
+        {
+          "type": "video",
+          "titre_video": "Article 11 – Droit à la pratique religieuse",
+          "video_url": "https://youtu.be/OrdMbiNy770"
+        },
+        {
+          "type": "video",
+          "titre_video": "Article 12 - Respect de l'intimité et de la dignité",
+          "video_url": "https://youtu.be/CyNDU-CU1Sc"
         }
       ]
     }
