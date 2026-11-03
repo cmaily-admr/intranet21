@@ -1,8 +1,19 @@
 /**
  * Construit, au moment du build, l'index de recherche globale :
  * la liste de tous les documents de toutes les rubriques, avec leur
- * titre, la rubrique et la section où ils se trouvent, et le lien vers
- * la rubrique. Utilisé par la barre de recherche de l'accueil.
+ * titre, la rubrique et la section où ils se trouvent.
+ *
+ * Chaque entrée porte deux liens :
+ *   - « lien »  : la destination du clic. Pour un document c'est le fichier
+ *                 lui-même (via la visionneuse), pour un lien utile l'adresse
+ *                 externe, sinon la page à la bonne section.
+ *   - « page »  : toujours la page de la rubrique, ancrée sur la section,
+ *                 pour le petit lien « dans la rubrique ».
+ *
+ * Les ancres (#s3, #s3-b7) sont calculées à partir du RANG des sections et
+ * des blocs dans le JSON. rubrique.liquid pose exactement les mêmes
+ * identifiants en bouclant sur les mêmes tableaux : les deux restent donc
+ * alignés même si Florian réordonne ou renomme une section.
  *
  * Lecture directe des fichiers _data/rubriques/*.json (Eleventy exécute
  * ce fichier avant de rendre les pages).
@@ -30,6 +41,11 @@ module.exports = function () {
    */
   function texteCherchable(md) {
     return String(md || "")
+      // Codes de mise en forme maison : [[sepa:x]], [[encadre:x]] … [[/encadre]].
+      // Decap ajoute parfois des antislashes d'échappement, d'où les \\? .
+      .replace(/\\?\[\\?\[\/?(?:sepa|encadre)(?::[a-z0-9]+)?\\?\]\\?\]/gi, " ")
+      // {orange|mon texte} -> mon texte
+      .replace(/\{(?:vert|orange|bleu|rouge|prune)\|([^}]*)\}/gi, "$1")
       .replace(/^[ \t]*[-*+]\s+/gm, " ")
       .replace(/^[ \t]*#{1,6}\s*/gm, " ")
       .replace(/[*_>`\[\]()!]/g, " ")
@@ -58,18 +74,24 @@ module.exports = function () {
     const nomRubrique = data.titre || slug;
     const sections = Array.isArray(data.sections) ? data.sections : [];
 
-    for (const section of sections) {
+    sections.forEach((section, iSection) => {
       const nomSection = section.titre || "";
       const blocs = Array.isArray(section.blocs) ? section.blocs : [];
+      const ancreSection = "#s" + (iSection + 1);
+      const pageSection = lien + ancreSection;
 
-      for (const bloc of blocs) {
+      blocs.forEach((bloc, iBloc) => {
+        const ancreFiche = ancreSection + "-b" + (iBloc + 1);
         // On indexe les documents (titre_doc) et les boutons de lien (libelle).
         if (bloc.type === "document" && bloc.titre_doc) {
           index.push({
             titre: bloc.titre_doc,
             rubrique: nomRubrique,
             section: nomSection,
-            lien: lien,
+            // Clic = la visionneuse ouvre directement le PDF.
+            lien: bloc.fichier ? "/voir-pdf.html?doc=" + bloc.fichier : pageSection,
+            page: pageSection,
+            fichier: bloc.fichier || "",
             type: "document",
           });
         } else if (bloc.type === "bouton" && bloc.libelle) {
@@ -77,7 +99,9 @@ module.exports = function () {
             titre: bloc.libelle,
             rubrique: nomRubrique,
             section: nomSection,
-            lien: lien,
+            lien: bloc.url || pageSection,
+            page: pageSection,
+            externe: !!bloc.url,
             type: "lien",
           });
         } else if (bloc.type === "texte" && bloc.texte) {
@@ -91,7 +115,8 @@ module.exports = function () {
               texte: brut,               // texte complet pour la recherche
               rubrique: nomRubrique,
               section: nomSection,
-              lien: lien,
+              lien: pageSection,
+              page: pageSection,
               type: "texte",
             });
           }
@@ -100,7 +125,8 @@ module.exports = function () {
             titre: bloc.legende,
             rubrique: nomRubrique,
             section: nomSection,
-            lien: lien,
+            lien: pageSection,
+            page: pageSection,
             type: "image",
           });
         } else if (bloc.type === "video" && bloc.titre_video) {
@@ -108,7 +134,8 @@ module.exports = function () {
             titre: bloc.titre_video,
             rubrique: nomRubrique,
             section: nomSection,
-            lien: lien,
+            lien: pageSection,
+            page: pageSection,
             type: "vidéo",
           });
         } else if (bloc.type === "fiche" && bloc.titre_fiche) {
@@ -124,12 +151,13 @@ module.exports = function () {
             texte: corps,
             rubrique: nomRubrique,
             section: nomSection,
-            lien: lien,
+            lien: lien + ancreFiche,
+            page: pageSection,
             type: "fiche",
           });
         }
-      }
-    }
+      });
+    });
 
     // Les "liens utiles" de fin de rubrique sont aussi indexés.
     const liens = Array.isArray(data.liens_utiles) ? data.liens_utiles : [];
@@ -139,7 +167,9 @@ module.exports = function () {
           titre: l.libelle,
           rubrique: nomRubrique,
           section: "Liens utiles",
-          lien: lien,
+          lien: l.url || lien,
+          page: lien,
+          externe: !!l.url,
           type: "lien",
         });
       }

@@ -55,6 +55,14 @@
     .aucun-resultat { display: none; padding: 20px; text-align: center; color: var(--gris-clair); background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 12px; }
 
     .faq { display: flex; flex-direction: column; gap: 14px; }
+    /* Mise en évidence passagère de la section ou de la fiche visée par
+       un lien de recherche (#s3, #s3-b7). */
+    @keyframes surligne-cible {
+      from { box-shadow: 0 0 0 3px rgba(91,155,49,.6); }
+      to   { box-shadow: 0 0 0 3px rgba(91,155,49,0); }
+    }
+    .cible-recherche { animation: surligne-cible 2.4s ease-out forwards; border-radius: 14px; }
+    @media (prefers-reduced-motion: reduce) { .cible-recherche { animation: none; } }
     .bloc { background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 14px; overflow: hidden; }
     .bloc > summary { list-style: none; cursor: pointer; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; font-weight: 800; color: var(--vert-fonce); font-size: 1.15rem; }
     .bloc > summary::-webkit-details-marker { display: none; }
@@ -156,7 +164,8 @@
 
       <div class="faq" id="liste-sections">
         {% for section in rubrique.sections %}
-        <details class="bloc" data-section {% if section.ouvert %}open{% endif %}>
+        {% assign rang_section = forloop.index %}{% comment %}forloop.parentloop n'est pas disponible dans la boucle interne{% endcomment %}
+        <details class="bloc" id="s{{ rang_section }}" data-section {% if section.ouvert %}open{% endif %}>
           <summary>{{ section.titre }}</summary>
           <div class="bloc-contenu">
             {% for bloc in section.blocs %}
@@ -208,7 +217,7 @@
                 <img class="separateur" src="/assets/separateurs/{{ bloc.modele }}" alt="" aria-hidden="true">
 
               {% elsif bloc.type == "fiche" %}
-                <details class="fiche" data-doc data-recherche="{{ bloc.titre_fiche | escape }} {{ bloc.chapo | escape }}">
+                <details class="fiche" id="s{{ rang_section }}-b{{ forloop.index }}" data-doc data-recherche="{{ bloc.titre_fiche | escape }} {{ bloc.chapo | escape }}">
                   <summary>
                     <span class="fiche-titre">{{ bloc.titre_fiche }}</span>
                     {% if bloc.categorie and bloc.categorie != "" %}<span class="fiche-cat">{{ bloc.categorie }}</span>{% endif %}
@@ -301,6 +310,30 @@
 
         msgVide.style.display = (q !== "" && totalVisible === 0) ? "block" : "none";
       });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // Un lien venant de la recherche de l'accueil (#s3 ou #s3-b7) doit
+      // déplier la section — et la fiche — visée, puis l'amener à l'écran.
+      // Sans cela le navigateur saute sur un <details> fermé : on ne voit rien.
+      function ciblerAncre() {
+        var h = window.location.hash;
+        if (!h || h.length < 2) return;
+        var cible;
+        try { cible = document.querySelector(h); } catch (e) { return; }
+        if (!cible) return;
+        for (var n = cible; n; n = n.parentElement) {
+          if (n.tagName === "DETAILS") n.open = true;
+        }
+        cible.scrollIntoView({ behavior: "smooth", block: "start" });
+        cible.classList.add("cible-recherche");
+        setTimeout(function () { cible.classList.remove("cible-recherche"); }, 2600);
+      }
+      window.addEventListener("hashchange", ciblerAncre);
+      if (document.readyState === "complete") ciblerAncre();
+      else window.addEventListener("load", ciblerAncre);
     })();
   </script>
 

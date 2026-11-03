@@ -73,13 +73,26 @@
     .barre-recherche-g input:focus { outline: 3px solid var(--orange-admr); outline-offset: 1px; border-color: transparent; }
     .barre-recherche-g svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; color: var(--gris-clair); }
     .resultats-recherche { max-width: 640px; margin: 10px auto 0; display: flex; flex-direction: column; gap: 8px; }
-    .resultat-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 12px; padding: 13px 16px; text-decoration: none; color: var(--gris-texte); transition: background .12s ease; }
+    .resultat-item { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--blanc); border: 1px solid #E7EBE1; border-radius: 12px; padding: 13px 16px; text-decoration: none; color: var(--gris-texte); transition: background .12s ease; }
     .resultat-item:hover { background: var(--vert-clair); }
     .resultat-titre { font-weight: 700; color: var(--vert-fonce); }
     .resultat-type { display: inline-block; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--gris-clair); background: var(--fond-page); border: 1px solid #E7EBE1; border-radius: 999px; padding: 1px 8px; vertical-align: middle; margin-left: 4px; }
     .resultat-loc { font-size: .85rem; color: var(--gris-clair); }
+    .resultat-principal { text-decoration: none; color: inherit; }
+    /* La zone cliquable couvre toute la carte ; le lien « dans la rubrique »
+       repasse au-dessus grâce à son z-index. */
+    .resultat-principal::after { content: ""; position: absolute; inset: 0; }
+    .resultat-actions { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+    .resultat-contexte { position: relative; z-index: 1; font-size: .8rem; color: var(--gris-clair); white-space: nowrap; }
+    .resultat-contexte:hover { color: var(--vert-fonce); }
     .resultat-fleche { color: var(--vert-admr); font-weight: 700; flex: 0 0 auto; }
     .resultat-vide { text-align: center; color: var(--gris-clair); padding: 14px; }
+    /* Sur petit écran, titre et actions ne tiennent pas côte à côte :
+       les actions passent sur une ligne à part, alignées à droite. */
+    @media (max-width: 560px) {
+      .resultat-item { flex-direction: column; align-items: stretch; gap: 8px; }
+      .resultat-actions { justify-content: flex-end; border-top: 1px solid #F0F3EC; padding-top: 8px; }
+    }
     .section-soustitre { margin: 0 0 26px; color: var(--gris-clair); }
 
     .rubriques { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
@@ -437,17 +450,30 @@
 
         trouves.forEach(function (x) {
           var d = x.d;
-          var a = document.createElement("a");
-          a.className = "resultat-item";
-          a.href = d.lien;
+          var carte = document.createElement("div");
+          carte.className = "resultat-item";
           var typeLabel = { document: "Document", texte: "Texte", image: "Image", "vidéo": "Vidéo", lien: "Lien", fiche: "Fiche" }[d.type] || "";
           var loc = d.rubrique + (d.section ? " · " + d.section : "");
-          a.innerHTML =
-            '<span><span class="resultat-titre">' + echapper(d.titre) + '</span>' +
+
+          // Un document mène au fichier, un lien utile à l'adresse externe ;
+          // le reste mène à la bonne section de la rubrique.
+          var fleche = d.type === "document" ? "Ouvrir le PDF →"
+                     : d.externe            ? "Ouvrir ↗"
+                     : "Voir →";
+          var cible = d.externe ? ' target="_blank" rel="noopener"' : '';
+          // Second lien, seulement quand le clic principal quitte la rubrique.
+          var contexte = (d.page && d.page !== d.lien)
+            ? '<a class="resultat-contexte" href="' + echapper(d.page) + '">dans la rubrique</a>'
+            : '';
+
+          carte.innerHTML =
+            '<span><a class="resultat-principal" href="' + echapper(d.lien) + '"' + cible + '>' +
+              '<span class="resultat-titre">' + echapper(d.titre) + '</span></a>' +
             (typeLabel ? ' <span class="resultat-type">' + typeLabel + '</span>' : '') +
             '<br><span class="resultat-loc">' + echapper(loc) + '</span></span>' +
-            '<span class="resultat-fleche">Voir →</span>';
-          zone.appendChild(a);
+            '<span class="resultat-actions">' + contexte +
+              '<span class="resultat-fleche">' + fleche + '</span></span>';
+          zone.appendChild(carte);
         });
       });
     })();
